@@ -25,7 +25,6 @@ import {
 	requestyDefaultModelId,
 	requestyDefaultModelInfo,
 	vercelAiGatewayDefaultModelId,
-	vercelAiGatewayDefaultModelInfo,
 } from "../../../src/shared/api"
 import type { McpMarketplaceCatalog, McpServer, McpViewTab } from "../../../src/shared/mcp"
 import { McpServiceClient, ModelsServiceClient, StateServiceClient, UiServiceClient } from "../services/grpc-client"
@@ -234,7 +233,7 @@ export const ExtensionStateContextProvider: React.FC<{
 	})
 	const [huggingFaceModels, setHuggingFaceModels] = useState<Record<string, ModelInfo>>({})
 	const [vercelAiGatewayModels, setVercelAiGatewayModels] = useState<Record<string, ModelInfo>>({
-		[vercelAiGatewayDefaultModelId]: vercelAiGatewayDefaultModelInfo,
+		[vercelAiGatewayDefaultModelId]: {} as ModelInfo,
 	})
 	const [mcpServers, setMcpServers] = useState<McpServer[]>([])
 	const [mcpMarketplaceCatalog, setMcpMarketplaceCatalog] = useState<McpMarketplaceCatalog>({ items: [] })

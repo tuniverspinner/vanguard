@@ -1,6 +1,5 @@
 import { geminiModels, ModelInfo } from "@shared/api"
 import { Fragment, useState } from "react"
-import { ModelDescriptionMarkdown } from "../OpenRouterModelPicker"
 import {
 	formatPrice,
 	formatTokenLimit,
@@ -151,13 +150,9 @@ export const ModelInfoView = ({ selectedModelId, modelInfo, isPopup }: ModelInfo
 
 	const infoItems = [
 		modelInfo.description && (
-			<ModelDescriptionMarkdown
-				isExpanded={isDescriptionExpanded}
-				isPopup={isPopup}
-				key="description"
-				markdown={modelInfo.description}
-				setIsExpanded={setIsDescriptionExpanded}
-			/>
+			<span key="description">
+				<span style={{ fontWeight: 500 }}>Description:</span> {modelInfo.description}
+			</span>
 		),
 		<ModelInfoSupportsItem
 			doesNotSupportLabel="Does not support images"

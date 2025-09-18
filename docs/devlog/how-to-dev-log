@@ -1,0 +1,91 @@
+working on something significant,
+capture the journey in dev-log,
+including:
+context (what led to this moment),
+decision/work-done (what exactly happened),
+impact (how this affects project),
+next-steps (what comes after).
+
+creating a dev-log entry,
+always use command line to get current time first (command line `date`);
+filename follows: MMDD|HHmm-[PRIMARY_TAG, secondary_tag, tertiary_tag]--descriptive-slug.md
+date header: "## Date: Month DDth, YYYY; time"
+
+FILENAME STRUCTURE:
+- Square brackets contain searchable tags for easy visual scanning
+- Primary tag is usually the PROJECT_NAMESPACE
+- Secondary/tertiary tags are key topics (payments, crypto, strategy, etc.)
+- Tags should be scannable and help with quick identification
+
+PROJECT NAMESPACE CONVENTIONS:
+staage: constellation chat interface (qweind.space)
+milbrook: client project work
+mdsage: markdown/documentation tools
+gefest: infrastructure/devops/SaaS platform
+konstantinovici: personal blog/portfolio
+[add new projects as needed]
+
+examples:
+0619|0551-[staage, ui, redesign]--professional-ui-redesign-white-grey-theme.md
+0620|1430-[milbrook, dashboard, integration]--client-dashboard-integration.md
+0621|0900-[mdsage, documentation, automation]--documentation-auto-generation.md
+0624|2107-[gefest, payments, crypto]--crypto-payments-milestone-strategic-pivot.md
+
+CRITICAL: after creating entry,
+immediately update docs/dev-log/index.md:
+add entry to appropriate development arc,
+update statistics and velocity indicators,
+mark critical impact level if applicable,
+maintain chronological organization.
+
+triggers for dev-log:
+major technical decisions,
+strategy pivots,
+feature completions, 
+external dependency changes,
+important insights affecting future work.
+
+writing the entry,
+be specific about what changed;
+include file names, reasoning, user feedback;
+capture lessons learned;
+note what you'd do differently.
+
+dev-log is project memory,
+located in docs/dev-log
+write for future you;
+assume context will be lost;
+explain why decisions were made.
+
+ADVANCED TECHNIQUES for session summaries:
+create comprehensive state snapshots;
+organize by business domains (payment, strategy, technical);
+include current status with clear indicators (✅⏳📋);
+preserve business intelligence (geographic context, user preferences);
+list concrete next steps with specific commands;
+capture user feedback verbatim ("this is on the greater side! me likee");
+include file structure changes with before/after;
+note what NOT to do (lessons learned section);
+end with impact statement for future sessions.
+
+structure for session summaries:
+session overview (what we accomplished),
+current project status (organized by domain),
+infrastructure achievements (what we built),
+critical rules established (for future reference),
+technical foundation (from previous work),
+business context (critical for decisions),
+next steps (concrete and actionable),
+insights (what we learned about process).
+
+tagging entries:
+#PROJECT_NAMESPACE #decision #strategy #technical #documentation #insight #session-summary
+helps with search and organization.
+always include project namespace as primary tag for filtering.
+
+index maintenance workflow:
+entry created → categorize by development arc → assess impact level → update statistics → cross-reference related entries → maintain search tags consistency → organize by project namespace;
+index serves as project navigation hub,
+comprehensive view of development themes,
+velocity tracking and milestone identification,
+critical for project context preservation. 

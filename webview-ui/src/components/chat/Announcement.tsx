@@ -52,10 +52,10 @@ const Announcement = ({ version, hideAnnouncement }: AnnouncementProps) => {
 		const modelId = "x-ai/grok-code-fast-1"
 		// set both plan and act modes to use grok-code-fast-1
 		handleFieldsChange({
-			planModeOpenRouterModelId: modelId,
-			actModeOpenRouterModelId: modelId,
-			planModeOpenRouterModelInfo: openRouterModels[modelId],
-			actModeOpenRouterModelInfo: openRouterModels[modelId],
+			planModeApiModelId: modelId,
+			actModeApiModelId: modelId,
+			planModeGroqModelInfo: openRouterModels[modelId],
+			actModeGroqModelInfo: openRouterModels[modelId],
 			planModeApiProvider: "cline",
 			actModeApiProvider: "cline",
 		})

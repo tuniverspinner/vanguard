@@ -114,9 +114,9 @@ const ThinkingBudgetSlider = ({ maxBudget, currentMode }: ThinkingBudgetSliderPr
 
 	const maxTokens = useMemo(
 		() =>
-			modeFields.apiProvider === "gemini"
-				? geminiModels[geminiDefaultModelId].maxTokens
-				: anthropicModels["claude-3-7-sonnet-20250219"].maxTokens,
+			(modeFields.apiProvider as string) === "gemini"
+				? geminiModels[geminiDefaultModelId]?.maxTokens || 32768
+				: anthropicModels["claude-3-7-sonnet-20250219"]?.maxTokens || 32768,
 		[modeFields.apiProvider],
 	)
 
