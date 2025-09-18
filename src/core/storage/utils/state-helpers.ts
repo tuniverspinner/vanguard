@@ -373,6 +373,7 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			sapAiResourceGroup,
 			difyBaseUrl,
 			sapAiCoreUseOrchestrationMode,
+			autoRetryOnEmptyAssistantMessage: context.globalState.get("autoRetryOnEmptyAssistantMessage") as boolean | undefined,
 			// Plan mode configurations
 			planModeApiProvider: planModeApiProvider || apiProvider,
 			planModeApiModelId,

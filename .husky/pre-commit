@@ -1,1 +1,3 @@
+#!/bin/bash
+export PATH="/opt/homebrew/bin:$PATH"
 lint-staged --no-stash
