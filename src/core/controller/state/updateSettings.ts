@@ -184,6 +184,11 @@ export async function updateSettings(controller: Controller, request: UpdateSett
 			controller.stateManager.setGlobalState("customPrompt", value)
 		}
 
+		// Update auto-retry on empty assistant message setting
+		if (request.autoRetryOnEmptyAssistantMessage !== undefined) {
+			controller.stateManager.setGlobalState("autoRetryOnEmptyAssistantMessage", request.autoRetryOnEmptyAssistantMessage)
+		}
+
 		// Update browser settings
 		if (request.browserSettings !== undefined) {
 			// Get current browser settings to preserve fields not in the request

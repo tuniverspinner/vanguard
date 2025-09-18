@@ -22,6 +22,7 @@ const FeatureSettingsSection = ({ renderSectionHeader }: FeatureSettingsSectionP
 		useAutoCondense,
 		focusChainSettings,
 		focusChainFeatureFlagEnabled,
+		autoRetryOnEmptyAssistantMessage,
 	} = useExtensionState()
 
 	const handleReasoningEffortChange = (newValue: OpenaiReasoningEffort) => {
@@ -187,6 +188,20 @@ const FeatureSettingsSection = ({ renderSectionHeader }: FeatureSettingsSectionP
 								target="_blank">
 								Learn more
 							</a>
+						</p>
+					</div>
+					<div style={{ marginTop: 10 }}>
+						<VSCodeCheckbox
+							checked={autoRetryOnEmptyAssistantMessage}
+							onChange={(e: any) => {
+								const checked = e.target.checked === true
+								updateSetting("autoRetryOnEmptyAssistantMessage", checked)
+							}}>
+							Auto-retry on Empty Response
+						</VSCodeCheckbox>
+						<p className="text-xs text-[var(--vscode-descriptionForeground)]">
+							Automatically retries once when the language model returns an empty response. Helps recover from
+							temporary API issues.
 						</p>
 					</div>
 				</div>

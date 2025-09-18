@@ -84,6 +84,7 @@ export interface GlobalState {
 	focusChainFeatureFlagEnabled: boolean
 	customPrompt: "compact" | undefined
 	difyBaseUrl: string | undefined
+	autoRetryOnEmptyAssistantMessage: boolean | undefined
 
 	// Multi-root workspace support
 	workspaceRoots: WorkspaceRoot[] | undefined

@@ -127,6 +127,9 @@ export class Task {
 	// Context Management
 	private useAutoCondense: boolean
 
+	// Auto-retry tracking
+	private emptyResponseRetryCount: number
+
 	// Callbacks
 	private updateTaskHistory: (historyItem: HistoryItem) => Promise<HistoryItem[]>
 	private postStateToWebview: () => Promise<void>
@@ -181,6 +184,7 @@ export class Task {
 	) {
 		this.taskInitializationStartTime = performance.now()
 		this.taskState = new TaskState()
+		this.emptyResponseRetryCount = 0
 		this.controller = controller
 		this.mcpHub = mcpHub
 		this.updateTaskHistory = updateTaskHistory
@@ -2197,6 +2201,24 @@ export class Task {
 					errorMessage: "empty_assistant_message",
 					requestId: reqId,
 				})
+
+				// Check if auto-retry is enabled and we haven't exceeded the retry limit
+				const autoRetryEnabled = this.stateManager.getGlobalStateKey("autoRetryOnEmptyAssistantMessage")
+				const shouldAutoRetry = autoRetryEnabled === true && this.emptyResponseRetryCount < 1
+
+				if (shouldAutoRetry) {
+					// Increment retry counter to prevent infinite loops
+					this.emptyResponseRetryCount++
+
+					// Provide user feedback about auto-retry
+					await this.say("text", "🤖 Received empty response from model. Auto-retrying once...")
+
+					// Log the auto-retry attempt
+					console.log(`[Task ${this.taskId}] Auto-retrying empty response (attempt ${this.emptyResponseRetryCount})`)
+
+					// Signal the loop to continue (i.e., do not end), so it will attempt again
+					return false
+				}
 
 				const baseErrorMessage =
 					"Unexpected API Response: The language model did not provide any assistant messages. This may indicate an issue with the API or the model's output."
