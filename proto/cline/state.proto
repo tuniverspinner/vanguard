@@ -288,3 +288,16 @@ message Viewport {
 message UpdateTerminalConnectionTimeoutResponse {
   optional int32 timeout_ms = 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
