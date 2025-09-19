@@ -4,6 +4,7 @@ import { OpenRouterCompatibleModelInfo } from "@shared/proto/cline/models"
 import { telemetryService } from "@/services/telemetry"
 import type { Controller } from "../index"
 import { sendMcpMarketplaceCatalogEvent } from "../mcp/subscribeToMcpMarketplaceCatalog"
+import { refreshClineModels } from "../models/refreshClineModels"
 import { refreshGroqModels } from "../models/refreshGroqModels"
 import { refreshOpenRouterModels } from "../models/refreshOpenRouterModels"
 import { sendOpenRouterModelsEvent } from "../models/subscribeToOpenRouterModels"
@@ -127,6 +128,9 @@ export async function initializeWebview(controller: Controller, _request: EmptyR
 		if (mcpMarketplaceCatalog) {
 			sendMcpMarketplaceCatalogEvent(mcpMarketplaceCatalog as McpMarketplaceCatalog)
 		}
+
+		// Refresh Cline models (which uses the MCP catalog) to ensure UI is up-to-date
+		refreshClineModels(controller, EmptyRequest.create())
 
 		// Silently refresh MCP marketplace catalog
 		controller.silentlyRefreshMcpMarketplace()
