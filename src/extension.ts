@@ -65,11 +65,31 @@ export async function activate(context: vscode.ExtensionContext) {
 
 	vscode.commands.executeCommand("setContext", "cline.isDevMode", IS_DEV && IS_DEV === "true")
 
+	console.log(`[VANGUARD DEBUG] Registering sidebar webview provider with ID: ${VscodeWebviewProvider.SIDEBAR_ID}`)
+	console.log(`[VANGUARD DEBUG] Extension registry info:`, ExtensionRegistryInfo)
+
 	context.subscriptions.push(
 		vscode.window.registerWebviewViewProvider(VscodeWebviewProvider.SIDEBAR_ID, sidebarWebview, {
 			webviewOptions: { retainContextWhenHidden: true },
 		}),
 	)
+
+	// Log available commands after registration
+	setTimeout(async () => {
+		const commands = await vscode.commands.getCommands(true)
+		console.log(
+			`[VANGUARD DEBUG] Commands containing 'vanguard' after registration:`,
+			commands.filter((cmd) => cmd.includes("vanguard")),
+		)
+		console.log(
+			`[VANGUARD DEBUG] Commands containing 'ActivityBar' after registration:`,
+			commands.filter((cmd) => cmd.includes("ActivityBar")),
+		)
+		console.log(
+			`[VANGUARD DEBUG] All workbench.view commands after registration:`,
+			commands.filter((cmd) => cmd.startsWith("workbench.view.")),
+		)
+	}, 1000)
 
 	const { commands } = ExtensionRegistryInfo
 

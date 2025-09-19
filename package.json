@@ -105,17 +105,17 @@
 		"viewsContainers": {
 			"activitybar": [
 				{
-					"id": "bryne-ActivityBar",
+					"id": "vanguard-ActivityBar",
 					"title": "Vanguard",
 					"icon": "assets/icons/icon.svg"
 				}
 			]
 		},
 		"views": {
-			"bryne-ActivityBar": [
+			"vanguard-ActivityBar": [
 				{
 					"type": "webview",
-					"id": "bryne.SidebarProvider",
+					"id": "vanguard.SidebarProvider",
 					"name": "",
 					"icon": "assets/icons/icon.svg"
 				}
@@ -233,64 +233,64 @@
 				{
 					"command": "bryne.plusButtonClicked",
 					"group": "navigation@1",
-					"when": "view == bryne.SidebarProvider"
+					"when": "view == vanguard.SidebarProvider"
 				},
 				{
 					"command": "bryne.mcpButtonClicked",
 					"group": "navigation@2",
-					"when": "view == bryne.SidebarProvider"
+					"when": "view == vanguard.SidebarProvider"
 				},
 				{
 					"command": "bryne.historyButtonClicked",
 					"group": "navigation@3",
-					"when": "view == bryne.SidebarProvider"
+					"when": "view == vanguard.SidebarProvider"
 				},
 				{
 					"command": "bryne.popoutButtonClicked",
 					"group": "navigation@4",
-					"when": "view == bryne.SidebarProvider"
+					"when": "view == vanguard.SidebarProvider"
 				},
 				{
 					"command": "bryne.accountButtonClicked",
 					"group": "navigation@5",
-					"when": "view == bryne.SidebarProvider"
+					"when": "view == vanguard.SidebarProvider"
 				},
 				{
 					"command": "bryne.settingsButtonClicked",
 					"group": "navigation@6",
-					"when": "view == bryne.SidebarProvider"
+					"when": "view == vanguard.SidebarProvider"
 				}
 			],
 			"editor/title": [
 				{
 					"command": "bryne.plusButtonClicked",
 					"group": "navigation@1",
-					"when": "activeWebviewPanelId == bryne.TabPanelProvider"
+					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
 					"command": "bryne.mcpButtonClicked",
 					"group": "navigation@2",
-					"when": "activeWebviewPanelId == bryne.TabPanelProvider"
+					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
 					"command": "bryne.historyButtonClicked",
 					"group": "navigation@3",
-					"when": "activeWebviewPanelId == bryne.TabPanelProvider"
+					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
 					"command": "bryne.popoutButtonClicked",
 					"group": "navigation@4",
-					"when": "activeWebviewPanelId == bryne.TabPanelProvider"
+					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
 					"command": "bryne.accountButtonClicked",
 					"group": "navigation@5",
-					"when": "activeWebviewPanelId == bryne.TabPanelProvider"
+					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
 					"command": "bryne.settingsButtonClicked",
 					"group": "navigation@6",
-					"when": "activeWebviewPanelId == bryne.TabPanelProvider"
+					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				}
 			],
 			"editor/context": [
