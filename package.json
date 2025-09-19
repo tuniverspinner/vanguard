@@ -2,7 +2,7 @@
 	"name": "vanguard",
 	"displayName": "Vanguard",
 	"description": "Resilient autonomous coding agent with automatic retry functionality for Grok models. Creates/edits files, runs commands, uses browser, and more with your permission every step of the way.",
-	"version": "1.0.0",
+	"version": "0.5.1",
 	"icon": "assets/icons/icon.png",
 	"engines": {
 		"vscode": "^1.84.0"
