@@ -1,5 +1,5 @@
-import { ApiProvider, BedrockModelId, ModelInfo } from "@shared/api"
-import { ExtensionContext, LanguageModelChatSelector } from "vscode"
+import { ApiProvider, ModelInfo } from "@shared/api"
+import { ExtensionContext } from "vscode"
 import { Controller } from "@/core/controller"
 import { AutoApprovalSettings, DEFAULT_AUTO_APPROVAL_SETTINGS } from "@/shared/AutoApprovalSettings"
 import { BrowserSettings, DEFAULT_BROWSER_SETTINGS } from "@/shared/BrowserSettings"
@@ -217,91 +217,27 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		const planModeApiModelId = context.globalState.get("planModeApiModelId") as string | undefined
 		const planModeThinkingBudgetTokens = context.globalState.get("planModeThinkingBudgetTokens") as number | undefined
 		const planModeReasoningEffort = context.globalState.get("planModeReasoningEffort") as string | undefined
-		const planModeVsCodeLmModelSelector = context.globalState.get("planModeVsCodeLmModelSelector") as
-			| LanguageModelChatSelector
-			| undefined
-		const planModeAwsBedrockCustomSelected = context.globalState.get("planModeAwsBedrockCustomSelected") as
-			| boolean
-			| undefined
-		const planModeAwsBedrockCustomModelBaseId = context.globalState.get("planModeAwsBedrockCustomModelBaseId") as
-			| BedrockModelId
-			| undefined
-		const planModeOpenRouterModelId = context.globalState.get("planModeOpenRouterModelId") as string | undefined
-		const planModeOpenRouterModelInfo = context.globalState.get("planModeOpenRouterModelInfo") as ModelInfo | undefined
-		const planModeOpenAiModelId = context.globalState.get("planModeOpenAiModelId") as string | undefined
-		const planModeOpenAiModelInfo = context.globalState.get("planModeOpenAiModelInfo") as ModelInfo | undefined
-		const planModeOllamaModelId = context.globalState.get("planModeOllamaModelId") as string | undefined
-		const planModeLmStudioModelId = context.globalState.get("planModeLmStudioModelId") as string | undefined
-		const planModeLiteLlmModelId = context.globalState.get("planModeLiteLlmModelId") as string | undefined
-		const planModeLiteLlmModelInfo = context.globalState.get("planModeLiteLlmModelInfo") as ModelInfo | undefined
-		const planModeRequestyModelId = context.globalState.get("planModeRequestyModelId") as string | undefined
-		const planModeRequestyModelInfo = context.globalState.get("planModeRequestyModelInfo") as ModelInfo | undefined
-		const planModeTogetherModelId = context.globalState.get("planModeTogetherModelId") as string | undefined
-		const planModeFireworksModelId = context.globalState.get("planModeFireworksModelId") as string | undefined
-		const planModeSapAiCoreModelId = context.globalState.get("planModeSapAiCoreModelId") as string | undefined
-		const planModeSapAiCoreDeploymentId = context.globalState.get("planModeSapAiCoreDeploymentId") as string | undefined
 		const planModeGroqModelId = context.globalState.get("planModeGroqModelId") as string | undefined
 		const planModeGroqModelInfo = context.globalState.get("planModeGroqModelInfo") as ModelInfo | undefined
-		const planModeHuggingFaceModelId = context.globalState.get("planModeHuggingFaceModelId") as string | undefined
-		const planModeHuggingFaceModelInfo = context.globalState.get("planModeHuggingFaceModelInfo") as ModelInfo | undefined
-		const planModeHuaweiCloudMaasModelId = context.globalState.get("planModeHuaweiCloudMaasModelId") as string | undefined
-		const planModeHuaweiCloudMaasModelInfo = context.globalState.get("planModeHuaweiCloudMaasModelInfo") as
-			| ModelInfo
-			| undefined
-		const planModeBasetenModelId = context.globalState.get("planModeBasetenModelId") as string | undefined
-		const planModeBasetenModelInfo = context.globalState.get("planModeBasetenModelInfo") as ModelInfo | undefined
-		const planModeVercelAiGatewayModelId = context.globalState.get("planModeVercelAiGatewayModelId") as string | undefined
-		const planModeVercelAiGatewayModelInfo = context.globalState.get("planModeVercelAiGatewayModelInfo") as
-			| ModelInfo
-			| undefined
+		const planModeOpenRouterModelId = context.globalState.get("planModeOpenRouterModelId") as string | undefined
+		const planModeOpenRouterModelInfo = context.globalState.get("planModeOpenRouterModelInfo") as ModelInfo | undefined
 		// Act mode configurations
 		const actModeApiProvider = context.globalState.get("actModeApiProvider") as ApiProvider | undefined
 		const actModeApiModelId = context.globalState.get("actModeApiModelId") as string | undefined
 		const actModeThinkingBudgetTokens = context.globalState.get("actModeThinkingBudgetTokens") as number | undefined
 		const actModeReasoningEffort = context.globalState.get("actModeReasoningEffort") as string | undefined
-		const actModeVsCodeLmModelSelector = context.globalState.get("actModeVsCodeLmModelSelector") as
-			| LanguageModelChatSelector
-			| undefined
-		const actModeAwsBedrockCustomSelected = context.globalState.get("actModeAwsBedrockCustomSelected") as boolean | undefined
-		const actModeAwsBedrockCustomModelBaseId = context.globalState.get("actModeAwsBedrockCustomModelBaseId") as
-			| BedrockModelId
-			| undefined
-		const actModeOpenRouterModelId = context.globalState.get("actModeOpenRouterModelId") as string | undefined
-		const actModeOpenRouterModelInfo = context.globalState.get("actModeOpenRouterModelInfo") as ModelInfo | undefined
-		const actModeOpenAiModelId = context.globalState.get("actModeOpenAiModelId") as string | undefined
-		const actModeOpenAiModelInfo = context.globalState.get("actModeOpenAiModelInfo") as ModelInfo | undefined
-		const actModeOllamaModelId = context.globalState.get("actModeOllamaModelId") as string | undefined
-		const actModeLmStudioModelId = context.globalState.get("actModeLmStudioModelId") as string | undefined
-		const actModeLiteLlmModelId = context.globalState.get("actModeLiteLlmModelId") as string | undefined
-		const actModeLiteLlmModelInfo = context.globalState.get("actModeLiteLlmModelInfo") as ModelInfo | undefined
-		const actModeRequestyModelId = context.globalState.get("actModeRequestyModelId") as string | undefined
-		const actModeRequestyModelInfo = context.globalState.get("actModeRequestyModelInfo") as ModelInfo | undefined
-		const actModeTogetherModelId = context.globalState.get("actModeTogetherModelId") as string | undefined
-		const actModeFireworksModelId = context.globalState.get("actModeFireworksModelId") as string | undefined
-		const actModeSapAiCoreModelId = context.globalState.get("actModeSapAiCoreModelId") as string | undefined
-		const actModeSapAiCoreDeploymentId = context.globalState.get("actModeSapAiCoreDeploymentId") as string | undefined
 		const actModeGroqModelId = context.globalState.get("actModeGroqModelId") as string | undefined
 		const actModeGroqModelInfo = context.globalState.get("actModeGroqModelInfo") as ModelInfo | undefined
-		const actModeHuggingFaceModelId = context.globalState.get("actModeHuggingFaceModelId") as string | undefined
-		const actModeHuggingFaceModelInfo = context.globalState.get("actModeHuggingFaceModelInfo") as ModelInfo | undefined
-		const actModeHuaweiCloudMaasModelId = context.globalState.get("actModeHuaweiCloudMaasModelId") as string | undefined
-		const actModeHuaweiCloudMaasModelInfo = context.globalState.get("actModeHuaweiCloudMaasModelInfo") as
-			| ModelInfo
-			| undefined
-		const actModeBasetenModelId = context.globalState.get("actModeBasetenModelId") as string | undefined
-		const actModeBasetenModelInfo = context.globalState.get("actModeBasetenModelInfo") as ModelInfo | undefined
-		const actModeVercelAiGatewayModelId = context.globalState.get("actModeVercelAiGatewayModelId") as string | undefined
-		const actModeVercelAiGatewayModelInfo = context.globalState.get("actModeVercelAiGatewayModelInfo") as
-			| ModelInfo
-			| undefined
+		const actModeOpenRouterModelId = context.globalState.get("actModeOpenRouterModelId") as string | undefined
+		const actModeOpenRouterModelInfo = context.globalState.get("actModeOpenRouterModelInfo") as ModelInfo | undefined
 		const sapAiCoreUseOrchestrationMode = context.globalState.get("sapAiCoreUseOrchestrationMode") as boolean | undefined
 
 		let apiProvider: ApiProvider
 		if (planModeApiProvider) {
 			apiProvider = planModeApiProvider
 		} else {
-			// New users should default to openrouter, since they've opted to use an API key instead of signing in
-			apiProvider = "openrouter"
+			// New users should default to cline, since they've opted to use an API key instead of signing in
+			apiProvider = "cline"
 		}
 
 		const mcpResponsesCollapsed = mcpResponsesCollapsedRaw ?? false
@@ -379,65 +315,19 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			planModeApiModelId,
 			planModeThinkingBudgetTokens,
 			planModeReasoningEffort,
-			planModeVsCodeLmModelSelector,
-			planModeAwsBedrockCustomSelected,
-			planModeAwsBedrockCustomModelBaseId,
-			planModeOpenRouterModelId,
-			planModeOpenRouterModelInfo,
-			planModeOpenAiModelId,
-			planModeOpenAiModelInfo,
-			planModeOllamaModelId,
-			planModeLmStudioModelId,
-			planModeLiteLlmModelId,
-			planModeLiteLlmModelInfo,
-			planModeRequestyModelId,
-			planModeRequestyModelInfo,
-			planModeTogetherModelId,
-			planModeFireworksModelId,
-			planModeSapAiCoreModelId,
-			planModeSapAiCoreDeploymentId,
 			planModeGroqModelId,
 			planModeGroqModelInfo,
-			planModeHuggingFaceModelId,
-			planModeHuggingFaceModelInfo,
-			planModeHuaweiCloudMaasModelId,
-			planModeHuaweiCloudMaasModelInfo,
-			planModeBasetenModelId,
-			planModeBasetenModelInfo,
-			planModeVercelAiGatewayModelId,
-			planModeVercelAiGatewayModelInfo,
+			planModeOpenRouterModelId,
+			planModeOpenRouterModelInfo,
 			// Act mode configurations
 			actModeApiProvider: actModeApiProvider || apiProvider,
 			actModeApiModelId,
 			actModeThinkingBudgetTokens,
 			actModeReasoningEffort,
-			actModeVsCodeLmModelSelector,
-			actModeAwsBedrockCustomSelected,
-			actModeAwsBedrockCustomModelBaseId,
-			actModeOpenRouterModelId,
-			actModeOpenRouterModelInfo,
-			actModeOpenAiModelId,
-			actModeOpenAiModelInfo,
-			actModeOllamaModelId,
-			actModeLmStudioModelId,
-			actModeLiteLlmModelId,
-			actModeLiteLlmModelInfo,
-			actModeRequestyModelId,
-			actModeRequestyModelInfo,
-			actModeTogetherModelId,
-			actModeFireworksModelId,
-			actModeSapAiCoreModelId,
-			actModeSapAiCoreDeploymentId,
 			actModeGroqModelId,
 			actModeGroqModelInfo,
-			actModeHuggingFaceModelId,
-			actModeHuggingFaceModelInfo,
-			actModeHuaweiCloudMaasModelId,
-			actModeHuaweiCloudMaasModelInfo,
-			actModeBasetenModelId,
-			actModeBasetenModelInfo,
-			actModeVercelAiGatewayModelId,
-			actModeVercelAiGatewayModelInfo,
+			actModeOpenRouterModelId,
+			actModeOpenRouterModelInfo,
 
 			// Other global fields
 			focusChainSettings: focusChainSettings || DEFAULT_FOCUS_CHAIN_SETTINGS,

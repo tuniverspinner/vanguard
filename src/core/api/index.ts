@@ -46,14 +46,14 @@ function createHandlerForProvider(
 				thinkingBudgetTokens:
 					mode === "plan" ? options.planModeThinkingBudgetTokens : options.actModeThinkingBudgetTokens,
 				openRouterProviderSorting: options.openRouterProviderSorting,
-				openRouterModelId: mode === "plan" ? options.planModeOpenRouterModelId : options.actModeOpenRouterModelId,
+				openRouterModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
 				openRouterModelInfo: mode === "plan" ? options.planModeOpenRouterModelInfo : options.actModeOpenRouterModelInfo,
 			})
 		case "groq":
 			return new GroqHandler({
 				onRetryAttempt: options.onRetryAttempt,
 				groqApiKey: options.groqApiKey,
-				groqModelId: mode === "plan" ? options.planModeGroqModelId : options.actModeGroqModelId,
+				groqModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
 				groqModelInfo: mode === "plan" ? options.planModeGroqModelInfo : options.actModeGroqModelInfo,
 				apiModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
 			})
@@ -74,7 +74,7 @@ function createHandlerForProvider(
 				thinkingBudgetTokens:
 					mode === "plan" ? options.planModeThinkingBudgetTokens : options.actModeThinkingBudgetTokens,
 				openRouterProviderSorting: options.openRouterProviderSorting,
-				openRouterModelId: mode === "plan" ? options.planModeOpenRouterModelId : options.actModeOpenRouterModelId,
+				openRouterModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
 				openRouterModelInfo: mode === "plan" ? options.planModeOpenRouterModelInfo : options.actModeOpenRouterModelInfo,
 			})
 	}

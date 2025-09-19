@@ -359,7 +359,8 @@ export class Task {
 
 		const currentProvider = this.mode === "plan" ? apiConfiguration.planModeApiProvider : apiConfiguration.actModeApiProvider
 
-		if (currentProvider === "openai" || currentProvider === "openai-native" || currentProvider === "sapaicore") {
+		// Only apply reasoning effort for supported providers
+		if (currentProvider === "cline" || currentProvider === "xai") {
 			if (this.mode === "plan") {
 				effectiveApiConfiguration.planModeReasoningEffort = this.openaiReasoningEffort
 			} else {

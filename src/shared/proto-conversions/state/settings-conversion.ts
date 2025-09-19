@@ -1,145 +1,49 @@
-import { ApiConfiguration, ApiProvider, BedrockModelId } from "@shared/api"
+import { ApiConfiguration, ApiProvider } from "@shared/api"
 import { ApiConfiguration as ProtoApiConfiguration } from "@shared/proto/cline/state"
 
 /**
  * Converts domain ApiConfiguration objects to proto ApiConfiguration objects
  */
 export function convertApiConfigurationToProtoApiConfiguration(config: ApiConfiguration): ProtoApiConfiguration {
-	return ProtoApiConfiguration.create({
+	const protoConfig: any = {
 		// Global configuration fields (not mode-specific)
-		apiKey: config.apiKey,
-		clineAccountId: config.clineAccountId,
-		ulid: config.ulid,
-		liteLlmBaseUrl: config.liteLlmBaseUrl,
-		liteLlmApiKey: config.liteLlmApiKey,
-		liteLlmUsePromptCache: config.liteLlmUsePromptCache,
-		openaiHeaders: config.openAiHeaders ? JSON.stringify(config.openAiHeaders) : undefined,
-		anthropicBaseUrl: config.anthropicBaseUrl,
-		openrouterApiKey: config.openRouterApiKey,
-		openrouterProviderSorting: config.openRouterProviderSorting,
-		awsAccessKey: config.awsAccessKey,
-		awsSecretKey: config.awsSecretKey,
-		awsSessionToken: config.awsSessionToken,
-		awsRegion: config.awsRegion,
-		awsUseCrossRegionInference: config.awsUseCrossRegionInference,
-		awsBedrockUsePromptCache: config.awsBedrockUsePromptCache,
-		awsUseProfile: config.awsUseProfile,
-		awsAuthentication: config.awsAuthentication,
-		awsProfile: config.awsProfile,
-		awsBedrockApiKey: config.awsBedrockApiKey,
-		awsBedrockEndpoint: config.awsBedrockEndpoint,
-		claudeCodePath: config.claudeCodePath,
-		vertexProjectId: config.vertexProjectId,
-		vertexRegion: config.vertexRegion,
-		openaiBaseUrl: config.openAiBaseUrl,
-		openaiApiKey: config.openAiApiKey,
-		ollamaBaseUrl: config.ollamaBaseUrl,
-		ollamaApiKey: config.ollamaApiKey,
-		ollamaApiOptionsCtxNum: config.ollamaApiOptionsCtxNum,
-		lmStudioBaseUrl: config.lmStudioBaseUrl,
-		lmStudioMaxTokens: config.lmStudioMaxTokens,
-		geminiApiKey: config.geminiApiKey,
-		geminiBaseUrl: config.geminiBaseUrl,
-		openaiNativeApiKey: config.openAiNativeApiKey,
-		deepSeekApiKey: config.deepSeekApiKey,
-		requestyApiKey: config.requestyApiKey,
-		requestyBaseUrl: config.requestyBaseUrl,
-		togetherApiKey: config.togetherApiKey,
-		fireworksApiKey: config.fireworksApiKey,
-		fireworksModelMaxCompletionTokens: config.fireworksModelMaxCompletionTokens
-			? Number(config.fireworksModelMaxCompletionTokens)
-			: undefined,
-		fireworksModelMaxTokens: config.fireworksModelMaxTokens ? Number(config.fireworksModelMaxTokens) : undefined,
-		qwenApiKey: config.qwenApiKey,
-		doubaoApiKey: config.doubaoApiKey,
-		mistralApiKey: config.mistralApiKey,
-		moonshotApiKey: config.moonshotApiKey,
-		azureApiVersion: config.azureApiVersion,
-		qwenApiLine: config.qwenApiLine,
-		nebiusApiKey: config.nebiusApiKey,
-		asksageApiUrl: config.asksageApiUrl,
-		asksageApiKey: config.asksageApiKey,
-		xaiApiKey: config.xaiApiKey,
-		sambanovaApiKey: config.sambanovaApiKey,
-		cerebrasApiKey: config.cerebrasApiKey,
-		zaiApiKey: config.zaiApiKey,
+		clineAccountId: config.clineAccountId || "",
+		ulid: config.ulid || "",
+		xaiApiKey: config.xaiApiKey || "",
+		groqApiKey: config.groqApiKey || "",
 		requestTimeoutMs: config.requestTimeoutMs ? Number(config.requestTimeoutMs) : undefined,
-		sapAiCoreClientId: config.sapAiCoreClientId,
-		sapAiCoreClientSecret: config.sapAiCoreClientSecret,
-		sapAiResourceGroup: config.sapAiResourceGroup,
-		sapAiCoreTokenUrl: config.sapAiCoreTokenUrl,
-		sapAiCoreBaseUrl: config.sapAiCoreBaseUrl,
-		vercelAiGatewayApiKey: config.vercelAiGatewayApiKey,
-		difyBaseUrl: config.difyBaseUrl,
-		difyApiKey: config.difyApiKey,
 
 		// Plan mode configurations
-		planModeApiProvider: config.planModeApiProvider,
-		planModeApiModelId: config.planModeApiModelId,
+		planModeApiProvider: config.planModeApiProvider || "cline",
+		planModeApiModelId: config.planModeApiModelId || "",
 		planModeThinkingBudgetTokens: config.planModeThinkingBudgetTokens
 			? Number(config.planModeThinkingBudgetTokens)
 			: undefined,
-		planModeReasoningEffort: config.planModeReasoningEffort,
-		planModeVscodeLmModelSelector: config.planModeVsCodeLmModelSelector
-			? JSON.stringify(config.planModeVsCodeLmModelSelector)
-			: undefined,
-		planModeAwsBedrockCustomSelected: config.planModeAwsBedrockCustomSelected,
-		planModeAwsBedrockCustomModelBaseId: config.planModeAwsBedrockCustomModelBaseId,
-		planModeOpenrouterModelId: config.planModeOpenRouterModelId,
-		planModeOpenrouterModelInfo: config.planModeOpenRouterModelInfo
+		planModeReasoningEffort: config.planModeReasoningEffort || "",
+		planModeGroqModelId: config.planModeGroqModelId || "",
+		planModeGroqModelInfo: config.planModeGroqModelInfo ? JSON.stringify(config.planModeGroqModelInfo) : undefined,
+		planModeOpenRouterModelId: config.planModeOpenRouterModelId || "",
+		planModeOpenRouterModelInfo: config.planModeOpenRouterModelInfo
 			? JSON.stringify(config.planModeOpenRouterModelInfo)
-			: undefined,
-		planModeOpenaiModelId: config.planModeOpenAiModelId,
-		planModeOpenaiModelInfo: config.planModeOpenAiModelInfo ? JSON.stringify(config.planModeOpenAiModelInfo) : undefined,
-		planModeOllamaModelId: config.planModeOllamaModelId,
-		planModeLmStudioModelId: config.planModeLmStudioModelId,
-		planModeLiteLlmModelId: config.planModeLiteLlmModelId,
-		planModeLiteLlmModelInfo: config.planModeLiteLlmModelInfo ? JSON.stringify(config.planModeLiteLlmModelInfo) : undefined,
-		planModeRequestyModelId: config.planModeRequestyModelId,
-		planModeRequestyModelInfo: config.planModeRequestyModelInfo
-			? JSON.stringify(config.planModeRequestyModelInfo)
-			: undefined,
-		planModeTogetherModelId: config.planModeTogetherModelId,
-		planModeFireworksModelId: config.planModeFireworksModelId,
-		planModeSapAiCoreModelId: config.planModeSapAiCoreModelId,
-		planModeVercelAiGatewayModelId: config.planModeVercelAiGatewayModelId,
-		planModeVercelAiGatewayModelInfo: config.planModeVercelAiGatewayModelInfo
-			? JSON.stringify(config.planModeVercelAiGatewayModelInfo)
 			: undefined,
 
 		// Act mode configurations
-		actModeApiProvider: config.actModeApiProvider,
-		actModeApiModelId: config.actModeApiModelId,
+		actModeApiProvider: config.actModeApiProvider || "cline",
+		actModeApiModelId: config.actModeApiModelId || "",
 		actModeThinkingBudgetTokens: config.actModeThinkingBudgetTokens ? Number(config.actModeThinkingBudgetTokens) : undefined,
-		actModeReasoningEffort: config.actModeReasoningEffort,
-		actModeVscodeLmModelSelector: config.actModeVsCodeLmModelSelector
-			? JSON.stringify(config.actModeVsCodeLmModelSelector)
-			: undefined,
-		actModeAwsBedrockCustomSelected: config.actModeAwsBedrockCustomSelected,
-		actModeAwsBedrockCustomModelBaseId: config.actModeAwsBedrockCustomModelBaseId,
-		actModeOpenrouterModelId: config.actModeOpenRouterModelId,
-		actModeOpenrouterModelInfo: config.actModeOpenRouterModelInfo
+		actModeReasoningEffort: config.actModeReasoningEffort || "",
+		actModeGroqModelId: config.actModeGroqModelId || "",
+		actModeGroqModelInfo: config.actModeGroqModelInfo ? JSON.stringify(config.actModeGroqModelInfo) : undefined,
+		actModeOpenRouterModelId: config.actModeOpenRouterModelId || "",
+		actModeOpenRouterModelInfo: config.actModeOpenRouterModelInfo
 			? JSON.stringify(config.actModeOpenRouterModelInfo)
-			: undefined,
-		actModeOpenaiModelId: config.actModeOpenAiModelId,
-		actModeOpenaiModelInfo: config.actModeOpenAiModelInfo ? JSON.stringify(config.actModeOpenAiModelInfo) : undefined,
-		actModeOllamaModelId: config.actModeOllamaModelId,
-		actModeLmStudioModelId: config.actModeLmStudioModelId,
-		actModeLiteLlmModelId: config.actModeLiteLlmModelId,
-		actModeLiteLlmModelInfo: config.actModeLiteLlmModelInfo ? JSON.stringify(config.actModeLiteLlmModelInfo) : undefined,
-		actModeRequestyModelId: config.actModeRequestyModelId,
-		actModeRequestyModelInfo: config.actModeRequestyModelInfo ? JSON.stringify(config.actModeRequestyModelInfo) : undefined,
-		actModeTogetherModelId: config.actModeTogetherModelId,
-		actModeFireworksModelId: config.actModeFireworksModelId,
-		actModeSapAiCoreModelId: config.actModeSapAiCoreModelId,
-		actModeVercelAiGatewayModelId: config.actModeVercelAiGatewayModelId,
-		actModeVercelAiGatewayModelInfo: config.actModeVercelAiGatewayModelInfo
-			? JSON.stringify(config.actModeVercelAiGatewayModelInfo)
 			: undefined,
 
 		// Favorited model IDs
 		favoritedModelIds: config.favoritedModelIds || [],
-	})
+	}
+
+	return ProtoApiConfiguration.create(protoConfig)
 }
 
 /**
@@ -148,70 +52,11 @@ export function convertApiConfigurationToProtoApiConfiguration(config: ApiConfig
 export function convertProtoApiConfigurationToApiConfiguration(protoConfig: ProtoApiConfiguration): ApiConfiguration {
 	const config: ApiConfiguration = {
 		// Global configuration fields (not mode-specific)
-		apiKey: protoConfig.apiKey,
 		clineAccountId: protoConfig.clineAccountId,
 		ulid: protoConfig.ulid,
-		liteLlmBaseUrl: protoConfig.liteLlmBaseUrl,
-		liteLlmApiKey: protoConfig.liteLlmApiKey,
-		liteLlmUsePromptCache: protoConfig.liteLlmUsePromptCache,
-		anthropicBaseUrl: protoConfig.anthropicBaseUrl,
-		openRouterApiKey: protoConfig.openrouterApiKey,
-		openRouterProviderSorting: protoConfig.openrouterProviderSorting,
-		awsAccessKey: protoConfig.awsAccessKey,
-		awsSecretKey: protoConfig.awsSecretKey,
-		awsSessionToken: protoConfig.awsSessionToken,
-		awsRegion: protoConfig.awsRegion,
-		awsUseCrossRegionInference: protoConfig.awsUseCrossRegionInference,
-		awsBedrockUsePromptCache: protoConfig.awsBedrockUsePromptCache,
-		awsUseProfile: protoConfig.awsUseProfile,
-		awsProfile: protoConfig.awsProfile,
-		awsAuthentication: protoConfig.awsAuthentication,
-		awsBedrockApiKey: protoConfig.awsBedrockApiKey,
-		awsBedrockEndpoint: protoConfig.awsBedrockEndpoint,
-		claudeCodePath: protoConfig.claudeCodePath,
-		vertexProjectId: protoConfig.vertexProjectId,
-		vertexRegion: protoConfig.vertexRegion,
-		openAiBaseUrl: protoConfig.openaiBaseUrl,
-		openAiApiKey: protoConfig.openaiApiKey,
-		ollamaBaseUrl: protoConfig.ollamaBaseUrl,
-		ollamaApiKey: protoConfig.ollamaApiKey,
-		ollamaApiOptionsCtxNum: protoConfig.ollamaApiOptionsCtxNum,
-		lmStudioBaseUrl: protoConfig.lmStudioBaseUrl,
-		lmStudioMaxTokens: protoConfig.lmStudioMaxTokens,
-		geminiApiKey: protoConfig.geminiApiKey,
-		geminiBaseUrl: protoConfig.geminiBaseUrl,
-		openAiNativeApiKey: protoConfig.openaiNativeApiKey,
-		deepSeekApiKey: protoConfig.deepSeekApiKey,
-		requestyApiKey: protoConfig.requestyApiKey,
-		requestyBaseUrl: protoConfig.requestyBaseUrl,
-		togetherApiKey: protoConfig.togetherApiKey,
-		fireworksApiKey: protoConfig.fireworksApiKey,
-		fireworksModelMaxCompletionTokens: protoConfig.fireworksModelMaxCompletionTokens
-			? Number(protoConfig.fireworksModelMaxCompletionTokens)
-			: undefined,
-		fireworksModelMaxTokens: protoConfig.fireworksModelMaxTokens ? Number(protoConfig.fireworksModelMaxTokens) : undefined,
-		qwenApiKey: protoConfig.qwenApiKey,
-		doubaoApiKey: protoConfig.doubaoApiKey,
-		mistralApiKey: protoConfig.mistralApiKey,
-		moonshotApiKey: protoConfig.moonshotApiKey,
-		azureApiVersion: protoConfig.azureApiVersion,
-		qwenApiLine: protoConfig.qwenApiLine,
-		nebiusApiKey: protoConfig.nebiusApiKey,
-		asksageApiUrl: protoConfig.asksageApiUrl,
-		asksageApiKey: protoConfig.asksageApiKey,
 		xaiApiKey: protoConfig.xaiApiKey,
-		sambanovaApiKey: protoConfig.sambanovaApiKey,
-		cerebrasApiKey: protoConfig.cerebrasApiKey,
-		zaiApiKey: protoConfig.zaiApiKey,
+		groqApiKey: protoConfig.groqApiKey,
 		requestTimeoutMs: protoConfig.requestTimeoutMs ? Number(protoConfig.requestTimeoutMs) : undefined,
-		sapAiCoreClientId: protoConfig.sapAiCoreClientId,
-		sapAiCoreClientSecret: protoConfig.sapAiCoreClientSecret,
-		sapAiResourceGroup: protoConfig.sapAiResourceGroup,
-		sapAiCoreTokenUrl: protoConfig.sapAiCoreTokenUrl,
-		sapAiCoreBaseUrl: protoConfig.sapAiCoreBaseUrl,
-		vercelAiGatewayApiKey: protoConfig.vercelAiGatewayApiKey,
-		difyApiKey: protoConfig.difyApiKey,
-		difyBaseUrl: protoConfig.difyBaseUrl,
 
 		// Plan mode configurations
 		planModeApiProvider: protoConfig.planModeApiProvider as ApiProvider,
@@ -220,18 +65,8 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 			? Number(protoConfig.planModeThinkingBudgetTokens)
 			: undefined,
 		planModeReasoningEffort: protoConfig.planModeReasoningEffort,
-		planModeAwsBedrockCustomSelected: protoConfig.planModeAwsBedrockCustomSelected,
-		planModeAwsBedrockCustomModelBaseId: protoConfig.planModeAwsBedrockCustomModelBaseId as BedrockModelId | undefined,
-		planModeOpenRouterModelId: protoConfig.planModeOpenrouterModelId,
-		planModeOpenAiModelId: protoConfig.planModeOpenaiModelId,
-		planModeOllamaModelId: protoConfig.planModeOllamaModelId,
-		planModeLmStudioModelId: protoConfig.planModeLmStudioModelId,
-		planModeLiteLlmModelId: protoConfig.planModeLiteLlmModelId,
-		planModeRequestyModelId: protoConfig.planModeRequestyModelId,
-		planModeTogetherModelId: protoConfig.planModeTogetherModelId,
-		planModeFireworksModelId: protoConfig.planModeFireworksModelId,
-		planModeSapAiCoreModelId: protoConfig.planModeSapAiCoreModelId,
-		planModeVercelAiGatewayModelId: protoConfig.planModeVercelAiGatewayModelId,
+		planModeGroqModelId: protoConfig.planModeGroqModelId,
+		planModeOpenRouterModelId: protoConfig.planModeOpenRouterModelId,
 
 		// Act mode configurations
 		actModeApiProvider: protoConfig.actModeApiProvider as ApiProvider,
@@ -240,18 +75,8 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 			? Number(protoConfig.actModeThinkingBudgetTokens)
 			: undefined,
 		actModeReasoningEffort: protoConfig.actModeReasoningEffort,
-		actModeAwsBedrockCustomSelected: protoConfig.actModeAwsBedrockCustomSelected,
-		actModeAwsBedrockCustomModelBaseId: protoConfig.actModeAwsBedrockCustomModelBaseId as BedrockModelId | undefined,
-		actModeOpenRouterModelId: protoConfig.actModeOpenrouterModelId,
-		actModeOpenAiModelId: protoConfig.actModeOpenaiModelId,
-		actModeOllamaModelId: protoConfig.actModeOllamaModelId,
-		actModeLmStudioModelId: protoConfig.actModeLmStudioModelId,
-		actModeLiteLlmModelId: protoConfig.actModeLiteLlmModelId,
-		actModeRequestyModelId: protoConfig.actModeRequestyModelId,
-		actModeTogetherModelId: protoConfig.actModeTogetherModelId,
-		actModeFireworksModelId: protoConfig.actModeFireworksModelId,
-		actModeSapAiCoreModelId: protoConfig.actModeSapAiCoreModelId,
-		actModeVercelAiGatewayModelId: protoConfig.actModeVercelAiGatewayModelId,
+		actModeGroqModelId: protoConfig.actModeGroqModelId,
+		actModeOpenRouterModelId: protoConfig.actModeOpenRouterModelId,
 
 		// Favorited model IDs
 		favoritedModelIds: protoConfig.favoritedModelIds || [],
@@ -259,44 +84,17 @@ export function convertProtoApiConfigurationToApiConfiguration(protoConfig: Prot
 
 	// Handle complex JSON objects
 	try {
-		if (protoConfig.openaiHeaders) {
-			config.openAiHeaders = JSON.parse(protoConfig.openaiHeaders)
+		if (protoConfig.planModeGroqModelInfo) {
+			config.planModeGroqModelInfo = JSON.parse(protoConfig.planModeGroqModelInfo)
 		}
-		if (protoConfig.planModeVscodeLmModelSelector) {
-			config.planModeVsCodeLmModelSelector = JSON.parse(protoConfig.planModeVscodeLmModelSelector)
+		if (protoConfig.planModeOpenRouterModelInfo) {
+			config.planModeOpenRouterModelInfo = JSON.parse(protoConfig.planModeOpenRouterModelInfo)
 		}
-		if (protoConfig.planModeOpenrouterModelInfo) {
-			config.planModeOpenRouterModelInfo = JSON.parse(protoConfig.planModeOpenrouterModelInfo)
+		if (protoConfig.actModeGroqModelInfo) {
+			config.actModeGroqModelInfo = JSON.parse(protoConfig.actModeGroqModelInfo)
 		}
-		if (protoConfig.planModeOpenaiModelInfo) {
-			config.planModeOpenAiModelInfo = JSON.parse(protoConfig.planModeOpenaiModelInfo)
-		}
-		if (protoConfig.planModeLiteLlmModelInfo) {
-			config.planModeLiteLlmModelInfo = JSON.parse(protoConfig.planModeLiteLlmModelInfo)
-		}
-		if (protoConfig.planModeRequestyModelInfo) {
-			config.planModeRequestyModelInfo = JSON.parse(protoConfig.planModeRequestyModelInfo)
-		}
-		if (protoConfig.actModeVscodeLmModelSelector) {
-			config.actModeVsCodeLmModelSelector = JSON.parse(protoConfig.actModeVscodeLmModelSelector)
-		}
-		if (protoConfig.actModeOpenrouterModelInfo) {
-			config.actModeOpenRouterModelInfo = JSON.parse(protoConfig.actModeOpenrouterModelInfo)
-		}
-		if (protoConfig.actModeOpenaiModelInfo) {
-			config.actModeOpenAiModelInfo = JSON.parse(protoConfig.actModeOpenaiModelInfo)
-		}
-		if (protoConfig.actModeLiteLlmModelInfo) {
-			config.actModeLiteLlmModelInfo = JSON.parse(protoConfig.actModeLiteLlmModelInfo)
-		}
-		if (protoConfig.actModeRequestyModelInfo) {
-			config.actModeRequestyModelInfo = JSON.parse(protoConfig.actModeRequestyModelInfo)
-		}
-		if (protoConfig.planModeVercelAiGatewayModelInfo) {
-			config.planModeVercelAiGatewayModelInfo = JSON.parse(protoConfig.planModeVercelAiGatewayModelInfo)
-		}
-		if (protoConfig.actModeVercelAiGatewayModelInfo) {
-			config.actModeVercelAiGatewayModelInfo = JSON.parse(protoConfig.actModeVercelAiGatewayModelInfo)
+		if (protoConfig.actModeOpenRouterModelInfo) {
+			config.actModeOpenRouterModelInfo = JSON.parse(protoConfig.actModeOpenRouterModelInfo)
 		}
 	} catch (error) {
 		console.error("Failed to parse complex JSON objects in API configuration:", error)

@@ -574,35 +574,9 @@ export async function migrateWelcomeViewCompleted(context: vscode.ExtensionConte
 			// This is the original logic used for checking is the welcome view should be shown
 			// It was located in the ExtensionStateContextProvider
 			const hasKey = config
-				? [
-						config.apiKey,
-						config.openRouterApiKey,
-						config.awsRegion,
-						config.vertexProjectId,
-						config.openAiApiKey,
-						config.ollamaApiKey,
-						config.planModeOllamaModelId,
-						config.planModeLmStudioModelId,
-						config.actModeOllamaModelId,
-						config.actModeLmStudioModelId,
-						config.liteLlmApiKey,
-						config.geminiApiKey,
-						config.openAiNativeApiKey,
-						config.deepSeekApiKey,
-						config.requestyApiKey,
-						config.togetherApiKey,
-						config.qwenApiKey,
-						config.doubaoApiKey,
-						config.mistralApiKey,
-						config.planModeVsCodeLmModelSelector,
-						config.actModeVsCodeLmModelSelector,
-						config.clineAccountId,
-						config.asksageApiKey,
-						config.xaiApiKey,
-						config.sambanovaApiKey,
-						config.sapAiCoreClientId,
-						config.difyApiKey,
-					].some((key) => key !== undefined)
+				? [config.clineAccountId, config.xaiApiKey, config.groqApiKey, config.openRouterProviderSorting].some(
+						(key) => key !== undefined,
+					)
 				: false
 
 			// Set welcomeViewCompleted based on whether user has keys

@@ -146,8 +146,8 @@ export class Controller {
 			const apiConfiguration = this.stateManager.getApiConfiguration()
 			const updatedConfig = {
 				...apiConfiguration,
-				planModeApiProvider: "openrouter" as ApiProvider,
-				actModeApiProvider: "openrouter" as ApiProvider,
+				planModeApiProvider: "cline" as ApiProvider,
+				actModeApiProvider: "cline" as ApiProvider,
 			}
 			this.stateManager.setApiConfiguration(updatedConfig)
 
@@ -506,7 +506,7 @@ export class Controller {
 			throw error
 		}
 
-		const openrouter: ApiProvider = "openrouter"
+		const openrouter: ApiProvider = "cline"
 		const currentMode = await this.getCurrentMode()
 
 		// Update API configuration through cache service
