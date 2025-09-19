@@ -6,7 +6,7 @@ import styled from "styled-components"
 import { normalizeApiConfiguration } from "@/components/settings/utils/providerUtils"
 import { useExtensionState } from "@/context/ExtensionStateContext"
 import { highlight } from "../history/HistoryView"
-import { ClineProvider } from "./providers/ClineProvider"
+import { ClineAccountInfoCard } from "./ClineAccountInfoCard"
 import { GroqProvider } from "./providers/GroqProvider"
 import { XaiProvider } from "./providers/XaiProvider"
 import { useApiConfigurationHandlers } from "./utils/useApiConfigurationHandlers"
@@ -242,9 +242,10 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 				</ProviderDropdownWrapper>
 			</DropdownContainer>
 
-			{apiConfiguration && selectedProvider === "cline" && (
-				<ClineProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
-			)}
+			{/* Cline Account Info Card - Always visible regardless of provider */}
+			<div style={{ marginBottom: 14, marginTop: 4 }}>
+				<ClineAccountInfoCard />
+			</div>
 
 			{apiConfiguration && selectedProvider === "groq" && (
 				<GroqProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />

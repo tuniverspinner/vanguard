@@ -5,6 +5,13 @@ This index tracks all development activities for the Vanguard project, organized
 
 ## Development Arcs
 
+### UI/UX Improvements
+- **0919|0726-[vanguard, ui, account]--fix-account-card-visibility-independent-of-provider.md**
+  - Account card visibility fix: Made Cline account card always visible regardless of AI provider selection
+  - User experience improvement: Billing/usage access now independent of provider choice
+  - Status: ✅ Complete
+  - Impact: Medium - Improved user experience and accessibility
+
 ### Provider Simplification & Refactoring
 - **0919|0714-[vanguard, refactoring, providers]--compilation-errors-fixed-simplified-to-3-core-providers.md**
   - Compilation fixes: Resolved all TypeScript errors after provider reduction
@@ -27,10 +34,10 @@ This index tracks all development activities for the Vanguard project, organized
 ## Statistics & Velocity
 
 ### Current Metrics
-- **Total Entries**: 3
-- **Active Development Arcs**: 2
-- **Completed Sessions**: 3
-- **Average Session Impact**: High
+- **Total Entries**: 4
+- **Active Development Arcs**: 3
+- **Completed Sessions**: 4
+- **Average Session Impact**: Medium-High
 
 ### Recent Activity
 - **Last Update**: September 19th, 2025
@@ -40,11 +47,12 @@ This index tracks all development activities for the Vanguard project, organized
 ## Project Organization
 
 ### By Namespace
-- **vanguard**: Provider simplification, build optimization
+- **vanguard**: Provider simplification, build optimization, UI/UX improvements
 - **gefest**: Documentation infrastructure (legacy)
 
 ### By Category
 - **refactoring**: Provider reduction, codebase cleanup
+- **ui**: Account card visibility, user experience improvements
 - **documentation**: Dev-log system, project organization
 - **build-optimization**: TypeScript error resolution, packaging improvements
 
@@ -57,9 +65,10 @@ This index tracks all development activities for the Vanguard project, organized
 - Tertiary tags provide additional context
 
 ### Recent Entries (Chronological)
-1. **0919|0714** - Compilation fixes (vanguard)
-2. **0919|0639** - Provider simplification (vanguard)
-3. **0609|0117** - Documentation infrastructure (gefest)
+1. **0919|0726** - Account card visibility fix (vanguard)
+2. **0919|0714** - Compilation fixes (vanguard)
+3. **0919|0639** - Provider simplification (vanguard)
+4. **0609|0117** - Documentation infrastructure (gefest)
 
 ## Guidelines
 
@@ -78,6 +87,8 @@ This index tracks all development activities for the Vanguard project, organized
 - `#vanguard` - Main project namespace
 - `#refactoring` - Code restructuring work
 - `#providers` - AI provider management
+- `#ui` - User interface improvements
+- `#account` - Account management features
 - `#build-optimization` - Build system improvements
 - `#documentation` - Documentation and organization
 
