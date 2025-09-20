@@ -123,92 +123,92 @@
 		},
 		"commands": [
 			{
-				"command": "bryne.plusButtonClicked",
+				"command": "vanguard.plusButtonClicked",
 				"title": "New Task",
 				"icon": "$(add)"
 			},
 			{
-				"command": "bryne.mcpButtonClicked",
+				"command": "vanguard.mcpButtonClicked",
 				"title": "MCP Servers",
 				"icon": "$(server)"
 			},
 			{
-				"command": "bryne.historyButtonClicked",
+				"command": "vanguard.historyButtonClicked",
 				"title": "History",
 				"icon": "$(history)"
 			},
 			{
-				"command": "bryne.popoutButtonClicked",
+				"command": "vanguard.popoutButtonClicked",
 				"title": "Open in Editor",
 				"icon": "$(link-external)"
 			},
 			{
-				"command": "bryne.accountButtonClicked",
+				"command": "vanguard.accountButtonClicked",
 				"title": "Account",
 				"icon": "$(account)"
 			},
 			{
-				"command": "bryne.settingsButtonClicked",
+				"command": "vanguard.settingsButtonClicked",
 				"title": "Settings",
 				"icon": "$(settings-gear)"
 			},
 			{
-				"command": "bryne.openInNewTab",
+				"command": "vanguard.openInNewTab",
 				"title": "Open In New Tab",
-				"category": "Bryne"
+				"category": "Vanguard"
 			},
 			{
-				"command": "bryne.dev.createTestTasks",
+				"command": "vanguard.dev.createTestTasks",
 				"title": "Create Test Tasks",
-				"category": "Bryne",
-				"when": "bryne.isDevMode"
+				"category": "Vanguard",
+				"when": "vanguard.isDevMode"
 			},
 			{
-				"command": "bryne.addToChat",
-				"title": "Add to Bryne",
-				"category": "Bryne"
+				"command": "vanguard.addToChat",
+				"title": "Add to Vanguard",
+				"category": "Vanguard"
 			},
 			{
-				"command": "bryne.addTerminalOutputToChat",
-				"title": "Add to Bryne",
-				"category": "Bryne"
+				"command": "vanguard.addTerminalOutputToChat",
+				"title": "Add to Vanguard",
+				"category": "Vanguard"
 			},
 			{
-				"command": "bryne.focusChatInput",
+				"command": "vanguard.focusChatInput",
 				"title": "Jump to Chat Input",
-				"category": "Bryne"
+				"category": "Vanguard"
 			},
 			{
-				"command": "bryne.generateGitCommitMessage",
-				"title": "Generate Commit Message with Bryne",
-				"category": "Bryne",
+				"command": "vanguard.generateGitCommitMessage",
+				"title": "Generate Commit Message with Vanguard",
+				"category": "Vanguard",
 				"icon": "$(robot)"
 			},
 			{
-				"command": "bryne.abortGitCommitMessage",
-				"title": "Generate Commit Message with Bryne - Stop",
-				"category": "Bryne",
+				"command": "vanguard.abortGitCommitMessage",
+				"title": "Generate Commit Message with Vanguard - Stop",
+				"category": "Vanguard",
 				"icon": "$(debug-stop)"
 			},
 			{
-				"command": "bryne.explainCode",
-				"title": "Explain with Bryne",
-				"category": "Bryne"
+				"command": "vanguard.explainCode",
+				"title": "Explain with Vanguard",
+				"category": "Vanguard"
 			},
 			{
-				"command": "bryne.improveCode",
-				"title": "Improve with Bryne",
-				"category": "Bryne"
+				"command": "vanguard.improveCode",
+				"title": "Improve with Vanguard",
+				"category": "Vanguard"
 			},
 			{
-				"command": "bryne.openWalkthrough",
+				"command": "vanguard.openWalkthrough",
 				"title": "Open Walkthrough",
-				"category": "Bryne"
+				"category": "Vanguard"
 			}
 		],
 		"keybindings": [
 			{
-				"command": "bryne.addToChat",
+				"command": "vanguard.addToChat",
 				"key": "cmd+'",
 				"mac": "cmd+'",
 				"win": "ctrl+'",
@@ -216,11 +216,11 @@
 				"when": "editorHasSelection"
 			},
 			{
-				"command": "bryne.generateGitCommitMessage",
+				"command": "vanguard.generateGitCommitMessage",
 				"when": "config.git.enabled && scmProvider == git"
 			},
 			{
-				"command": "bryne.focusChatInput",
+				"command": "vanguard.focusChatInput",
 				"key": "cmd+'",
 				"mac": "cmd+'",
 				"win": "ctrl+'",
@@ -231,101 +231,101 @@
 		"menus": {
 			"view/title": [
 				{
-					"command": "bryne.plusButtonClicked",
+					"command": "vanguard.plusButtonClicked",
 					"group": "navigation@1",
 					"when": "view == vanguard.SidebarProvider"
 				},
 				{
-					"command": "bryne.mcpButtonClicked",
+					"command": "vanguard.mcpButtonClicked",
 					"group": "navigation@2",
 					"when": "view == vanguard.SidebarProvider"
 				},
 				{
-					"command": "bryne.historyButtonClicked",
+					"command": "vanguard.historyButtonClicked",
 					"group": "navigation@3",
 					"when": "view == vanguard.SidebarProvider"
 				},
 				{
-					"command": "bryne.popoutButtonClicked",
+					"command": "vanguard.popoutButtonClicked",
 					"group": "navigation@4",
 					"when": "view == vanguard.SidebarProvider"
 				},
 				{
-					"command": "bryne.accountButtonClicked",
+					"command": "vanguard.accountButtonClicked",
 					"group": "navigation@5",
 					"when": "view == vanguard.SidebarProvider"
 				},
 				{
-					"command": "bryne.settingsButtonClicked",
+					"command": "vanguard.settingsButtonClicked",
 					"group": "navigation@6",
 					"when": "view == vanguard.SidebarProvider"
 				}
 			],
 			"editor/title": [
 				{
-					"command": "bryne.plusButtonClicked",
+					"command": "vanguard.plusButtonClicked",
 					"group": "navigation@1",
 					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
-					"command": "bryne.mcpButtonClicked",
+					"command": "vanguard.mcpButtonClicked",
 					"group": "navigation@2",
 					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
-					"command": "bryne.historyButtonClicked",
+					"command": "vanguard.historyButtonClicked",
 					"group": "navigation@3",
 					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
-					"command": "bryne.popoutButtonClicked",
+					"command": "vanguard.popoutButtonClicked",
 					"group": "navigation@4",
 					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
-					"command": "bryne.accountButtonClicked",
+					"command": "vanguard.accountButtonClicked",
 					"group": "navigation@5",
 					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				},
 				{
-					"command": "bryne.settingsButtonClicked",
+					"command": "vanguard.settingsButtonClicked",
 					"group": "navigation@6",
 					"when": "activeWebviewPanelId == vanguard.TabPanelProvider"
 				}
 			],
 			"editor/context": [
 				{
-					"command": "bryne.addToChat",
+					"command": "vanguard.addToChat",
 					"group": "navigation",
 					"when": "editorHasSelection"
 				}
 			],
 			"terminal/context": [
 				{
-					"command": "bryne.addTerminalOutputToChat",
+					"command": "vanguard.addTerminalOutputToChat",
 					"group": "navigation"
 				}
 			],
 			"scm/title": [
 				{
-					"command": "bryne.generateGitCommitMessage",
+					"command": "vanguard.generateGitCommitMessage",
 					"group": "navigation",
-					"when": "config.git.enabled && scmProvider == git && !bryne.isGeneratingCommit"
+					"when": "config.git.enabled && scmProvider == git && !vanguard.isGeneratingCommit"
 				},
 				{
-					"command": "bryne.abortGitCommitMessage",
+					"command": "vanguard.abortGitCommitMessage",
 					"group": "navigation",
-					"when": "config.git.enabled && scmProvider == git && bryne.isGeneratingCommit"
+					"when": "config.git.enabled && scmProvider == git && vanguard.isGeneratingCommit"
 				}
 			],
 			"commandPalette": [
 				{
-					"command": "bryne.generateGitCommitMessage",
-					"when": "config.git.enabled && scmProvider == git && !bryne.isGeneratingCommit"
+					"command": "vanguard.generateGitCommitMessage",
+					"when": "config.git.enabled && scmProvider == git && !vanguard.isGeneratingCommit"
 				},
 				{
-					"command": "bryne.abortGitCommitMessage",
-					"when": "config.git.enabled && scmProvider == git && bryne.isGeneratingCommit"
+					"command": "vanguard.abortGitCommitMessage",
+					"when": "config.git.enabled && scmProvider == git && vanguard.isGeneratingCommit"
 				}
 			]
 		},
