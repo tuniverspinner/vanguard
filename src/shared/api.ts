@@ -100,9 +100,18 @@ export const difyDefaultModelId = ""
 export const CLAUDE_SONNET_4_1M_SUFFIX = ":1m"
 export const CLAUDE_SONNET_4_1M_TIERS = []
 export const azureOpenAiDefaultApiVersion = "2024-08-01-preview"
-export const openRouterDefaultModelId = ""
+export const openRouterDefaultModelId = "x-ai/grok-code-fast-1"
 export const openRouterClaudeSonnet41mModelId = ""
-export const openRouterDefaultModelInfo = {} as ModelInfo
+export const openRouterDefaultModelInfo: ModelInfo = {
+	maxTokens: 8192,
+	contextWindow: 256000,
+	supportsImages: true,
+	supportsPromptCache: true,
+	inputPrice: 0.2,
+	cacheReadsPrice: 0.02,
+	outputPrice: 1.5,
+	description: "Grok Code Fast 1 is a speedy and economical reasoning model that excels at agentic coding.",
+}
 export const requestyDefaultModelId = ""
 export const requestyDefaultModelInfo = {} as ModelInfo
 export const liteLlmModelInfoSaneDefaults = {} as any

@@ -64,6 +64,13 @@ export const ClineProvider = ({ showModelOptions, isPopup, currentMode }: ClineP
 				if (response.models) {
 					setOpenRouterModels(response.models)
 					console.log("[ClineProvider] OpenRouter models loaded:", Object.keys(response.models).length)
+
+					// Initialize default model if none is selected
+					const currentModelId = modeFields.openRouterModelId
+					if (!currentModelId && response.models["x-ai/grok-code-fast-1"]) {
+						console.log("[ClineProvider] Initializing default model: x-ai/grok-code-fast-1")
+						handleModelChange("x-ai/grok-code-fast-1")
+					}
 				}
 			})
 			.catch((err) => {
