@@ -5,6 +5,14 @@ This index tracks all development activities for the Vanguard project, organized
 
 ## Development Arcs
 
+### Rebranding & Bug Fixes
+- **0920|0832-[vanguard, rebranding, command-fix]--complete-extension-rebrand-from-cline-to-vanguard.md**
+  - Complete extension rebrand: Fixed command registration bug and updated all branding from "Cline" to "Vanguard"
+  - Critical bug fix: Resolved "command not found" error for plus button functionality
+  - Documentation update: Renamed and updated all user-facing content for consistent branding
+  - Status: ✅ Complete
+  - Impact: High - Fixed critical user experience bug and established consistent branding
+
 ### UI Architecture & Model Management
 - **0920|0721-[vanguard, ui, architecture, models]--model-selector-architecture-investigation.md**
   - Model selector investigation: Comprehensive analysis of how AI providers and models are loaded
@@ -39,27 +47,29 @@ This index tracks all development activities for the Vanguard project, organized
 ## Statistics & Velocity
 
 ### Current Metrics
-- **Total Entries**: 5
-- **Active Development Arcs**: 3
-- **Completed Sessions**: 5
-- **Average Session Impact**: High - Architecture investigations
+- **Total Entries**: 6
+- **Active Development Arcs**: 4
+- **Completed Sessions**: 6
+- **Average Session Impact**: High - Architecture investigations and critical bug fixes
 
 ### Recent Activity
 - **Last Update**: September 20th, 2025
 - **Active Projects**: vanguard
-- **Critical Impact Level**: 2 (High impact architecture discoveries)
+- **Critical Impact Level**: 3 (High impact architecture discoveries and bug fixes)
 
 ## Project Organization
 
 ### By Namespace
-- **vanguard**: Provider simplification, build optimization, UI/UX improvements
+- **vanguard**: Provider simplification, build optimization, UI/UX improvements, rebranding, bug fixes
 - **gefest**: Documentation infrastructure (legacy)
 
 ### By Category
 - **refactoring**: Provider reduction, codebase cleanup
 - **ui**: Account card visibility, user experience improvements
-- **documentation**: Dev-log system, project organization
+- **documentation**: Dev-log system, project organization, rebranding
 - **build-optimization**: TypeScript error resolution, packaging improvements
+- **rebranding**: Extension branding and user-facing content updates
+- **bug-fix**: Critical functionality fixes and command registration
 
 ## Navigation Guide
 
@@ -70,11 +80,12 @@ This index tracks all development activities for the Vanguard project, organized
 - Tertiary tags provide additional context
 
 ### Recent Entries (Chronological)
-1. **0920|0721** - Model selector architecture investigation (vanguard)
-2. **0919|0726** - Account card visibility fix (vanguard)
-3. **0919|0714** - Compilation fixes (vanguard)
-4. **0919|0639** - Provider simplification (vanguard)
-5. **0609|0117** - Documentation infrastructure (gefest)
+1. **0920|0832** - Complete extension rebrand and command fix (vanguard)
+2. **0920|0721** - Model selector architecture investigation (vanguard)
+3. **0919|0726** - Account card visibility fix (vanguard)
+4. **0919|0714** - Compilation fixes (vanguard)
+5. **0919|0639** - Provider simplification (vanguard)
+6. **0609|0117** - Documentation infrastructure (gefest)
 
 ## Guidelines
 
@@ -102,6 +113,9 @@ This index tracks all development activities for the Vanguard project, organized
 - `#openrouter` - OpenRouter integration and marketplace
 - `#investigation` - Code analysis and architecture discovery
 - `#technical` - Technical implementation details
+- `#rebranding` - Extension branding and user-facing content updates
+- `#bug-fix` - Critical functionality fixes and command registration
+- `#command-fix` - VS Code command registration and execution fixes
 
 ---
 *This index serves as the central navigation hub for all Vanguard development activities.*
