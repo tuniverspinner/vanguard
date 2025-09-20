@@ -14,6 +14,12 @@ This index tracks all development activities for the Vanguard project, organized
   - Impact: High - Fixed critical user experience bug and established consistent branding
 
 ### Architecture & Error Handling
+- **0920|1108-[vanguard, investigation]--plan-mode-message-flow-investigation.md**
+  - Plan Mode message flow investigation: Comprehensive analysis of user input processing and backend message handling
+  - Architecture discovery: Mapped complete flow from webview input to API response in Plan Mode
+  - Technical documentation: Detailed breakdown of Plan vs Act Mode differences and message routing
+  - Status: ✅ Complete
+  - Impact: High - Critical understanding of core message processing architecture
 - **0920|0856-[vanguard, xml, parsing]--xml-parsing-conundrum-observer-analysis.md**
   - XML parsing architecture analysis: Identified fundamental tension between strict validation and user experience
   - Error handling investigation: Discovered brittle interaction between AI models and tool execution pipeline
@@ -53,9 +59,9 @@ This index tracks all development activities for the Vanguard project, organized
 ## Statistics & Velocity
 
 ### Current Metrics
-- **Total Entries**: 7
+- **Total Entries**: 8
 - **Active Development Arcs**: 4
-- **Completed Sessions**: 6
+- **Completed Sessions**: 7
 - **Analysis Pending**: 1 (XML parsing conundrum)
 - **Average Session Impact**: High - Architecture investigations and critical bug fixes
 
@@ -87,13 +93,14 @@ This index tracks all development activities for the Vanguard project, organized
 - Tertiary tags provide additional context
 
 ### Recent Entries (Chronological)
-1. **0920|0856** - XML parsing conundrum observer analysis (vanguard)
-2. **0920|0832** - Complete extension rebrand and command fix (vanguard)
-3. **0920|0721** - Model selector architecture investigation (vanguard)
-4. **0919|0726** - Account card visibility fix (vanguard)
-5. **0919|0714** - Compilation fixes (vanguard)
-6. **0919|0639** - Provider simplification (vanguard)
-7. **0609|0117** - Documentation infrastructure (gefest)
+1. **0920|1108** - Plan Mode message flow investigation (vanguard)
+2. **0920|0856** - XML parsing conundrum observer analysis (vanguard)
+3. **0920|0832** - Complete extension rebrand and command fix (vanguard)
+4. **0920|0721** - Model selector architecture investigation (vanguard)
+5. **0919|0726** - Account card visibility fix (vanguard)
+6. **0919|0714** - Compilation fixes (vanguard)
+7. **0919|0639** - Provider simplification (vanguard)
+8. **0609|0117** - Documentation infrastructure (gefest)
 
 ## Guidelines
 
@@ -120,6 +127,8 @@ This index tracks all development activities for the Vanguard project, organized
 - `#models` - AI model management and selection
 - `#openrouter` - OpenRouter integration and marketplace
 - `#investigation` - Code analysis and architecture discovery
+- `#plan-mode` - Plan Mode functionality and message processing
+- `#message-flow` - Message routing and processing architecture
 - `#technical` - Technical implementation details
 - `#rebranding` - Extension branding and user-facing content updates
 - `#bug-fix` - Critical functionality fixes and command registration
