@@ -89,6 +89,21 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 		return () => window.removeEventListener("keydown", handleKeyDown)
 	}, [handleKeyDown])
 
+	// Get button configuration values for auto-retry logic
+	const { primaryAction } = buttonConfig
+
+	// Auto-retry when the retry button appears for API request failed
+	useEffect(() => {
+		if (lastMessage?.ask === "api_req_failed" && primaryAction === "retry") {
+			// Small delay to ensure UI is stable
+			const timer = setTimeout(() => {
+				handleActionClick("retry", inputValue, selectedImages, selectedFiles)
+			}, 100)
+
+			return () => clearTimeout(timer)
+		}
+	}, [lastMessage?.ask, primaryAction, handleActionClick, inputValue, selectedImages, selectedFiles])
+
 	if (!task) {
 		return null
 	}
@@ -121,7 +136,7 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 		)
 	}
 
-	const { primaryText, secondaryText, primaryAction, secondaryAction, enableButtons } = buttonConfig
+	const { primaryText, secondaryText, secondaryAction, enableButtons } = buttonConfig
 	const hasButtons = primaryText || secondaryText
 	const isStreaming = task.partial === true
 	const canInteract = enableButtons && !isProcessingRef.current
