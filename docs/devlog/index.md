@@ -5,7 +5,12 @@ This index tracks all development activities for the Vanguard project, organized
 
 ## Development Arcs
 
-### UI/UX Improvements
+### UI Architecture & Model Management
+- **0920|0721-[vanguard, ui, architecture, models]--model-selector-architecture-investigation.md**
+  - Model selector investigation: Comprehensive analysis of how AI providers and models are loaded
+  - Architecture discovery: Revealed OpenRouter integration for Cline provider models
+  - Status: ✅ Complete
+  - Impact: High - Critical understanding of core model selection architecture
 - **0919|0726-[vanguard, ui, account]--fix-account-card-visibility-independent-of-provider.md**
   - Account card visibility fix: Made Cline account card always visible regardless of AI provider selection
   - User experience improvement: Billing/usage access now independent of provider choice
@@ -34,15 +39,15 @@ This index tracks all development activities for the Vanguard project, organized
 ## Statistics & Velocity
 
 ### Current Metrics
-- **Total Entries**: 4
+- **Total Entries**: 5
 - **Active Development Arcs**: 3
-- **Completed Sessions**: 4
-- **Average Session Impact**: Medium-High
+- **Completed Sessions**: 5
+- **Average Session Impact**: High - Architecture investigations
 
 ### Recent Activity
-- **Last Update**: September 19th, 2025
+- **Last Update**: September 20th, 2025
 - **Active Projects**: vanguard
-- **Critical Impact Level**: 1 (High impact refactoring)
+- **Critical Impact Level**: 2 (High impact architecture discoveries)
 
 ## Project Organization
 
@@ -65,10 +70,11 @@ This index tracks all development activities for the Vanguard project, organized
 - Tertiary tags provide additional context
 
 ### Recent Entries (Chronological)
-1. **0919|0726** - Account card visibility fix (vanguard)
-2. **0919|0714** - Compilation fixes (vanguard)
-3. **0919|0639** - Provider simplification (vanguard)
-4. **0609|0117** - Documentation infrastructure (gefest)
+1. **0920|0721** - Model selector architecture investigation (vanguard)
+2. **0919|0726** - Account card visibility fix (vanguard)
+3. **0919|0714** - Compilation fixes (vanguard)
+4. **0919|0639** - Provider simplification (vanguard)
+5. **0609|0117** - Documentation infrastructure (gefest)
 
 ## Guidelines
 
@@ -91,6 +97,11 @@ This index tracks all development activities for the Vanguard project, organized
 - `#account` - Account management features
 - `#build-optimization` - Build system improvements
 - `#documentation` - Documentation and organization
+- `#architecture` - System architecture and design patterns
+- `#models` - AI model management and selection
+- `#openrouter` - OpenRouter integration and marketplace
+- `#investigation` - Code analysis and architecture discovery
+- `#technical` - Technical implementation details
 
 ---
 *This index serves as the central navigation hub for all Vanguard development activities.*
