@@ -7,6 +7,7 @@ import { normalizeApiConfiguration } from "@/components/settings/utils/providerU
 import { useExtensionState } from "@/context/ExtensionStateContext"
 import { highlight } from "../history/HistoryView"
 import { ClineAccountInfoCard } from "./ClineAccountInfoCard"
+import { ClineProvider } from "./providers/ClineProvider"
 import { GroqProvider } from "./providers/GroqProvider"
 import { XaiProvider } from "./providers/XaiProvider"
 import { useApiConfigurationHandlers } from "./utils/useApiConfigurationHandlers"
@@ -246,6 +247,10 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 			<div style={{ marginBottom: 14, marginTop: 4 }}>
 				<ClineAccountInfoCard />
 			</div>
+
+			{apiConfiguration && selectedProvider === "cline" && (
+				<ClineProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
+			)}
 
 			{apiConfiguration && selectedProvider === "groq" && (
 				<GroqProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
