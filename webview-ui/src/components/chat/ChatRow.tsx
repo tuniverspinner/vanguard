@@ -991,18 +991,12 @@ export const ChatRowContent = memo(
 					case "text":
 						return (
 							<WithCopyButton
+								additionalButtons={message.text ? <TtsButton size="sm" text={message.text} /> : null}
 								onMouseUp={handleMouseUp}
 								position="bottom-right"
 								ref={contentRef}
 								textToCopy={message.text}>
-								<div style={{ position: "relative" }}>
-									<Markdown markdown={message.text} />
-									{message.text && (
-										<div style={{ position: "absolute", top: "8px", right: "8px" }}>
-											<TtsButton size="sm" text={message.text} />
-										</div>
-									)}
-								</div>
+								<Markdown markdown={message.text} />
 								{quoteButtonState.visible && (
 									<QuoteButton
 										left={quoteButtonState.left}
@@ -1145,6 +1139,7 @@ export const ChatRowContent = memo(
 									/>
 								</div>
 								<WithCopyButton
+									additionalButtons={text ? <TtsButton size="sm" text={text} /> : null}
 									onMouseUp={handleMouseUp}
 									position="bottom-right"
 									ref={contentRef}
@@ -1284,6 +1279,7 @@ export const ChatRowContent = memo(
 										/>
 									</div>
 									<WithCopyButton
+										additionalButtons={text ? <TtsButton size="sm" text={text} /> : null}
 										onMouseUp={handleMouseUp}
 										position="bottom-right"
 										ref={contentRef}

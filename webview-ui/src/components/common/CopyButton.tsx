@@ -1,6 +1,7 @@
 import { VSCodeButton } from "@vscode/webview-ui-toolkit/react"
 import React, { forwardRef, useState } from "react"
 import styled from "styled-components"
+import { HoverActions } from "./HoverActions"
 
 // ======== Interfaces ========
 
@@ -20,6 +21,7 @@ interface WithCopyButtonProps {
 	className?: string
 	onMouseUp?: (event: React.MouseEvent<HTMLDivElement>) => void
 	ariaLabel?: string
+	additionalButtons?: React.ReactNode
 }
 
 // ======== Styled Components ========
@@ -28,29 +30,9 @@ const StyledButton = styled(VSCodeButton)`
 	z-index: 1;
 `
 
-// Unified container component
+// Container that provides relative positioning context for content
 const ContentContainer = styled.div`
 	position: relative;
-`
-
-// Unified button container with flexible positioning
-const ButtonContainer = styled.div<{ $position?: "top-right" | "bottom-right" }>`
-	position: absolute;
-	${(props) => {
-		switch (props.$position) {
-			case "bottom-right":
-				return "bottom: 2px; right: 2px;"
-			case "top-right":
-			default:
-				return "top: 5px; right: 5px;"
-		}
-	}}
-	z-index: 1;
-	opacity: 0;
-
-	${ContentContainer}:hover & {
-		opacity: 1;
-	}
 `
 
 // ======== Component Implementations ========
@@ -110,7 +92,8 @@ export const WithCopyButton = forwardRef<HTMLDivElement, WithCopyButtonProps>(
 			style,
 			className,
 			onMouseUp,
-			ariaLabel, // Destructure ariaLabel
+			ariaLabel,
+			additionalButtons,
 			...props
 		},
 		ref,
@@ -118,14 +101,11 @@ export const WithCopyButton = forwardRef<HTMLDivElement, WithCopyButtonProps>(
 		return (
 			<ContentContainer className={className} onMouseUp={onMouseUp} ref={ref} style={style} {...props}>
 				{children}
-				{(textToCopy || onCopy) && (
-					<ButtonContainer $position={position}>
-						<CopyButton
-							ariaLabel={ariaLabel}
-							onCopy={onCopy}
-							textToCopy={textToCopy} // Pass through the ariaLabel prop directly
-						/>
-					</ButtonContainer>
+				{(textToCopy || onCopy || additionalButtons) && (
+					<HoverActions position={position}>
+						{additionalButtons}
+						{(textToCopy || onCopy) && <CopyButton ariaLabel={ariaLabel} onCopy={onCopy} textToCopy={textToCopy} />}
+					</HoverActions>
 				)}
 			</ContentContainer>
 		)

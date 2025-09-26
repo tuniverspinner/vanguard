@@ -1,4 +1,5 @@
 import * as proto from "@shared/proto"
+import { VSCodeButton } from "@vscode/webview-ui-toolkit/react"
 import { Loader2, Volume2, VolumeX } from "lucide-react"
 import React, { useCallback, useRef, useState } from "react"
 import { UiServiceClient } from "@/services/grpc-client"
@@ -196,13 +197,14 @@ export const TtsButton: React.FC<TtsButtonProps> = ({ text, className = "", size
 	}
 
 	return (
-		<button
+		<VSCodeButton
+			appearance="icon"
 			aria-label={isPlaying ? "Stop text-to-speech" : "Start text-to-speech"}
-			className={`inline-flex items-center justify-center rounded-md border border-transparent bg-transparent p-1 text-foreground/60 hover:bg-accent hover:text-accent-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none transition-colors ${className}`}
+			className={className}
 			disabled={isLoading}
 			onClick={handleTtsClick}
 			title={getTooltip()}>
 			{getIcon()}
-		</button>
+		</VSCodeButton>
 	)
 }
