@@ -275,4 +275,7 @@ service UiService {
 
   // Get cached speech if available
   rpc getCachedSpeech(StringRequest) returns (stream Bytes);
+
+  // Save API key securely
+  rpc saveApiKey(KeyValuePair) returns (Empty);
 }

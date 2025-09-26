@@ -2,7 +2,17 @@ import { ExtensionMessage } from "@shared/ExtensionMessage"
 import { ResetStateRequest } from "@shared/proto/cline/state"
 import { VSCodeButton } from "@vscode/webview-ui-toolkit/react"
 import debounce from "lodash/debounce"
-import { CheckCheck, FlaskConical, Info, LucideIcon, Settings, SquareMousePointer, SquareTerminal, Webhook } from "lucide-react"
+import {
+	CheckCheck,
+	FlaskConical,
+	Info,
+	Key,
+	LucideIcon,
+	Settings,
+	SquareMousePointer,
+	SquareTerminal,
+	Webhook,
+} from "lucide-react"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { useEvent } from "react-use"
 import HeroTooltip from "@/components/common/HeroTooltip"
@@ -16,6 +26,7 @@ import BrowserSettingsSection from "./sections/BrowserSettingsSection"
 import DebugSection from "./sections/DebugSection"
 import FeatureSettingsSection from "./sections/FeatureSettingsSection"
 import GeneralSettingsSection from "./sections/GeneralSettingsSection"
+import KeysSection from "./sections/KeysSection"
 import TerminalSettingsSection from "./sections/TerminalSettingsSection"
 
 const IS_DEV = process.env.IS_DEV
@@ -85,6 +96,13 @@ export const SETTINGS_TABS: SettingsTab[] = [
 		hidden: !IS_DEV,
 	},
 	{
+		id: "keys",
+		name: "Keys",
+		tooltipText: "API Keys",
+		headerText: "API Keys",
+		icon: Key,
+	},
+	{
 		id: "about",
 		name: "About",
 		tooltipText: "About Cline",
@@ -124,6 +142,7 @@ const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
 			features: FeatureSettingsSection,
 			browser: BrowserSettingsSection,
 			terminal: TerminalSettingsSection,
+			keys: KeysSection,
 			about: AboutSection,
 			debug: DebugSection,
 		}),
