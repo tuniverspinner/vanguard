@@ -1,21 +1,29 @@
-import axios, { AxiosResponse } from "axios"
+import { HfInference } from "@huggingface/inference"
 import { TtsCache } from "./cache"
-import { HuggingFaceTtsPayload, TtsRequest, TtsResponse } from "./types"
+import { TtsRequest, TtsResponse } from "./types"
 
 export class TtsService {
-	private readonly huggingFaceApiUrl = "https://api-inference.huggingface.co/models/hexgrad/Kokoro-82M"
 	private readonly cache = new TtsCache()
+	private client: HfInference | null = null
 
-	constructor(private readonly apiKey?: string) {}
+	constructor(private readonly apiKey?: string) {
+		if (apiKey) {
+			this.client = new HfInference(apiKey)
+		}
+	}
 
 	/**
 	 * Generate speech from text using Kokoro-82M model
 	 */
 	async generateSpeech(request: TtsRequest): Promise<TtsResponse> {
-		const { text, voice = "af" } = request
+		const { text, voice = "af_heart" } = request
 
 		if (!text || text.trim().length === 0) {
 			throw new Error("Text cannot be empty")
+		}
+
+		if (!this.client) {
+			throw new Error("Hugging Face API key not configured")
 		}
 
 		// Check cache first
@@ -28,31 +36,15 @@ export class TtsService {
 		}
 
 		try {
-			// Prepare payload for Hugging Face API
-			const payload: HuggingFaceTtsPayload = {
+			// Use Hugging Face Inference API with textToSpeech method
+			const audioBlob = await this.client.textToSpeech({
+				model: "hexgrad/Kokoro-82M",
 				inputs: text.trim(),
-				options: {
-					wait_for_model: true,
-					use_cache: true,
-				},
-			}
-
-			// Make request to Hugging Face
-			const response: AxiosResponse<ArrayBuffer> = await axios.post(this.huggingFaceApiUrl, payload, {
-				headers: {
-					Authorization: `Bearer ${this.apiKey}`,
-					"Content-Type": "application/json",
-				},
-				responseType: "arraybuffer",
-				timeout: 30000, // 30 second timeout
 			})
 
-			if (response.status !== 200) {
-				throw new Error(`Hugging Face API returned status ${response.status}`)
-			}
-
-			const audioData = response.data
-			const contentType = response.headers["content-type"] || "audio/wav"
+			// Convert blob to ArrayBuffer
+			const audioData = await audioBlob.arrayBuffer()
+			const contentType = audioBlob.type || "audio/wav"
 
 			// Cache the result
 			this.cache.set(text, audioData, contentType)
@@ -62,15 +54,15 @@ export class TtsService {
 				contentType,
 			}
 		} catch (error) {
-			if (axios.isAxiosError(error)) {
-				if (error.response?.status === 429) {
+			if (error instanceof Error) {
+				if (error.message.includes("429")) {
 					throw new Error("Rate limit exceeded. Please try again later.")
-				} else if (error.response?.status === 503) {
+				} else if (error.message.includes("503")) {
 					throw new Error("Model is currently loading. Please try again in a few moments.")
-				} else if (error.response?.status === 401) {
+				} else if (error.message.includes("401")) {
 					throw new Error("Invalid API key. Please check your Hugging Face token.")
 				} else {
-					throw new Error(`Hugging Face API error: ${error.response?.status} ${error.response?.statusText}`)
+					throw new Error(`Hugging Face API error: ${error.message}`)
 				}
 			}
 
