@@ -14,6 +14,13 @@ This index tracks all development activities for the Vanguard project, organized
   - Impact: High - Fixed critical user experience bug and established consistent branding
 
 ### Architecture & Error Handling
+- **0927|0111-[vanguard, tts, implementation]--text-to-speech-feature-architecture-and-provider-replacement.md**
+  - Complete TTS feature implementation: Text-to-speech functionality with Hugging Face integration, error handling, and provider replacement guide
+  - Architecture documentation: Comprehensive breakdown of frontend/backend communication, streaming, and caching systems
+  - Provider replacement framework: Modular design enabling easy switching between TTS providers (OpenAI, ElevenLabs, etc.)
+  - Error handling system: Pale red tooltip feedback, comprehensive logging, and graceful failure recovery
+  - Status: ✅ Complete
+  - Impact: High - New accessibility feature with extensible provider architecture
 - **0926|2338-[vanguard, debugging, tts]--how-to-debug-vanguard-extension.md**
   - Extension debugging infrastructure: Established comprehensive logging and debugging workflow for VSCode extensions
   - Log file location discovery: Identified extension runtime directories and user-accessible logging locations
@@ -71,16 +78,16 @@ This index tracks all development activities for the Vanguard project, organized
 ## Statistics & Velocity
 
 ### Current Metrics
-- **Total Entries**: 10
+- **Total Entries**: 11
 - **Active Development Arcs**: 4
-- **Completed Sessions**: 9
+- **Completed Sessions**: 10
 - **Analysis Pending**: 1 (XML parsing conundrum)
-- **Average Session Impact**: High - Architecture investigations, debugging infrastructure, and critical bug fixes
+- **Average Session Impact**: High - Architecture investigations, debugging infrastructure, feature implementation, and critical bug fixes
 
 ### Recent Activity
-- **Last Update**: September 26th, 2025
+- **Last Update**: September 27th, 2025
 - **Active Projects**: vanguard
-- **Critical Impact Level**: 5 (High impact architecture discoveries, debugging infrastructure, bug fixes, and UX bottlenecks)
+- **Critical Impact Level**: 5 (High impact architecture discoveries, debugging infrastructure, new features, bug fixes, and UX bottlenecks)
 
 ## Project Organization
 
@@ -105,16 +112,17 @@ This index tracks all development activities for the Vanguard project, organized
 - Tertiary tags provide additional context
 
 ### Recent Entries (Chronological)
-1. **0926|2338** - How to debug Vanguard extension (vanguard)
-2. **0920|1111** - Frontend auto-retry implementation (vanguard)
-3. **0920|1108** - Plan Mode message flow investigation (vanguard)
-4. **0920|0856** - XML parsing conundrum observer analysis (vanguard)
-5. **0920|0832** - Complete extension rebrand and command fix (vanguard)
-6. **0920|0721** - Model selector architecture investigation (vanguard)
-7. **0919|0726** - Account card visibility fix (vanguard)
-8. **0919|0714** - Compilation fixes (vanguard)
-9. **0919|0639** - Provider simplification (vanguard)
-10. **0609|0117** - Documentation infrastructure (gefest)
+1. **0927|0111** - Text-to-speech feature architecture and provider replacement (vanguard)
+2. **0926|2338** - How to debug Vanguard extension (vanguard)
+3. **0920|1111** - Frontend auto-retry implementation (vanguard)
+4. **0920|1108** - Plan Mode message flow investigation (vanguard)
+5. **0920|0856** - XML parsing conundrum observer analysis (vanguard)
+6. **0920|0832** - Complete extension rebrand and command fix (vanguard)
+7. **0920|0721** - Model selector architecture investigation (vanguard)
+8. **0919|0726** - Account card visibility fix (vanguard)
+9. **0919|0714** - Compilation fixes (vanguard)
+10. **0919|0639** - Provider simplification (vanguard)
+11. **0609|0117** - Documentation infrastructure (gefest)
 
 ## Guidelines
 
