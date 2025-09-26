@@ -79,6 +79,7 @@ export async function generateSpeech(
 		console.error(`[TTS-HANDLER] TTS generation failed:`, error)
 		console.error(`[TTS-HANDLER] Error stack:`, error instanceof Error ? error.stack : "No stack trace")
 		console.error(`[TTS-HANDLER] Error message:`, error instanceof Error ? error.message : String(error))
+		console.error(`[TTS-HANDLER] About to throw error for gRPC framework to handle`)
 
 		// For streaming responses, we need to throw the error to let the gRPC framework handle it
 		// This will properly propagate the error to the frontend

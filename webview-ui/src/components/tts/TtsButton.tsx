@@ -111,112 +111,67 @@ export const TtsButton: React.FC<TtsButtonProps> = ({ text, className = "", size
 		setError(null)
 
 		try {
+			// Generate new speech directly (skip cache for now since it's causing issues)
+			console.log(`[TTS-UI] Starting speech generation (skipping cache)...`)
 			const audioChunks: Uint8Array[] = []
 
-			// Try to get cached speech first
-			console.log(`[TTS-UI] Checking cache for text...`)
-			const unsubscribeCached = UiServiceClient.getCachedSpeech(proto.cline.StringRequest.create({ value: text }), {
+			const unsubscribe = UiServiceClient.generateSpeech(proto.cline.StringRequest.create({ value: text }), {
 				onResponse: (response: proto.cline.Bytes) => {
-					console.log(`[TTS-UI] Cache response received, chunk size: ${response.value?.length || 0}`)
+					console.log(`[TTS-UI] Generation response received, chunk size: ${response.value?.length || 0}`)
 					if (response.value) {
 						audioChunks.push(new Uint8Array(response.value))
 					}
 				},
 				onComplete: async () => {
-					console.log(`[TTS-UI] Cache check complete, total chunks: ${audioChunks.length}`)
+					console.log(`[TTS-UI] Generation complete, total chunks: ${audioChunks.length}`)
 					if (audioChunks.length > 0) {
 						// Combine chunks and play
 						const totalLength = audioChunks.reduce((sum, chunk) => sum + chunk.length, 0)
-						console.log(`[TTS-UI] Playing cached audio, total size: ${totalLength} bytes`)
+						console.log(`[TTS-UI] Playing generated audio, total size: ${totalLength} bytes`)
 						const combinedBuffer = new Uint8Array(totalLength)
 						let offset = 0
 						for (const chunk of audioChunks) {
 							combinedBuffer.set(chunk, offset)
 							offset += chunk.length
 						}
+						// Save audio file for debugging (optional)
+						console.log(`[TTS-UI] Saving audio file for debugging...`)
+						try {
+							// Create a blob and download link for debugging
+							const blob = new Blob([combinedBuffer.buffer], { type: "audio/wav" })
+							const url = URL.createObjectURL(blob)
+							const a = document.createElement("a")
+							a.href = url
+							a.download = `tts-debug-${Date.now()}.wav`
+							document.body.appendChild(a)
+							a.click()
+							document.body.removeChild(a)
+							URL.revokeObjectURL(url)
+							console.log(`[TTS-UI] Audio file saved for debugging`)
+						} catch (saveErr) {
+							console.warn(`[TTS-UI] Failed to save debug audio file:`, saveErr)
+						}
+
 						await playAudioBuffer(combinedBuffer.buffer)
 					} else {
-						// No cached speech, generate new
-						console.log(`[TTS-UI] No cached speech found, generating new...`)
-						await generateNewSpeech()
+						console.error(`[TTS-UI] Error: No audio data received`)
+						setError("No audio data received")
 					}
 					setIsLoading(false)
 				},
 				onError: (error) => {
-					console.log(`[TTS-UI] Cache check failed:`, error)
-					console.log(`[TTS-UI] No cached speech available, generating new...`)
-					generateNewSpeech()
+					console.error(`[TTS-UI] Generation failed:`, error)
+					console.error(`[TTS-UI] Error details:`, error.message, error.stack)
+					setError(`Failed to generate speech: ${error.message}`)
+					setIsLoading(false)
 				},
 			})
 
-			const generateNewSpeech = async () => {
-				console.log(`[TTS-UI] Starting new speech generation...`)
-				const newAudioChunks: Uint8Array[] = []
-
-				const unsubscribeNew = UiServiceClient.generateSpeech(proto.cline.StringRequest.create({ value: text }), {
-					onResponse: (response: proto.cline.Bytes) => {
-						console.log(`[TTS-UI] Generation response received, chunk size: ${response.value?.length || 0}`)
-						if (response.value) {
-							newAudioChunks.push(new Uint8Array(response.value))
-						}
-					},
-					onComplete: async () => {
-						console.log(`[TTS-UI] Generation complete, total chunks: ${newAudioChunks.length}`)
-						if (newAudioChunks.length > 0) {
-							// Combine chunks and play
-							const totalLength = newAudioChunks.reduce((sum, chunk) => sum + chunk.length, 0)
-							console.log(`[TTS-UI] Playing generated audio, total size: ${totalLength} bytes`)
-							const combinedBuffer = new Uint8Array(totalLength)
-							let offset = 0
-							for (const chunk of newAudioChunks) {
-								combinedBuffer.set(chunk, offset)
-								offset += chunk.length
-							}
-							// Save audio file for debugging (optional)
-							console.log(`[TTS-UI] Saving audio file for debugging...`)
-							try {
-								// Create a blob and download link for debugging
-								const blob = new Blob([combinedBuffer.buffer], { type: "audio/wav" })
-								const url = URL.createObjectURL(blob)
-								const a = document.createElement("a")
-								a.href = url
-								a.download = `tts-debug-${Date.now()}.wav`
-								document.body.appendChild(a)
-								a.click()
-								document.body.removeChild(a)
-								URL.revokeObjectURL(url)
-								console.log(`[TTS-UI] Audio file saved for debugging`)
-							} catch (saveErr) {
-								console.warn(`[TTS-UI] Failed to save debug audio file:`, saveErr)
-							}
-
-							await playAudioBuffer(combinedBuffer.buffer)
-						} else {
-							console.error(`[TTS-UI] Error: No audio data received`)
-							setError("No audio data received")
-						}
-						setIsLoading(false)
-					},
-					onError: (error) => {
-						console.error(`[TTS-UI] Generation failed:`, error)
-						console.error(`[TTS-UI] Error details:`, error.message, error.stack)
-						setError(`Failed to generate speech: ${error.message}`)
-						setIsLoading(false)
-					},
-				})
-
-				// Clean up subscription after a timeout
-				setTimeout(() => {
-					console.log(`[TTS-UI] Cleaning up generation subscription after timeout`)
-					unsubscribeNew()
-				}, 30000) // 30 second timeout
-			}
-
-			// Clean up cached speech subscription after a timeout
+			// Clean up subscription after a timeout
 			setTimeout(() => {
-				console.log(`[TTS-UI] Cleaning up cache subscription after timeout`)
-				unsubscribeCached()
-			}, 5000) // 5 second timeout for cache check
+				console.log(`[TTS-UI] Cleaning up generation subscription after timeout`)
+				unsubscribe()
+			}, 30000) // 30 second timeout
 		} catch (err) {
 			console.error(`[TTS-UI] TTS error:`, err)
 			setError(err instanceof Error ? err.message : "TTS failed")

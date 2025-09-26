@@ -92,6 +92,10 @@ async function handleUnaryRequest(
 	} catch (error) {
 		// Send error response
 		console.log("Protobus error:", error)
+		console.log(
+			`[GRPC-HANDLER] Sending error response for request ${request.request_id}:`,
+			error instanceof Error ? error.message : String(error),
+		)
 		await postMessageToWebview({
 			type: "grpc_response",
 			grpc_response: {
@@ -100,6 +104,7 @@ async function handleUnaryRequest(
 				is_streaming: false,
 			},
 		})
+		console.log(`[GRPC-HANDLER] Error response sent for request ${request.request_id}`)
 	}
 }
 
@@ -143,6 +148,10 @@ async function handleStreamingRequest(
 	} catch (error) {
 		// Send error response
 		console.log("Protobus error:", error)
+		console.log(
+			`[GRPC-HANDLER] Sending streaming error response for request ${request.request_id}:`,
+			error instanceof Error ? error.message : String(error),
+		)
 		await postMessageToWebview({
 			type: "grpc_response",
 			grpc_response: {
@@ -151,6 +160,7 @@ async function handleStreamingRequest(
 				is_streaming: false,
 			},
 		})
+		console.log(`[GRPC-HANDLER] Streaming error response sent for request ${request.request_id}`)
 	}
 }
 
