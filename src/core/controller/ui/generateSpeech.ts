@@ -1,14 +1,21 @@
 import { Bytes, StringRequest } from "@shared/proto/cline/common"
 import { TtsService } from "../../../services/tts"
 import { Controller } from ".."
+import { StreamingResponseHandler } from "../grpc-handler"
 
 /**
  * Generates speech from text using TTS service
  * @param controller The controller instance
  * @param request The request containing the text to convert to speech
- * @returns Stream of audio bytes
+ * @param responseStream The streaming response handler
+ * @param requestId The ID of the request (passed by the gRPC handler)
  */
-export async function* generateSpeech(controller: Controller, request: StringRequest): AsyncGenerator<Bytes, void, unknown> {
+export async function generateSpeech(
+	controller: Controller,
+	request: StringRequest,
+	responseStream: StreamingResponseHandler<Bytes>,
+	requestId?: string,
+): Promise<void> {
 	try {
 		// Get TTS service instance (create if not exists)
 		let ttsService = (controller as any).ttsService
@@ -31,15 +38,29 @@ export async function* generateSpeech(controller: Controller, request: StringReq
 		for (let i = 0; i < audioData.byteLength; i += chunkSize) {
 			const chunk = audioData.slice(i, i + chunkSize)
 			const buffer = Buffer.from(chunk)
-			yield Bytes.create({
-				value: buffer,
-			})
+			await responseStream(
+				Bytes.create({
+					value: buffer,
+				}),
+				false, // Not the last chunk
+			)
 		}
+
+		// Send final empty chunk to indicate completion
+		await responseStream(
+			Bytes.create({
+				value: Buffer.alloc(0),
+			}),
+			true, // This is the last chunk
+		)
 	} catch (error) {
 		console.error("TTS generation failed:", error)
-		// Return empty bytes to indicate error
-		yield Bytes.create({
-			value: Buffer.alloc(0),
-		})
+		// Send error indication
+		await responseStream(
+			Bytes.create({
+				value: Buffer.alloc(0),
+			}),
+			true, // End the stream with error
+		)
 	}
 }
