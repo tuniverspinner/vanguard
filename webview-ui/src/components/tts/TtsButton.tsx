@@ -2,6 +2,7 @@ import * as proto from "@shared/proto"
 import { VSCodeButton } from "@vscode/webview-ui-toolkit/react"
 import { Loader2, Volume2, VolumeX } from "lucide-react"
 import React, { useCallback, useRef, useState } from "react"
+import HeroTooltip from "@/components/common/HeroTooltip"
 import { UiServiceClient } from "@/services/grpc-client"
 
 interface TtsButtonProps {
@@ -198,14 +199,23 @@ export const TtsButton: React.FC<TtsButtonProps> = ({ text, className = "", size
 	}
 
 	return (
-		<VSCodeButton
-			appearance="icon"
-			aria-label={isPlaying ? "Stop text-to-speech" : "Start text-to-speech"}
-			className={className}
-			disabled={isLoading}
-			onClick={handleTtsClick}
-			title={getTooltip()}>
-			{getIcon()}
-		</VSCodeButton>
+		<HeroTooltip
+			content={
+				error ? (
+					<div className="bg-red-50 text-red-800 border border-red-200 rounded p-2 max-w-[300px] text-xs">{error}</div>
+				) : (
+					getTooltip()
+				)
+			}
+			delay={error ? 0 : 500}>
+			<VSCodeButton
+				appearance="icon"
+				aria-label={isPlaying ? "Stop text-to-speech" : "Start text-to-speech"}
+				className={className}
+				disabled={isLoading}
+				onClick={handleTtsClick}>
+				{getIcon()}
+			</VSCodeButton>
+		</HeroTooltip>
 	)
 }
