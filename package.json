@@ -8,7 +8,7 @@
 		"vscode": "^1.84.0"
 	},
 	"author": {
-		"name": "Bryne Development"
+		"name": "Vanguard Development"
 	},
 	"license": "Apache-2.0",
 	"publisher": "bryne-dev",
@@ -26,7 +26,6 @@
 		"Testing"
 	],
 	"keywords": [
-		"bryne",
 		"grok",
 		"retry",
 		"resilient",

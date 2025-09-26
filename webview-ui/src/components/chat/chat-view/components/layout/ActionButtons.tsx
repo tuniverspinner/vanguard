@@ -5,6 +5,7 @@ import type React from "react"
 import { useCallback, useEffect, useMemo, useRef } from "react"
 import { ButtonActionType, getButtonConfig } from "../../shared/buttonConfig"
 import type { ChatState, MessageHandlers } from "../../types/chatTypes"
+import { useAutoProceed, useAutoRetry } from "./hooks/useAutoActions"
 
 interface ActionButtonsProps {
 	task?: ClineMessage
@@ -92,17 +93,8 @@ export const ActionButtons: React.FC<ActionButtonsProps> = ({
 	// Get button configuration values for auto-retry logic
 	const { primaryAction } = buttonConfig
 
-	// Auto-retry when the retry button appears for API request failed
-	useEffect(() => {
-		if (lastMessage?.ask === "api_req_failed" && primaryAction === "retry") {
-			// Small delay to ensure UI is stable
-			const timer = setTimeout(() => {
-				handleActionClick("retry", inputValue, selectedImages, selectedFiles)
-			}, 100)
-
-			return () => clearTimeout(timer)
-		}
-	}, [lastMessage?.ask, primaryAction, handleActionClick, inputValue, selectedImages, selectedFiles])
+	useAutoRetry(handleActionClick, lastMessage?.ask, primaryAction, inputValue, selectedImages, selectedFiles)
+	useAutoProceed(handleActionClick, lastMessage?.ask, primaryAction, inputValue, selectedImages, selectedFiles)
 
 	if (!task) {
 		return null
