@@ -269,4 +269,10 @@ service UiService {
   
   // Opens the Cline walkthrough
   rpc openWalkthrough(EmptyRequest) returns (Empty);
+
+  // Generate speech from text using TTS
+  rpc generateSpeech(StringRequest) returns (stream Bytes);
+
+  // Get cached speech if available
+  rpc getCachedSpeech(StringRequest) returns (stream Bytes);
 }

@@ -29,6 +29,7 @@ import { FileServiceClient, TaskServiceClient, UiServiceClient } from "@/service
 import { findMatchingResourceOrTemplate, getMcpServerDisplayName } from "@/utils/mcp"
 import { CheckpointControls } from "../common/CheckpointControls"
 import CodeAccordian, { cleanPathPrefix } from "../common/CodeAccordian"
+import { TtsButton } from "../tts"
 import { ErrorBlockTitle } from "./ErrorBlockTitle"
 import ErrorRow from "./ErrorRow"
 import NewTaskPreview from "./NewTaskPreview"
@@ -994,7 +995,14 @@ export const ChatRowContent = memo(
 								position="bottom-right"
 								ref={contentRef}
 								textToCopy={message.text}>
-								<Markdown markdown={message.text} />
+								<div style={{ position: "relative" }}>
+									<Markdown markdown={message.text} />
+									{message.text && (
+										<div style={{ position: "absolute", top: "8px", right: "8px" }}>
+											<TtsButton size="sm" text={message.text} />
+										</div>
+									)}
+								</div>
 								{quoteButtonState.visible && (
 									<QuoteButton
 										left={quoteButtonState.left}
