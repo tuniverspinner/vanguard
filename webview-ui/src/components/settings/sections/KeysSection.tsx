@@ -9,12 +9,12 @@ interface KeysSectionProps {
 }
 
 const KeysSection = ({ renderSectionHeader }: KeysSectionProps) => {
-	const [huggingFaceKey, setHuggingFaceKey] = useState("")
+	const [falApiKey, setFalApiKey] = useState("")
 	const [isSaving, setIsSaving] = useState(false)
 	const [saveStatus, setSaveStatus] = useState<"idle" | "success" | "error">("idle")
 
 	const handleSaveKey = useCallback(async () => {
-		if (!huggingFaceKey.trim()) {
+		if (!falApiKey.trim()) {
 			setSaveStatus("error")
 			return
 		}
@@ -25,19 +25,19 @@ const KeysSection = ({ renderSectionHeader }: KeysSectionProps) => {
 		try {
 			await UiServiceClient.saveApiKey(
 				KeyValuePair.create({
-					key: "huggingFaceApiKey",
-					value: huggingFaceKey,
+					key: "falApiKey",
+					value: falApiKey,
 				}),
 			)
 			setSaveStatus("success")
-			setHuggingFaceKey("")
+			setFalApiKey("")
 		} catch (error) {
 			console.error("Failed to save API key:", error)
 			setSaveStatus("error")
 		} finally {
 			setIsSaving(false)
 		}
-	}, [huggingFaceKey])
+	}, [falApiKey])
 
 	return (
 		<div>
@@ -45,31 +45,28 @@ const KeysSection = ({ renderSectionHeader }: KeysSectionProps) => {
 			<Section>
 				<div className="space-y-4">
 					<div>
-						<h4 className="text-sm font-medium text-[var(--vscode-foreground)] mb-2">Hugging Face API Key</h4>
+						<h4 className="text-sm font-medium text-[var(--vscode-foreground)] mb-2">Fal.ai API Key</h4>
 						<p className="text-xs text-[var(--vscode-descriptionForeground)] mb-3">
 							Required for text-to-speech functionality. Get your API key from{" "}
 							<a
 								className="text-[var(--vscode-textLink-foreground)] hover:underline"
-								href="https://huggingface.co/settings/tokens"
+								href="https://fal.ai/dashboard/keys"
 								rel="noopener noreferrer"
 								target="_blank">
-								Hugging Face Settings
+								Fal.ai Dashboard
 							</a>
 						</p>
 
 						<div className="flex gap-2 items-end">
 							<VSCodeTextField
 								className="flex-1"
-								onChange={(e: any) => setHuggingFaceKey(e.target.value)}
-								placeholder="hf_..."
+								onChange={(e: any) => setFalApiKey(e.target.value)}
+								placeholder="9647ee36-0da3-4fdc-b650-f0c07bd70c31:2ac67befe7813ff6355abb73df1527ab"
 								type="password"
-								value={huggingFaceKey}>
+								value={falApiKey}>
 								API Key
 							</VSCodeTextField>
-							<VSCodeButton
-								appearance="primary"
-								disabled={isSaving || !huggingFaceKey.trim()}
-								onClick={handleSaveKey}>
+							<VSCodeButton appearance="primary" disabled={isSaving || !falApiKey.trim()} onClick={handleSaveKey}>
 								{isSaving ? "Saving..." : "Save"}
 							</VSCodeButton>
 						</div>

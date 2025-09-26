@@ -26,15 +26,15 @@ export async function generateSpeech(
 		let ttsService = (controller as any).ttsService
 		if (!ttsService) {
 			console.log(`[TTS-HANDLER] Creating new TTS service instance`)
-			// Get Hugging Face API key from secrets
-			const huggingFaceApiKey = controller.stateManager.getSecretKey("huggingFaceApiKey")
-			console.log(`[TTS-HANDLER] API key available: ${!!huggingFaceApiKey}`)
+			// Get Fal.ai API key from secrets
+			const falApiKey = controller.stateManager.getSecretKey("falApiKey")
+			console.log(`[TTS-HANDLER] API key available: ${!!falApiKey}`)
 
 			// Create log file in extension storage
 			const logFilePath = path.join(controller.context.globalStorageUri.fsPath, "tts-debug.log")
 			console.log(`[TTS-HANDLER] Log file path: ${logFilePath}`)
 
-			ttsService = new TtsService(huggingFaceApiKey, logFilePath)
+			ttsService = new TtsService(falApiKey, logFilePath)
 			;(controller as any).ttsService = ttsService
 			console.log(`[TTS-HANDLER] TTS service created and cached`)
 		} else {

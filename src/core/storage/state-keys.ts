@@ -136,6 +136,7 @@ export interface Secrets {
 	moonshotApiKey: string | undefined
 	zaiApiKey: string | undefined
 	huggingFaceApiKey: string | undefined
+	falApiKey: string | undefined
 	nebiusApiKey: string | undefined
 	sambanovaApiKey: string | undefined
 	cerebrasApiKey: string | undefined
