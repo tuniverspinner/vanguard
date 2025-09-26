@@ -14,6 +14,12 @@ This index tracks all development activities for the Vanguard project, organized
   - Impact: High - Fixed critical user experience bug and established consistent branding
 
 ### Architecture & Error Handling
+- **0926|2338-[vanguard, debugging, tts]--how-to-debug-vanguard-extension.md**
+  - Extension debugging infrastructure: Established comprehensive logging and debugging workflow for VSCode extensions
+  - Log file location discovery: Identified extension runtime directories and user-accessible logging locations
+  - Development process improvement: Created systematic approach to extension debugging and troubleshooting
+  - Status: ✅ Complete
+  - Impact: High - 10x faster debugging for future development sessions
 - **0920|1111-[vanguard, ui, auto-retry]--frontend-auto-retry-implementation.md**
   - Frontend auto-retry implementation: Added automatic retry mechanism for API request failed errors
   - User experience improvement: Seamless recovery from "Unexpected API Response" errors without manual intervention
@@ -65,16 +71,16 @@ This index tracks all development activities for the Vanguard project, organized
 ## Statistics & Velocity
 
 ### Current Metrics
-- **Total Entries**: 9
+- **Total Entries**: 10
 - **Active Development Arcs**: 4
-- **Completed Sessions**: 8
+- **Completed Sessions**: 9
 - **Analysis Pending**: 1 (XML parsing conundrum)
-- **Average Session Impact**: High - Architecture investigations and critical bug fixes
+- **Average Session Impact**: High - Architecture investigations, debugging infrastructure, and critical bug fixes
 
 ### Recent Activity
-- **Last Update**: September 20th, 2025
+- **Last Update**: September 26th, 2025
 - **Active Projects**: vanguard
-- **Critical Impact Level**: 4 (High impact architecture discoveries, bug fixes, and UX bottlenecks)
+- **Critical Impact Level**: 5 (High impact architecture discoveries, debugging infrastructure, bug fixes, and UX bottlenecks)
 
 ## Project Organization
 
@@ -99,15 +105,16 @@ This index tracks all development activities for the Vanguard project, organized
 - Tertiary tags provide additional context
 
 ### Recent Entries (Chronological)
-1. **0920|1111** - Frontend auto-retry implementation (vanguard)
-2. **0920|1108** - Plan Mode message flow investigation (vanguard)
-3. **0920|0856** - XML parsing conundrum observer analysis (vanguard)
-4. **0920|0832** - Complete extension rebrand and command fix (vanguard)
-5. **0920|0721** - Model selector architecture investigation (vanguard)
-6. **0919|0726** - Account card visibility fix (vanguard)
-7. **0919|0714** - Compilation fixes (vanguard)
-8. **0919|0639** - Provider simplification (vanguard)
-9. **0609|0117** - Documentation infrastructure (gefest)
+1. **0926|2338** - How to debug Vanguard extension (vanguard)
+2. **0920|1111** - Frontend auto-retry implementation (vanguard)
+3. **0920|1108** - Plan Mode message flow investigation (vanguard)
+4. **0920|0856** - XML parsing conundrum observer analysis (vanguard)
+5. **0920|0832** - Complete extension rebrand and command fix (vanguard)
+6. **0920|0721** - Model selector architecture investigation (vanguard)
+7. **0919|0726** - Account card visibility fix (vanguard)
+8. **0919|0714** - Compilation fixes (vanguard)
+9. **0919|0639** - Provider simplification (vanguard)
+10. **0609|0117** - Documentation infrastructure (gefest)
 
 ## Guidelines
 
@@ -147,6 +154,11 @@ This index tracks all development activities for the Vanguard project, organized
 - `#ai-model-interaction` - AI model communication and tool usage
 - `#technical-debt` - Code quality and architectural improvements
 - `#fallback-mechanisms` - Recovery strategies and error resilience
+- `#debugging` - Extension debugging and troubleshooting
+- `#extension-development` - VSCode extension development patterns
+- `#logging` - Logging infrastructure and file management
+- `#infrastructure` - Development infrastructure and tooling
+- `#process-improvement` - Development process optimization
 
 ---
 *This index serves as the central navigation hub for all Vanguard development activities.*

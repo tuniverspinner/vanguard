@@ -22,7 +22,12 @@ export async function getCachedSpeech(
 		if (!ttsService) {
 			// Get Hugging Face API key from secrets
 			const huggingFaceApiKey = controller.stateManager.getSecretKey("huggingFaceApiKey")
-			ttsService = new TtsService(huggingFaceApiKey)
+
+			// Create log file in extension storage
+			const path = require("path")
+			const logFilePath = path.join(controller.context.globalStorageUri.fsPath, "tts-debug.log")
+
+			ttsService = new TtsService(huggingFaceApiKey, logFilePath)
 			;(controller as any).ttsService = ttsService
 		}
 

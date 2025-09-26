@@ -2,6 +2,17 @@ const { HfInference } = require("@huggingface/inference")
 const fs = require("fs")
 const { exec } = require("child_process")
 
+// Create a log file for debugging TTS issues
+const logFile = "tts-debug.log"
+const logStream = fs.createWriteStream(logFile, { flags: "a" })
+
+function logToFile(message) {
+	const timestamp = new Date().toISOString()
+	const logMessage = `[${timestamp}] ${message}\n`
+	logStream.write(logMessage)
+	console.log(message)
+}
+
 // Test TTS functionality
 async function testTTS() {
 	const text = "Hello, this is a test of the text-to-speech system."

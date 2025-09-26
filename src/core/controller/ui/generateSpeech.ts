@@ -1,4 +1,5 @@
 import { Bytes, StringRequest } from "@shared/proto/cline/common"
+import * as path from "path"
 import { TtsService } from "../../../services/tts"
 import { Controller } from ".."
 import { StreamingResponseHandler } from "../grpc-handler"
@@ -16,46 +17,70 @@ export async function generateSpeech(
 	responseStream: StreamingResponseHandler<Bytes>,
 	requestId?: string,
 ): Promise<void> {
+	console.log(`[TTS-HANDLER] generateSpeech called with requestId: ${requestId}`)
+	console.log(`[TTS-HANDLER] Text length: ${request.value?.length || 0}`)
+	console.log(`[TTS-HANDLER] Text preview: "${request.value?.substring(0, 50) || "empty"}..."`)
+
 	try {
 		// Get TTS service instance (create if not exists)
 		let ttsService = (controller as any).ttsService
 		if (!ttsService) {
+			console.log(`[TTS-HANDLER] Creating new TTS service instance`)
 			// Get Hugging Face API key from secrets
 			const huggingFaceApiKey = controller.stateManager.getSecretKey("huggingFaceApiKey")
-			ttsService = new TtsService(huggingFaceApiKey)
+			console.log(`[TTS-HANDLER] API key available: ${!!huggingFaceApiKey}`)
+
+			// Create log file in extension storage
+			const logFilePath = path.join(controller.context.globalStorageUri.fsPath, "tts-debug.log")
+			console.log(`[TTS-HANDLER] Log file path: ${logFilePath}`)
+
+			ttsService = new TtsService(huggingFaceApiKey, logFilePath)
 			;(controller as any).ttsService = ttsService
+			console.log(`[TTS-HANDLER] TTS service created and cached`)
+		} else {
+			console.log(`[TTS-HANDLER] Using existing TTS service instance`)
 		}
 
+		console.log(`[TTS-HANDLER] Calling ttsService.generateSpeech...`)
 		// Generate speech
 		const response = await ttsService.generateSpeech({
 			text: request.value || "",
 		})
 
+		console.log(`[TTS-HANDLER] TTS generation successful, audio size: ${response.audioData.byteLength} bytes`)
+		console.log(`[TTS-HANDLER] Content type: ${response.contentType}`)
+
 		// Stream the audio data
 		const audioData = response.audioData
 		const chunkSize = 8192 // 8KB chunks
+		const totalChunks = Math.ceil(audioData.byteLength / chunkSize)
+
+		console.log(`[TTS-HANDLER] Streaming audio in ${totalChunks} chunks of ${chunkSize} bytes each`)
 
 		for (let i = 0; i < audioData.byteLength; i += chunkSize) {
 			const chunk = audioData.slice(i, i + chunkSize)
 			const buffer = Buffer.from(chunk)
+			const isLast = i + chunkSize >= audioData.byteLength
+
+			console.log(
+				`[TTS-HANDLER] Sending chunk ${Math.floor(i / chunkSize) + 1}/${totalChunks}, size: ${buffer.length} bytes, isLast: ${isLast}`,
+			)
+
 			await responseStream(
 				Bytes.create({
 					value: buffer,
 				}),
-				false, // Not the last chunk
+				isLast,
 			)
 		}
 
-		// Send final empty chunk to indicate completion
-		await responseStream(
-			Bytes.create({
-				value: Buffer.alloc(0),
-			}),
-			true, // This is the last chunk
-		)
+		console.log(`[TTS-HANDLER] All chunks sent successfully`)
 	} catch (error) {
-		console.error("TTS generation failed:", error)
+		console.error(`[TTS-HANDLER] TTS generation failed:`, error)
+		console.error(`[TTS-HANDLER] Error stack:`, error instanceof Error ? error.stack : "No stack trace")
+
 		// Send error indication
+		console.log(`[TTS-HANDLER] Sending error response to client`)
 		await responseStream(
 			Bytes.create({
 				value: Buffer.alloc(0),
