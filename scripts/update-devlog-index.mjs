@@ -1,0 +1,198 @@
+#!/usr/bin/env node
+
+/**
+ * DevLog Index Automation Script - Minimal Viable Version
+ *
+ * Generates a clean, simple navigation index for devlog entries.
+ * Focuses on reliable automation for mechanical tasks only.
+ *
+ * Usage:
+ *   node scripts/update-devlog-index.mjs
+ *   # or add to package.json scripts
+ */
+
+import fs from "fs"
+import path from "path"
+import { fileURLToPath } from "url"
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const DEVLOG_DIR = path.join(__dirname, "..", "docs", "devlog")
+const INDEX_FILE = path.join(DEVLOG_DIR, "index.md")
+
+/**
+ * Parse devlog filename to extract metadata
+ * Format: MMDD|HHmm-[tags]--descriptive-slug.md
+ */
+function parseDevlogFilename(filename) {
+	const match = filename.match(/^(\d{4})\|(\d{4})-\[([^\]]+)\]--(.+)\.md$/)
+	if (!match) return null
+
+	const [, date, time, tags, slug] = match
+	const tagArray = tags.split(",").map((t) => t.trim())
+	const primaryTag = tagArray[0]
+
+	return {
+		filename,
+		date,
+		time,
+		tags: tagArray,
+		primaryTag,
+		slug: slug.replace(/-/g, " "), // Convert slug to readable title
+		timestamp: `${date}|${time}`,
+		filepath: path.join(DEVLOG_DIR, filename),
+	}
+}
+
+/**
+ * Categorize entry by development arc based on tags
+ */
+function categorizeEntry(tags) {
+	if (tags.includes("rebranding") || tags.includes("bug-fix")) {
+		return "Rebranding & Bug Fixes"
+	}
+	if (tags.includes("architecture") || tags.includes("error-handling") || tags.includes("debugging")) {
+		return "Architecture & Error Handling"
+	}
+	if (tags.includes("refactoring") || tags.includes("providers")) {
+		return "Provider Simplification & Refactoring"
+	}
+	if (tags.includes("documentation") || tags.includes("infrastructure")) {
+		return "Documentation Infrastructure"
+	}
+	return "Architecture & Error Handling" // default
+}
+
+/**
+ * Generate recent entries section (last 13 entries)
+ */
+function generateRecentEntries(entries) {
+	const recent = entries.slice(0, 13) // Already sorted newest first
+
+	const lines = recent.map((entry, index) => {
+		const readableTitle = entry.slug
+			.split(" ")
+			.map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+			.join(" ")
+		return `${index + 1}. **${entry.timestamp}** - [${readableTitle}](${entry.filename}) (${entry.primaryTag})`
+	})
+
+	return `## Recent Activity (Last 13 entries)
+${lines.join("\n")}`
+}
+
+/**
+ * Generate development arcs section
+ */
+function generateArcSections(entries) {
+	const arcs = {}
+
+	// Group entries by arc
+	for (const entry of entries) {
+		const arc = entry.arc
+		if (!arcs[arc]) arcs[arc] = []
+		arcs[arc].push(entry)
+	}
+
+	// Generate sections
+	const arcSections = Object.entries(arcs)
+		.sort(([a], [b]) => a.localeCompare(b)) // Alphabetical order
+		.map(([arcName, arcEntries]) => {
+			const entryLines = arcEntries
+				.map((entry) => `- **${entry.timestamp}** - [${entry.slug}](${entry.filename})`)
+				.join("\n")
+
+			return `### ${arcName} (${arcEntries.length} entries)
+${entryLines}`
+		})
+		.join("\n\n")
+
+	return `## Development Arcs\n\n${arcSections}`
+}
+
+/**
+ * Generate quick stats
+ */
+function generateStats(entries) {
+	const total = entries.length
+	const arcs = new Set(entries.map((e) => e.arc)).size
+	const lastUpdate = new Date().toLocaleDateString("en-US", {
+		month: "long",
+		day: "numeric",
+		year: "numeric",
+	})
+
+	return `## Quick Stats
+- **Total Entries**: ${total}
+- **Active Arcs**: ${arcs}
+- **Last Updated**: ${lastUpdate}`
+}
+
+/**
+ * Main index generation
+ */
+function generateIndex() {
+	console.log("🔄 Scanning devlog directory...")
+
+	// Read all devlog files
+	const files = fs
+		.readdirSync(DEVLOG_DIR)
+		.filter((file) => file.endsWith(".md") && file !== "index.md" && file !== "how-to-dev-log")
+
+	console.log(`📁 Found ${files.length} devlog entries`)
+
+	// Parse and sort entries (newest first)
+	const entries = []
+	for (const file of files) {
+		const metadata = parseDevlogFilename(file)
+		if (!metadata) {
+			console.warn(`⚠️  Could not parse filename: ${file}`)
+			continue
+		}
+
+		metadata.arc = categorizeEntry(metadata.tags)
+		entries.push(metadata)
+	}
+
+	// Sort by timestamp (newest first)
+	entries.sort((a, b) => b.timestamp.localeCompare(a.timestamp))
+
+	console.log(`✅ Parsed ${entries.length} valid entries`)
+
+	// Generate sections
+	const recentEntries = generateRecentEntries(entries)
+	const arcSections = generateArcSections(entries)
+	const stats = generateStats(entries)
+
+	// Generate clean, minimal index
+	const newIndex = `# Development Log Index
+
+${recentEntries}
+
+${arcSections}
+
+${stats}
+
+## Navigation
+- **Recent Activity**: See what happened recently
+- **Development Arcs**: Browse by topic/category
+- **Quick Stats**: High-level project metrics
+- Click any **[entry title]** to read the full devlog
+
+## How to Use
+- Use \`npm run devlog:update-index\` after creating new devlog entries
+- Chronological order shows project evolution
+- Tags help filter by topic (vanguard, architecture, etc.)
+- The devlogs contain all technical details and insights
+
+---
+*Index auto-generated by scripts/update-devlog-index.mjs*
+`
+
+	// Write new index
+	fs.writeFileSync(INDEX_FILE, newIndex, "utf8")
+	console.log("✅ DevLog index updated successfully!")
+	console.log(`📊 Generated clean index with ${entries.length} entries across ${new Set(entries.map((e) => e.arc)).size} arcs`)
+}
+
+// Run the script
+generateIndex()

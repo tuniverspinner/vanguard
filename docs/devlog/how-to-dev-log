@@ -32,11 +32,18 @@ examples:
 0624|2107-[gefest, payments, crypto]--crypto-payments-milestone-strategic-pivot.md
 
 CRITICAL: after creating entry,
-immediately update docs/dev-log/index.md:
-add entry to appropriate development arc,
-update statistics and velocity indicators,
-mark critical impact level if applicable,
-maintain chronological organization.
+run the automated index update script:
+```bash
+npm run devlog:update-index
+```
+This script automatically:
+- Parses all devlog filenames and content
+- Categorizes entries by development arc
+- Updates statistics and velocity indicators
+- Maintains chronological organization
+- Generates comprehensive summaries
+
+Manual index updates are no longer needed - the script handles everything!
 
 triggers for dev-log:
 major technical decisions,
@@ -88,4 +95,4 @@ entry created → categorize by development arc → assess impact level → upda
 index serves as project navigation hub,
 comprehensive view of development themes,
 velocity tracking and milestone identification,
-critical for project context preservation. 
+critical for project context preservation.
