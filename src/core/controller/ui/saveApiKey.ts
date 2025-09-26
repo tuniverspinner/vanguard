@@ -10,7 +10,10 @@ import { Controller } from ".."
 export async function saveApiKey(controller: Controller, request: KeyValuePair): Promise<Empty> {
 	const { key, value } = request
 
+	console.log(`[DEBUG-SAVE-API-KEY] Function called with key: "${key}", value length: ${value?.length || 0}`)
+
 	if (!key || !value) {
+		console.log(`[DEBUG-SAVE-API-KEY] ERROR: Key or value missing`)
 		throw new Error("Key and value are required")
 	}
 
@@ -69,6 +72,7 @@ function isValidSecretKey(key: string): key is SecretKey {
 		"basetenApiKey",
 		"vercelAiGatewayApiKey",
 		"difyApiKey",
+		"falApiKey",
 	]
 
 	return validKeys.includes(key as SecretKey)
