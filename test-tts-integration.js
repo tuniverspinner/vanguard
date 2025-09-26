@@ -53,9 +53,21 @@ class MockTtsService {
 			const result = await this.pollForCompletion(submitResponse.request_id)
 			console.log(`✅ Audio generation completed`)
 
+			// Actually download the audio from the URL (like the real TtsService)
+			console.log(`📥 Downloading audio from: ${result.audio.url}`)
+			const audioResponse = await fetch(result.audio.url)
+			if (!audioResponse.ok) {
+				throw new Error(`Failed to download audio: HTTP ${audioResponse.status}`)
+			}
+
+			const audioData = await audioResponse.arrayBuffer()
+			const contentType = result.audio.content_type || audioResponse.headers.get("content-type") || "audio/wav"
+
+			console.log(`📏 Downloaded audio: ${audioData.byteLength} bytes, type: ${contentType}`)
+
 			return {
-				audioData: result.audio.data,
-				contentType: result.audio.content_type,
+				audioData,
+				contentType,
 			}
 		} catch (error) {
 			console.log(`❌ FAIL: Fal.ai API call failed: ${error.message}`)

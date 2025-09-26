@@ -56,6 +56,8 @@ export class TtsService {
 	private readonly cache = new TtsCache()
 	private readonly baseUrl = "https://queue.fal.run"
 	private logStream: fs.WriteStream | null = null
+	private statusUrl?: string
+	private responseUrl?: string
 
 	constructor(
 		private readonly apiKey?: string,
@@ -190,6 +192,10 @@ export class TtsService {
 		const result: FalQueueSubmitResponse = await response.json()
 		logToFile(this.logStream, "[TTS]", `Submit response: ${JSON.stringify(result)}`)
 
+		// Store the URLs from the response for polling
+		this.statusUrl = result.status_url
+		this.responseUrl = result.response_url
+
 		return result
 	}
 
@@ -197,8 +203,13 @@ export class TtsService {
 	 * Poll for request completion
 	 */
 	private async pollForCompletion(requestId: string): Promise<FalQueueResultResponse> {
-		const statusUrl = `${this.baseUrl}/fal-ai/kokoro/american-english/requests/${requestId}/status`
-		const resultUrl = `${this.baseUrl}/fal-ai/kokoro/american-english/requests/${requestId}`
+		// Use the URLs provided by the API response
+		const statusUrl = this.statusUrl
+		const resultUrl = this.responseUrl
+
+		if (!statusUrl || !resultUrl) {
+			throw new Error("Status and response URLs not available from submit response")
+		}
 
 		logToFile(this.logStream, "[TTS]", `Polling status at: ${statusUrl}`)
 
