@@ -78,14 +78,10 @@ export async function generateSpeech(
 	} catch (error) {
 		console.error(`[TTS-HANDLER] TTS generation failed:`, error)
 		console.error(`[TTS-HANDLER] Error stack:`, error instanceof Error ? error.stack : "No stack trace")
+		console.error(`[TTS-HANDLER] Error message:`, error instanceof Error ? error.message : String(error))
 
-		// Send error indication
-		console.log(`[TTS-HANDLER] Sending error response to client`)
-		await responseStream(
-			Bytes.create({
-				value: Buffer.alloc(0),
-			}),
-			true, // End the stream with error
-		)
+		// For streaming responses, we need to throw the error to let the gRPC framework handle it
+		// This will properly propagate the error to the frontend
+		throw error
 	}
 }

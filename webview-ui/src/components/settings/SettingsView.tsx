@@ -134,6 +134,10 @@ const renderSectionHeader = (tabId: string) => {
 }
 
 const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
+	console.log(`[SETTINGS-DEBUG] SettingsView rendered, targetSection: ${targetSection}`)
+	console.log(`[SETTINGS-DEBUG] SETTINGS_TABS:`, SETTINGS_TABS)
+	console.log(`[SETTINGS-DEBUG] IS_DEV: ${IS_DEV}`)
+
 	// Memoize to avoid recreation
 	const TAB_CONTENT_MAP = useMemo(
 		() => ({
@@ -150,6 +154,7 @@ const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
 	) // Empty deps - these imports never change
 
 	const { version, telemetrySetting } = useExtensionState()
+	console.log(`[SETTINGS-DEBUG] telemetrySetting: ${telemetrySetting}`)
 
 	// Initialize active tab with memoized calculation
 	const initialTab = useMemo(
@@ -249,6 +254,7 @@ const SettingsView = ({ onDone, targetSection }: SettingsViewProps) => {
 	// Memoized tab item renderer
 	const renderTabItem = useCallback(
 		(tab: (typeof SETTINGS_TABS)[0]) => {
+			console.log(`[SETTINGS-DEBUG] Rendering tab: ${tab.id} - ${tab.name}, hidden: ${tab.hidden}`)
 			const isActive = activeTab === tab.id
 			const tabClassName = `${isActive ? `${settingsTabTrigger} ${settingsTabTriggerActive}` : settingsTabTrigger} focus:ring-0`
 			const iconContainerClassName = `flex items-center gap-2 ${isCompactMode ? "justify-center" : ""}`

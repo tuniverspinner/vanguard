@@ -48,14 +48,20 @@ export const TtsButton: React.FC<TtsButtonProps> = ({ text, className = "", size
 
 	const playAudioBuffer = useCallback(
 		async (audioBuffer: ArrayBuffer) => {
+			console.log(`[TTS-UI] playAudioBuffer called with buffer size: ${audioBuffer.byteLength} bytes`)
 			try {
 				const audioContext = await initializeAudioContext()
+				console.log(`[TTS-UI] AudioContext initialized, state: ${audioContext.state}`)
 
 				// Stop any currently playing audio
 				stopPlayback()
 
+				console.log(`[TTS-UI] Decoding audio data...`)
 				// Create audio buffer from the received data
 				const buffer = await audioContext.decodeAudioData(audioBuffer.slice(0))
+				console.log(
+					`[TTS-UI] Audio decoded successfully, duration: ${buffer.duration}s, sampleRate: ${buffer.sampleRate}Hz`,
+				)
 
 				// Create and configure audio source
 				const source = audioContext.createBufferSource()
@@ -65,15 +71,18 @@ export const TtsButton: React.FC<TtsButtonProps> = ({ text, className = "", size
 
 				// Set up event handlers
 				source.onended = () => {
+					console.log(`[TTS-UI] Audio playback ended naturally`)
 					setIsPlaying(false)
 					currentSourceRef.current = null
 				}
 
+				console.log(`[TTS-UI] Starting audio playback...`)
 				// Start playback
 				source.start(0)
 				setIsPlaying(true)
+				console.log(`[TTS-UI] Audio playback started successfully`)
 			} catch (err) {
-				console.error("Failed to play audio:", err)
+				console.error(`[TTS-UI] Failed to play audio:`, err)
 				setIsPlaying(false)
 				setError("Failed to play audio")
 				throw err
@@ -163,6 +172,24 @@ export const TtsButton: React.FC<TtsButtonProps> = ({ text, className = "", size
 								combinedBuffer.set(chunk, offset)
 								offset += chunk.length
 							}
+							// Save audio file for debugging (optional)
+							console.log(`[TTS-UI] Saving audio file for debugging...`)
+							try {
+								// Create a blob and download link for debugging
+								const blob = new Blob([combinedBuffer.buffer], { type: "audio/wav" })
+								const url = URL.createObjectURL(blob)
+								const a = document.createElement("a")
+								a.href = url
+								a.download = `tts-debug-${Date.now()}.wav`
+								document.body.appendChild(a)
+								a.click()
+								document.body.removeChild(a)
+								URL.revokeObjectURL(url)
+								console.log(`[TTS-UI] Audio file saved for debugging`)
+							} catch (saveErr) {
+								console.warn(`[TTS-UI] Failed to save debug audio file:`, saveErr)
+							}
+
 							await playAudioBuffer(combinedBuffer.buffer)
 						} else {
 							console.error(`[TTS-UI] Error: No audio data received`)
@@ -172,7 +199,8 @@ export const TtsButton: React.FC<TtsButtonProps> = ({ text, className = "", size
 					},
 					onError: (error) => {
 						console.error(`[TTS-UI] Generation failed:`, error)
-						setError("Failed to generate speech")
+						console.error(`[TTS-UI] Error details:`, error.message, error.stack)
+						setError(`Failed to generate speech: ${error.message}`)
 						setIsLoading(false)
 					},
 				})
