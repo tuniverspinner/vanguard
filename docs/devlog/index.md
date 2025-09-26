@@ -14,6 +14,13 @@ This index tracks all development activities for the Vanguard project, organized
   - Impact: High - Fixed critical user experience bug and established consistent branding
 
 ### Architecture & Error Handling
+- **0927|0116-[vanguard, tts, provider-pivot]--fal-ai-kokoro-tts-provider-replacement-plan.md**
+  - Fal.ai TTS provider pivot plan: Complete migration strategy from Hugging Face to Fal.ai Kokoro model
+  - API architecture analysis: Queue-based system with submit/poll/retrieve workflow
+  - Cost optimization: Eliminates monthly recurring fees for better user economics
+  - Implementation roadmap: Step-by-step plan for seamless provider replacement
+  - Status: 📋 Planned - Implementation Ready
+  - Impact: High - Addresses user pricing concerns while maintaining feature functionality
 - **0927|0111-[vanguard, tts, implementation]--text-to-speech-feature-architecture-and-provider-replacement.md**
   - Complete TTS feature implementation: Text-to-speech functionality with Hugging Face integration, error handling, and provider replacement guide
   - Architecture documentation: Comprehensive breakdown of frontend/backend communication, streaming, and caching systems
@@ -78,16 +85,17 @@ This index tracks all development activities for the Vanguard project, organized
 ## Statistics & Velocity
 
 ### Current Metrics
-- **Total Entries**: 11
+- **Total Entries**: 12
 - **Active Development Arcs**: 4
 - **Completed Sessions**: 10
+- **Planned Sessions**: 1 (Fal.ai TTS provider pivot)
 - **Analysis Pending**: 1 (XML parsing conundrum)
-- **Average Session Impact**: High - Architecture investigations, debugging infrastructure, feature implementation, and critical bug fixes
+- **Average Session Impact**: High - Architecture investigations, debugging infrastructure, feature implementation, provider migrations, and critical bug fixes
 
 ### Recent Activity
 - **Last Update**: September 27th, 2025
 - **Active Projects**: vanguard
-- **Critical Impact Level**: 5 (High impact architecture discoveries, debugging infrastructure, new features, bug fixes, and UX bottlenecks)
+- **Critical Impact Level**: 5 (High impact architecture discoveries, debugging infrastructure, new features, provider migrations, bug fixes, and UX bottlenecks)
 
 ## Project Organization
 
@@ -112,17 +120,18 @@ This index tracks all development activities for the Vanguard project, organized
 - Tertiary tags provide additional context
 
 ### Recent Entries (Chronological)
-1. **0927|0111** - Text-to-speech feature architecture and provider replacement (vanguard)
-2. **0926|2338** - How to debug Vanguard extension (vanguard)
-3. **0920|1111** - Frontend auto-retry implementation (vanguard)
-4. **0920|1108** - Plan Mode message flow investigation (vanguard)
-5. **0920|0856** - XML parsing conundrum observer analysis (vanguard)
-6. **0920|0832** - Complete extension rebrand and command fix (vanguard)
-7. **0920|0721** - Model selector architecture investigation (vanguard)
-8. **0919|0726** - Account card visibility fix (vanguard)
-9. **0919|0714** - Compilation fixes (vanguard)
-10. **0919|0639** - Provider simplification (vanguard)
-11. **0609|0117** - Documentation infrastructure (gefest)
+1. **0927|0116** - Fal.ai Kokoro TTS provider replacement plan (vanguard)
+2. **0927|0111** - Text-to-speech feature architecture and provider replacement (vanguard)
+3. **0926|2338** - How to debug Vanguard extension (vanguard)
+4. **0920|1111** - Frontend auto-retry implementation (vanguard)
+5. **0920|1108** - Plan Mode message flow investigation (vanguard)
+6. **0920|0856** - XML parsing conundrum observer analysis (vanguard)
+7. **0920|0832** - Complete extension rebrand and command fix (vanguard)
+8. **0920|0721** - Model selector architecture investigation (vanguard)
+9. **0919|0726** - Account card visibility fix (vanguard)
+10. **0919|0714** - Compilation fixes (vanguard)
+11. **0919|0639** - Provider simplification (vanguard)
+12. **0609|0117** - Documentation infrastructure (gefest)
 
 ## Guidelines
 
