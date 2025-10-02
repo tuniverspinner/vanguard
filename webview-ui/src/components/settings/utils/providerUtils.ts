@@ -1,6 +1,7 @@
 import {
 	ApiConfiguration,
 	ApiProvider,
+	anthropicModelsActive,
 	groqDefaultModelId,
 	groqModels,
 	ModelInfo,
@@ -75,6 +76,18 @@ export function normalizeApiConfiguration(
 			}
 		case "xai":
 			return getProviderData(xaiModels, xaiDefaultModelId)
+		case "anthropic":
+			const anthropicModelId =
+				currentMode === "plan" ? apiConfiguration?.planModeAnthropicModelId : apiConfiguration?.actModeAnthropicModelId
+			const anthropicModelInfo =
+				currentMode === "plan"
+					? apiConfiguration?.planModeAnthropicModelInfo
+					: apiConfiguration?.actModeAnthropicModelInfo
+			return {
+				selectedProvider: provider,
+				selectedModelId: anthropicModelId || "claude-sonnet-4-5-20250929",
+				selectedModelInfo: anthropicModelInfo || anthropicModelsActive["claude-sonnet-4-5-20250929"],
+			}
 		default:
 			// Default to Cline if provider is not recognized
 			const defaultOpenRouterModelId =
@@ -116,6 +129,7 @@ export function getModeSpecificFields(apiConfiguration: ApiConfiguration | undef
 			openAiModelId: undefined,
 			openRouterModelId: undefined,
 			groqModelId: undefined,
+			anthropicModelId: undefined,
 			basetenModelId: undefined,
 			huggingFaceModelId: undefined,
 			huaweiCloudMaasModelId: undefined,
@@ -127,6 +141,7 @@ export function getModeSpecificFields(apiConfiguration: ApiConfiguration | undef
 			openRouterModelInfo: undefined,
 			requestyModelInfo: undefined,
 			groqModelInfo: undefined,
+			anthropicModelInfo: undefined,
 			basetenModelInfo: undefined,
 			huggingFaceModelInfo: undefined,
 			vercelAiGatewayModelInfo: undefined,
@@ -154,11 +169,14 @@ export function getModeSpecificFields(apiConfiguration: ApiConfiguration | undef
 		openRouterModelId:
 			mode === "plan" ? apiConfiguration.planModeOpenRouterModelId : apiConfiguration.actModeOpenRouterModelId,
 		groqModelId: mode === "plan" ? apiConfiguration.planModeGroqModelId : apiConfiguration.actModeGroqModelId,
+		anthropicModelId: mode === "plan" ? apiConfiguration.planModeAnthropicModelId : apiConfiguration.actModeAnthropicModelId,
 
 		// Model info objects
 		openRouterModelInfo:
 			mode === "plan" ? apiConfiguration.planModeOpenRouterModelInfo : apiConfiguration.actModeOpenRouterModelInfo,
 		groqModelInfo: mode === "plan" ? apiConfiguration.planModeGroqModelInfo : apiConfiguration.actModeGroqModelInfo,
+		anthropicModelInfo:
+			mode === "plan" ? apiConfiguration.planModeAnthropicModelInfo : apiConfiguration.actModeAnthropicModelInfo,
 		vsCodeLmModelSelector:
 			mode === "plan" ? apiConfiguration.planModeVsCodeLmModelSelector : apiConfiguration.actModeVsCodeLmModelSelector,
 
@@ -221,6 +239,13 @@ export async function syncModeConfigurations(
 			updates.actModeGroqModelId = sourceFields.groqModelId
 			updates.planModeGroqModelInfo = sourceFields.groqModelInfo
 			updates.actModeGroqModelInfo = sourceFields.groqModelInfo
+			break
+
+		case "anthropic":
+			updates.planModeAnthropicModelId = sourceFields.anthropicModelId
+			updates.actModeAnthropicModelId = sourceFields.anthropicModelId
+			updates.planModeAnthropicModelInfo = sourceFields.anthropicModelInfo
+			updates.actModeAnthropicModelInfo = sourceFields.anthropicModelInfo
 			break
 
 		case "xai":

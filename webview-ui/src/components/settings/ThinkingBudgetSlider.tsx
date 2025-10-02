@@ -1,4 +1,4 @@
-import { anthropicModels, geminiDefaultModelId, geminiModels } from "@shared/api"
+import { anthropicModelsActive, geminiDefaultModelId, geminiModels } from "@shared/api"
 import { Mode } from "@shared/storage/types"
 import { VSCodeCheckbox } from "@vscode/webview-ui-toolkit/react"
 import { memo, useCallback, useEffect, useMemo, useState } from "react"
@@ -116,7 +116,7 @@ const ThinkingBudgetSlider = ({ maxBudget, currentMode }: ThinkingBudgetSliderPr
 		() =>
 			(modeFields.apiProvider as string) === "gemini"
 				? geminiModels[geminiDefaultModelId]?.maxTokens || 32768
-				: anthropicModels["claude-3-7-sonnet-20250219"]?.maxTokens || 32768,
+				: anthropicModelsActive["claude-3-7-sonnet-20250219"]?.maxTokens || 32768,
 		[modeFields.apiProvider],
 	)
 

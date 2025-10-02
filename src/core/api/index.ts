@@ -1,6 +1,7 @@
 import { Anthropic } from "@anthropic-ai/sdk"
 import { ApiConfiguration, ModelInfo } from "@shared/api"
 import { Mode } from "@shared/storage/types"
+import { AnthropicHandler } from "./providers/anthropic"
 import { ClineHandler } from "./providers/cline"
 import { GroqHandler } from "./providers/groq"
 import { XAIHandler } from "./providers/xai"
@@ -62,6 +63,14 @@ function createHandlerForProvider(
 				onRetryAttempt: options.onRetryAttempt,
 				xaiApiKey: options.xaiApiKey,
 				reasoningEffort: mode === "plan" ? options.planModeReasoningEffort : options.actModeReasoningEffort,
+				apiModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
+			})
+		case "anthropic":
+			return new AnthropicHandler({
+				onRetryAttempt: options.onRetryAttempt,
+				anthropicApiKey: options.anthropicApiKey,
+				anthropicModelId: mode === "plan" ? options.planModeAnthropicModelId : options.actModeAnthropicModelId,
+				anthropicModelInfo: mode === "plan" ? options.planModeAnthropicModelInfo : options.actModeAnthropicModelInfo,
 				apiModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
 			})
 		default:

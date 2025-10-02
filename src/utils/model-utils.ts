@@ -1,5 +1,5 @@
 import { ApiHandlerModel, ApiProviderInfo } from "@core/api"
-import { AnthropicModelId, anthropicModels } from "@/shared/api"
+import { AnthropicModelId, anthropicModelsActive } from "@/shared/api"
 
 export function modelDoesntSupportWebp(apiHandlerModel: ApiHandlerModel): boolean {
 	const modelId = apiHandlerModel.id.toLowerCase()
@@ -18,7 +18,7 @@ export function shouldSkipReasoningForModel(modelId?: string): boolean {
 }
 
 export function isAnthropicModelId(modelId: string): modelId is AnthropicModelId {
-	return modelId in anthropicModels || isClaude4ModelFamily(modelId)
+	return modelId in anthropicModelsActive || isClaude4ModelFamily(modelId)
 }
 
 export function isClaude4ModelFamily(id: string): boolean {

@@ -1,7 +1,6 @@
 // Placeholder types for removed providers to maintain compatibility
 export type BedrockModelId = string
 export type LiteLLMModelInfo = any
-export type AnthropicModelId = string
 export type ClaudeCodeModelId = string
 export type VertexModelId = string
 export type GeminiModelId = string
@@ -31,7 +30,6 @@ export type ZAiModelId = string
 export type DifyModelId = string
 
 // Empty model objects for compatibility
-export const anthropicModels = {} as Record<string, ModelInfo>
 export const claudeCodeModels = {} as Record<string, ModelInfo>
 export const bedrockModels = {} as Record<string, ModelInfo>
 export const vertexModels = {} as Record<string, ModelInfo>
@@ -64,7 +62,6 @@ export const mainlandZAiModels = {} as Record<string, ModelInfo>
 export const difyModels = {} as Record<string, ModelInfo>
 
 // Default model IDs (empty strings for compatibility)
-export const anthropicDefaultModelId = ""
 export const claudeCodeDefaultModelId = ""
 export const bedrockDefaultModelId = ""
 export const vertexDefaultModelId = ""
@@ -121,7 +118,7 @@ export const QwenApiRegions = { CHINA: "china", INTERNATIONAL: "international" }
 
 import type { LanguageModelChatSelector } from "../core/api/providers/types"
 
-export type ApiProvider = "cline" | "xai" | "groq"
+export type ApiProvider = "cline" | "xai" | "groq" | "anthropic"
 
 export interface ApiHandlerOptions {
 	// Global configuration (not mode-specific)
@@ -129,6 +126,7 @@ export interface ApiHandlerOptions {
 	ulid?: string // Used to identify the task in API requests
 	xaiApiKey?: string
 	groqApiKey?: string
+	anthropicApiKey?: string
 	openRouterProviderSorting?: string
 	requestTimeoutMs?: number
 	onRetryAttempt?: (attempt: number, maxRetries: number, delay: number, error: any) => void
@@ -141,6 +139,8 @@ export interface ApiHandlerOptions {
 	planModeGroqModelInfo?: ModelInfo
 	planModeOpenRouterModelId?: string
 	planModeOpenRouterModelInfo?: ModelInfo
+	planModeAnthropicModelId?: string
+	planModeAnthropicModelInfo?: ModelInfo
 	// Act mode configurations
 	actModeApiModelId?: string
 	actModeThinkingBudgetTokens?: number
@@ -150,6 +150,8 @@ export interface ApiHandlerOptions {
 	actModeGroqModelInfo?: ModelInfo
 	actModeOpenRouterModelId?: string
 	actModeOpenRouterModelInfo?: ModelInfo
+	actModeAnthropicModelId?: string
+	actModeAnthropicModelInfo?: ModelInfo
 }
 
 export type ApiConfiguration = ApiHandlerOptions & {
@@ -485,5 +487,90 @@ export const xaiModels = {
 		inputPrice: 5.0,
 		outputPrice: 15.0,
 		description: "X AI's Grok Beta model (legacy) with 131K context window",
+	},
+} as const satisfies Record<string, ModelInfo>
+
+// Anthropic
+// https://docs.anthropic.com/en/docs/about-claude/models
+export type AnthropicModelId = keyof typeof anthropicModelsActive
+export const anthropicDefaultModelId: AnthropicModelId = "claude-sonnet-4-5-20250929"
+export const anthropicModelsActive = {
+	"claude-sonnet-4-5-20250929": {
+		maxTokens: 16384,
+		contextWindow: 204800,
+		supportsImages: true,
+		supportsPromptCache: true,
+		inputPrice: 3.0,
+		outputPrice: 15.0,
+		cacheWritesPrice: 3.75,
+		cacheReadsPrice: 0.3,
+		description:
+			"Claude Sonnet 4.5 (2025-09-29) - Latest flagship model with extended thinking and enhanced coding capabilities",
+	},
+	"claude-sonnet-4-20250514": {
+		maxTokens: 8192,
+		contextWindow: 200000,
+		supportsImages: true,
+		supportsPromptCache: true,
+		inputPrice: 3.0,
+		outputPrice: 15.0,
+		cacheWritesPrice: 3.75,
+		cacheReadsPrice: 0.3,
+		description: "Claude Sonnet 4 (2025-05-14) - Previous flagship model with excellent performance and vision support",
+	},
+	"claude-3-7-sonnet-20250219": {
+		maxTokens: 8192,
+		contextWindow: 200000,
+		supportsImages: true,
+		supportsPromptCache: true,
+		inputPrice: 3.0,
+		outputPrice: 15.0,
+		cacheWritesPrice: 3.75,
+		cacheReadsPrice: 0.3,
+		description: "Claude 3.7 Sonnet - Enhanced reasoning and coding capabilities with vision support",
+	},
+	"claude-3-5-sonnet-20241022": {
+		maxTokens: 8192,
+		contextWindow: 200000,
+		supportsImages: true,
+		supportsPromptCache: true,
+		inputPrice: 3.0,
+		outputPrice: 15.0,
+		cacheWritesPrice: 3.75,
+		cacheReadsPrice: 0.3,
+		description: "Claude 3.5 Sonnet (October 2024) - Improved agentic coding and vision capabilities",
+	},
+	"claude-3-5-sonnet-20240620": {
+		maxTokens: 8192,
+		contextWindow: 200000,
+		supportsImages: true,
+		supportsPromptCache: true,
+		inputPrice: 3.0,
+		outputPrice: 15.0,
+		cacheWritesPrice: 3.75,
+		cacheReadsPrice: 0.3,
+		description: "Claude 3.5 Sonnet (June 2024) - Original 3.5 release with strong performance across tasks",
+	},
+	"claude-3-5-haiku-20241022": {
+		maxTokens: 8192,
+		contextWindow: 200000,
+		supportsImages: false,
+		supportsPromptCache: true,
+		inputPrice: 1.0,
+		outputPrice: 5.0,
+		cacheWritesPrice: 1.25,
+		cacheReadsPrice: 0.1,
+		description: "Claude 3.5 Haiku - Fast and cost-effective model for quick responses",
+	},
+	"claude-3-opus-20240229": {
+		maxTokens: 4096,
+		contextWindow: 200000,
+		supportsImages: true,
+		supportsPromptCache: true,
+		inputPrice: 15.0,
+		outputPrice: 75.0,
+		cacheWritesPrice: 18.75,
+		cacheReadsPrice: 1.5,
+		description: "Claude 3 Opus - Powerful model for highly complex tasks (legacy)",
 	},
 } as const satisfies Record<string, ModelInfo>
