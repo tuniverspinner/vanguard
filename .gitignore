@@ -5,6 +5,8 @@ node_modules
 tmp
 .vscode-test/
 *.vsix
+*.log
+*.wav
 
 .DS_Store
 .idea
@@ -34,4 +36,4 @@ webview-ui/src/services/grpc-client.ts
 test-results
 
 ## CLI pre-release  ##
-/cli 
+/cli
