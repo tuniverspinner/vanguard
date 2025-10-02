@@ -7,6 +7,7 @@ import { normalizeApiConfiguration } from "@/components/settings/utils/providerU
 import { useExtensionState } from "@/context/ExtensionStateContext"
 import { highlight } from "../history/HistoryView"
 import { ClineAccountInfoCard } from "./ClineAccountInfoCard"
+import { AnthropicProvider } from "./providers/AnthropicProvider"
 import { ClineProvider } from "./providers/ClineProvider"
 import { GroqProvider } from "./providers/GroqProvider"
 import { XaiProvider } from "./providers/XaiProvider"
@@ -56,6 +57,7 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 			{ value: "cline", label: "Cline" },
 			{ value: "groq", label: "Groq" },
 			{ value: "xai", label: "xAI" },
+			{ value: "anthropic", label: "Anthropic" },
 		],
 		[],
 	)
@@ -258,6 +260,10 @@ const ApiOptions = ({ showModelOptions, apiErrorMessage, modelIdErrorMessage, is
 
 			{apiConfiguration && selectedProvider === "xai" && (
 				<XaiProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
+			)}
+
+			{apiConfiguration && selectedProvider === "anthropic" && (
+				<AnthropicProvider currentMode={currentMode} isPopup={isPopup} showModelOptions={showModelOptions} />
 			)}
 
 			{apiErrorMessage && (
