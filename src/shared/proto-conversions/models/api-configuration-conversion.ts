@@ -269,7 +269,9 @@ function convertProtoToApiProvider(provider: ProtoApiProvider): ApiProvider {
 			return "xai"
 		case ProtoApiProvider.GROQ:
 			return "groq"
-		// All other providers now default to "cline" since only 3 providers are active
+		case ProtoApiProvider.ANTHROPIC:
+			return "anthropic"
+		// All other providers now default to "cline" since only 4 providers are active
 		default:
 			return "cline"
 	}
