@@ -1,3 +1,4 @@
+import { buildApiHandler } from "@core/api"
 import { Empty, KeyValuePair } from "@shared/proto/cline/common"
 import { SecretKey } from "../../storage/state-keys"
 import { Controller } from ".."
@@ -26,6 +27,12 @@ export async function saveApiKey(controller: Controller, request: KeyValuePair):
 
 	// Save to VSCode secrets
 	await controller.stateManager.setSecret(key as SecretKey, value)
+
+	// Rebuild API handler with updated configuration
+	if (controller.task) {
+		const apiConfiguration = controller.stateManager.getApiConfiguration()
+		controller.task.api = buildApiHandler({ ...apiConfiguration, ulid: controller.task.ulid }, controller.task.mode)
+	}
 
 	console.log(`[UI-HANDLER] API key saved successfully for: ${key}`)
 

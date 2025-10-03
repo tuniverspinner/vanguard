@@ -265,6 +265,8 @@ export class StateManager {
 			actModeGroqModelInfo,
 			actModeOpenRouterModelId,
 			actModeOpenRouterModelInfo,
+			actModeAnthropicModelId,
+			actModeAnthropicModelInfo,
 		} = apiConfiguration
 
 		// Batch update global state keys
@@ -288,6 +290,8 @@ export class StateManager {
 			actModeGroqModelInfo,
 			actModeOpenRouterModelId,
 			actModeOpenRouterModelInfo,
+			actModeAnthropicModelId,
+			actModeAnthropicModelInfo,
 
 			// Global state updates
 			openRouterProviderSorting,
@@ -480,6 +484,7 @@ export class StateManager {
 			clineAccountId: this.secretsCache["clineAccountId"],
 			xaiApiKey: this.secretsCache["xaiApiKey"],
 			groqApiKey: this.secretsCache["groqApiKey"],
+			anthropicApiKey: this.secretsCache["apiKey"],
 			openRouterProviderSorting: this.globalStateCache["openRouterProviderSorting"],
 			requestTimeoutMs: this.globalStateCache["requestTimeoutMs"],
 			favoritedModelIds: this.globalStateCache["favoritedModelIds"],
@@ -503,6 +508,8 @@ export class StateManager {
 			actModeGroqModelInfo: this.globalStateCache["actModeGroqModelInfo"],
 			actModeOpenRouterModelId: this.globalStateCache["actModeOpenRouterModelId"],
 			actModeOpenRouterModelInfo: this.globalStateCache["actModeOpenRouterModelInfo"],
+			actModeAnthropicModelId: this.globalStateCache["actModeAnthropicModelId"],
+			actModeAnthropicModelInfo: this.globalStateCache["actModeAnthropicModelInfo"],
 		}
 	}
 }

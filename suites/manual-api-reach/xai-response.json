@@ -1,0 +1,36 @@
+{
+	"id": "f4cc77be-89c8-9193-0920-d1fac5dad72c_us-east-1",
+	"object": "chat.completion",
+	"created": 1759481883,
+	"model": "grok-4-fast-reasoning",
+	"choices": [
+		{
+			"index": 0,
+			"message": {
+				"role": "assistant",
+				"content": "Hello! How can I help you today?",
+				"refusal": null
+			},
+			"finish_reason": "length"
+		}
+	],
+	"usage": {
+		"prompt_tokens": 119,
+		"completion_tokens": 9,
+		"total_tokens": 226,
+		"prompt_tokens_details": {
+			"text_tokens": 119,
+			"audio_tokens": 0,
+			"image_tokens": 0,
+			"cached_tokens": 112
+		},
+		"completion_tokens_details": {
+			"reasoning_tokens": 98,
+			"audio_tokens": 0,
+			"accepted_prediction_tokens": 0,
+			"rejected_prediction_tokens": 0
+		},
+		"num_sources_used": 0
+	},
+	"system_fingerprint": "fp_9362061f30"
+}

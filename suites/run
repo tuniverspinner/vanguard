@@ -1,0 +1,41 @@
+#!/bin/bash
+
+# xAI Models Test Runner
+# Usage: ./suites/run [--cost=true]
+
+set -e
+
+# Parse arguments
+COST_MODE=false
+for arg in "$@"; do
+  case $arg in
+    --cost=true)
+      COST_MODE=true
+      shift
+      ;;
+    --cost=false)
+      COST_MODE=false
+      shift
+      ;;
+    *)
+      echo "Unknown argument: $arg"
+      echo "Usage: $0 [--cost=true]"
+      exit 1
+      ;;
+  esac
+done
+
+# Set environment variables based on mode
+if [ "$COST_MODE" = true ]; then
+  echo "🧪 Running xAI Models Tests (Real API Mode)"
+  echo "⚠️  This will make actual API calls to xAI"
+  export VITEST_COST_TEST=true
+else
+  echo "🧪 Running xAI Models Tests (Mock Mode)"
+  export VITEST_COST_TEST=false
+fi
+
+# Run the tests
+npx vitest run xai-models.test.ts
+
+echo "✅ Test run complete"

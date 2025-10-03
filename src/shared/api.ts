@@ -112,7 +112,6 @@ export const openRouterDefaultModelInfo: ModelInfo = {
 export const requestyDefaultModelId = ""
 export const requestyDefaultModelInfo = {} as ModelInfo
 export const liteLlmModelInfoSaneDefaults = {} as any
-export const openAiModelInfoSaneDefaults = {} as OpenAiCompatibleModelInfo
 export const vertexGlobalModels = {} as Record<string, ModelInfo>
 export const QwenApiRegions = { CHINA: "china", INTERNATIONAL: "international" } as const
 
@@ -190,23 +189,6 @@ export interface ModelInfo {
 		cacheWritesPrice?: number
 		cacheReadsPrice?: number
 	}[]
-}
-
-export interface OpenAiCompatibleModelInfo extends ModelInfo {
-	temperature?: number
-	isR1FormatRequired?: boolean
-}
-
-// Cline custom model - sonic (same config as grok-4)
-export const clineMicrowaveAlphaModelInfo: ModelInfo = {
-	contextWindow: 262144,
-	supportsImages: false,
-	supportsPromptCache: true,
-	inputPrice: 0,
-	outputPrice: 0,
-	cacheReadsPrice: 0,
-	cacheWritesPrice: 0, // Not specified in grok-4, setting to 0
-	description: "Cline Microwave Alpha - Advanced model for complex coding tasks with large context window",
 }
 
 // Groq
@@ -340,155 +322,31 @@ export const xaiModels = {
 		contextWindow: 262144,
 		supportsImages: true,
 		supportsPromptCache: true,
-		inputPrice: 3.0, // will have different pricing for long context vs short context
+		inputPrice: 3.0,
 		cacheReadsPrice: 0.75,
 		outputPrice: 15.0,
 	},
-	"grok-3-beta": {
+	"grok-code-fast-1": {
 		maxTokens: 8192,
-		contextWindow: 131072,
+		contextWindow: 256000,
 		supportsImages: false,
 		supportsPromptCache: true,
-		inputPrice: 3.0,
-		outputPrice: 15.0,
-		description: "X AI's Grok-3 beta model with 131K context window",
+		inputPrice: 0.2,
+		outputPrice: 1.5,
+		cacheReadsPrice: 0.02,
+		description: "Grok Code Fast 1 is a speedy and economical reasoning model that excels at agentic coding.",
 	},
-	"grok-3-fast-beta": {
+	"grok-4-fast": {
 		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
+		contextWindow: 2000000,
+		supportsImages: true,
 		supportsPromptCache: true,
-		inputPrice: 5.0,
-		outputPrice: 25.0,
-		description: "X AI's Grok-3 fast beta model with 131K context window",
-	},
-	"grok-3-mini-beta": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: true,
-		inputPrice: 0.3,
+		inputPrice: 0.2,
 		outputPrice: 0.5,
-		description: "X AI's Grok-3 mini beta model with 131K context window",
+		cacheReadsPrice: 0.05,
+		description: "X AI's Grok-4 Fast model with 2M context window and multimodal capabilities",
 	},
-	"grok-3-mini-fast-beta": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: true,
-		inputPrice: 0.6,
-		outputPrice: 4.0,
-		description: "X AI's Grok-3 mini fast beta model with 131K context window",
-	},
-	"grok-3": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: true,
-		inputPrice: 3.0,
-		outputPrice: 15.0,
-		description: "X AI's Grok-3 model with 131K context window",
-	},
-	"grok-3-fast": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: true,
-		inputPrice: 5.0,
-		outputPrice: 25.0,
-		description: "X AI's Grok-3 fast model with 131K context window",
-	},
-	"grok-3-mini": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: true,
-		inputPrice: 0.3,
-		outputPrice: 0.5,
-		description: "X AI's Grok-3 mini model with 131K context window",
-	},
-	"grok-3-mini-fast": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: true,
-		inputPrice: 0.6,
-		outputPrice: 4.0,
-		description: "X AI's Grok-3 mini fast model with 131K context window",
-	},
-	"grok-2-latest": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: false,
-		inputPrice: 2.0,
-		outputPrice: 10.0,
-		description: "X AI's Grok-2 model - latest version with 131K context window",
-	},
-	"grok-2": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: false,
-		inputPrice: 2.0,
-		outputPrice: 10.0,
-		description: "X AI's Grok-2 model with 131K context window",
-	},
-	"grok-2-1212": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: false,
-		inputPrice: 2.0,
-		outputPrice: 10.0,
-		description: "X AI's Grok-2 model (version 1212) with 131K context window",
-	},
-	"grok-2-vision-latest": {
-		maxTokens: 8192,
-		contextWindow: 32768,
-		supportsImages: true,
-		supportsPromptCache: false,
-		inputPrice: 2.0,
-		outputPrice: 10.0,
-		description: "X AI's Grok-2 Vision model - latest version with image support and 32K context window",
-	},
-	"grok-2-vision": {
-		maxTokens: 8192,
-		contextWindow: 32768,
-		supportsImages: true,
-		supportsPromptCache: false,
-		inputPrice: 2.0,
-		outputPrice: 10.0,
-		description: "X AI's Grok-2 Vision model with image support and 32K context window",
-	},
-	"grok-2-vision-1212": {
-		maxTokens: 8192,
-		contextWindow: 32768,
-		supportsImages: true,
-		supportsPromptCache: false,
-		inputPrice: 2.0,
-		outputPrice: 10.0,
-		description: "X AI's Grok-2 Vision model (version 1212) with image support and 32K context window",
-	},
-	"grok-vision-beta": {
-		maxTokens: 8192,
-		contextWindow: 8192,
-		supportsImages: true,
-		supportsPromptCache: false,
-		inputPrice: 5.0,
-		outputPrice: 15.0,
-		description: "X AI's Grok Vision Beta model with image support and 8K context window",
-	},
-	"grok-beta": {
-		maxTokens: 8192,
-		contextWindow: 131072,
-		supportsImages: false,
-		supportsPromptCache: false,
-		inputPrice: 5.0,
-		outputPrice: 15.0,
-		description: "X AI's Grok Beta model (legacy) with 131K context window",
-	},
-} as const satisfies Record<string, ModelInfo>
+}
 
 // Anthropic
 // https://docs.anthropic.com/en/docs/about-claude/models
@@ -506,71 +364,5 @@ export const anthropicModelsActive = {
 		cacheReadsPrice: 0.3,
 		description:
 			"Claude Sonnet 4.5 (2025-09-29) - Latest flagship model with extended thinking and enhanced coding capabilities",
-	},
-	"claude-sonnet-4-20250514": {
-		maxTokens: 8192,
-		contextWindow: 200000,
-		supportsImages: true,
-		supportsPromptCache: true,
-		inputPrice: 3.0,
-		outputPrice: 15.0,
-		cacheWritesPrice: 3.75,
-		cacheReadsPrice: 0.3,
-		description: "Claude Sonnet 4 (2025-05-14) - Previous flagship model with excellent performance and vision support",
-	},
-	"claude-3-7-sonnet-20250219": {
-		maxTokens: 8192,
-		contextWindow: 200000,
-		supportsImages: true,
-		supportsPromptCache: true,
-		inputPrice: 3.0,
-		outputPrice: 15.0,
-		cacheWritesPrice: 3.75,
-		cacheReadsPrice: 0.3,
-		description: "Claude 3.7 Sonnet - Enhanced reasoning and coding capabilities with vision support",
-	},
-	"claude-3-5-sonnet-20241022": {
-		maxTokens: 8192,
-		contextWindow: 200000,
-		supportsImages: true,
-		supportsPromptCache: true,
-		inputPrice: 3.0,
-		outputPrice: 15.0,
-		cacheWritesPrice: 3.75,
-		cacheReadsPrice: 0.3,
-		description: "Claude 3.5 Sonnet (October 2024) - Improved agentic coding and vision capabilities",
-	},
-	"claude-3-5-sonnet-20240620": {
-		maxTokens: 8192,
-		contextWindow: 200000,
-		supportsImages: true,
-		supportsPromptCache: true,
-		inputPrice: 3.0,
-		outputPrice: 15.0,
-		cacheWritesPrice: 3.75,
-		cacheReadsPrice: 0.3,
-		description: "Claude 3.5 Sonnet (June 2024) - Original 3.5 release with strong performance across tasks",
-	},
-	"claude-3-5-haiku-20241022": {
-		maxTokens: 8192,
-		contextWindow: 200000,
-		supportsImages: false,
-		supportsPromptCache: true,
-		inputPrice: 1.0,
-		outputPrice: 5.0,
-		cacheWritesPrice: 1.25,
-		cacheReadsPrice: 0.1,
-		description: "Claude 3.5 Haiku - Fast and cost-effective model for quick responses",
-	},
-	"claude-3-opus-20240229": {
-		maxTokens: 4096,
-		contextWindow: 200000,
-		supportsImages: true,
-		supportsPromptCache: true,
-		inputPrice: 15.0,
-		outputPrice: 75.0,
-		cacheWritesPrice: 18.75,
-		cacheReadsPrice: 1.5,
-		description: "Claude 3 Opus - Powerful model for highly complex tasks (legacy)",
 	},
 } as const satisfies Record<string, ModelInfo>

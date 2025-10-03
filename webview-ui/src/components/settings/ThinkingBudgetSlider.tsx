@@ -116,7 +116,7 @@ const ThinkingBudgetSlider = ({ maxBudget, currentMode }: ThinkingBudgetSliderPr
 		() =>
 			(modeFields.apiProvider as string) === "gemini"
 				? geminiModels[geminiDefaultModelId]?.maxTokens || 32768
-				: anthropicModelsActive["claude-3-7-sonnet-20250219"]?.maxTokens || 32768,
+				: anthropicModelsActive["claude-sonnet-4-5-20250929"]?.maxTokens || 32768,
 		[modeFields.apiProvider],
 	)
 

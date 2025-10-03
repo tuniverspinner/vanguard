@@ -396,7 +396,7 @@
 		"@types/diff": "^5.2.1",
 		"@types/get-folder-size": "^3.0.4",
 		"@types/mocha": "^10.0.7",
-		"@types/node": "20.x",
+		"@types/node": "^20.19.19",
 		"@types/pdf-parse": "^1.1.4",
 		"@types/proxyquire": "^1.3.31",
 		"@types/should": "^11.2.0",
@@ -423,7 +423,8 @@
 		"ts-node": "^10.9.2",
 		"ts-proto": "^2.6.1",
 		"tsconfig-paths": "^4.2.0",
-		"typescript": "^5.4.5"
+		"typescript": "^5.4.5",
+		"vitest": "^3.2.4"
 	},
 	"dependencies": {
 		"@anthropic-ai/sdk": "^0.37.0",

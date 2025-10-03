@@ -64,3 +64,4 @@ old_docs/**
 e2e-build.mjs
 e2e.vsix
 test-results/
+staage/

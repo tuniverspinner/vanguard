@@ -224,7 +224,8 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		const planModeGroqModelInfo = context.globalState.get("planModeGroqModelInfo") as ModelInfo | undefined
 		const planModeOpenRouterModelId = context.globalState.get("planModeOpenRouterModelId") as string | undefined
 		const planModeOpenRouterModelInfo = context.globalState.get("planModeOpenRouterModelInfo") as ModelInfo | undefined
-		// Act mode configurations
+		const planModeAnthropicModelId = context.globalState.get("planModeAnthropicModelId") as string | undefined
+		const planModeAnthropicModelInfo = context.globalState.get("planModeAnthropicModelInfo") as ModelInfo | undefined // Act mode configurations
 		const actModeApiProvider = context.globalState.get("actModeApiProvider") as ApiProvider | undefined
 		const actModeApiModelId = context.globalState.get("actModeApiModelId") as string | undefined
 		const actModeThinkingBudgetTokens = context.globalState.get("actModeThinkingBudgetTokens") as number | undefined
@@ -233,6 +234,8 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 		const actModeGroqModelInfo = context.globalState.get("actModeGroqModelInfo") as ModelInfo | undefined
 		const actModeOpenRouterModelId = context.globalState.get("actModeOpenRouterModelId") as string | undefined
 		const actModeOpenRouterModelInfo = context.globalState.get("actModeOpenRouterModelInfo") as ModelInfo | undefined
+		const actModeAnthropicModelId = context.globalState.get("actModeAnthropicModelId") as string | undefined
+		const actModeAnthropicModelInfo = context.globalState.get("actModeAnthropicModelInfo") as ModelInfo | undefined
 		const sapAiCoreUseOrchestrationMode = context.globalState.get("sapAiCoreUseOrchestrationMode") as boolean | undefined
 
 		let apiProvider: ApiProvider
@@ -322,7 +325,8 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			planModeGroqModelInfo,
 			planModeOpenRouterModelId,
 			planModeOpenRouterModelInfo,
-			// Act mode configurations
+			planModeAnthropicModelId,
+			planModeAnthropicModelInfo, // Act mode configurations
 			actModeApiProvider: actModeApiProvider || apiProvider,
 			actModeApiModelId,
 			actModeThinkingBudgetTokens,
@@ -331,7 +335,8 @@ export async function readGlobalStateFromDisk(context: ExtensionContext): Promis
 			actModeGroqModelInfo,
 			actModeOpenRouterModelId,
 			actModeOpenRouterModelInfo,
-
+			actModeAnthropicModelId,
+			actModeAnthropicModelInfo,
 			// Other global fields
 			focusChainSettings: focusChainSettings || DEFAULT_FOCUS_CHAIN_SETTINGS,
 			focusChainFeatureFlagEnabled: focusChainFeatureFlagEnabled ?? false,

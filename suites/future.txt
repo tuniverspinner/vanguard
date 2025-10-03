@@ -1,0 +1,171 @@
+# Future Test Coverage - Not Yet Implemented
+
+This file documents test scenarios and validations that are planned but not yet implemented.
+
+## Real API Connectivity Tests (--cost=true mode)
+
+### Authentication & Connection
+- [ ] API key validation (invalid key handling)
+- [ ] Network connectivity failures
+- [ ] Rate limit handling
+- [ ] Timeout scenarios
+
+### Basic Request/Response
+- [ ] Minimal "hello world" request to each model
+- [ ] Response format validation
+- [ ] Token counting accuracy
+- [ ] Streaming response handling
+
+### Cost Validation (Real API)
+- [ ] Compare calculated costs vs actual API usage reports
+- [ ] Validate cache token tracking
+- [ ] Test billing accuracy with small requests
+- [ ] Verify no unexpected charges
+
+## Advanced Integration Tests
+
+### Streaming Behavior
+- [ ] Test streaming responses for both models
+- [ ] Validate partial message handling
+- [ ] Test interruption recovery
+- [ ] Performance benchmarking
+
+### Error Scenarios
+- [ ] Invalid model names
+- [ ] Context window exceeded
+- [ ] Malformed requests
+- [ ] API service outages
+
+### Cache Functionality
+- [ ] Real cache hit/miss validation
+- [ ] Cache token accounting accuracy
+- [ ] Cache performance impact
+- [ ] Cache invalidation scenarios
+
+## UI Integration Tests
+
+### Model Selection
+- [ ] Models appear in Vanguard UI
+- [ ] Correct pricing display
+- [ ] Model switching functionality
+- [ ] Settings persistence
+
+### Cost Tracking
+- [ ] Real-time cost updates
+- [ ] Usage history accuracy
+- [ ] Billing alerts
+- [ ] Cost limit enforcement
+
+## Performance Tests
+
+### Speed Benchmarks
+- [ ] First token latency
+- [ ] Token generation speed
+- [ ] Cache performance impact
+- [ ] Memory usage validation
+
+### Scalability Tests
+- [ ] Large context handling (2M tokens)
+- [ ] Concurrent request handling
+- [ ] Long-running conversation memory
+- [ ] Resource cleanup validation
+
+## Cross-Platform Tests
+
+### Environment Compatibility
+- [ ] Windows execution
+- [ ] Linux execution
+- [ ] macOS execution
+- [ ] CI/CD pipeline integration
+
+### VSCode Extension Context
+- [ ] Extension host integration
+- [ ] Webview communication
+- [ ] Settings synchronization
+- [ ] Task execution flow
+
+## Security & Compliance
+
+### API Key Handling
+- [ ] Secure key storage validation
+- [ ] Key rotation testing
+- [ ] Access token expiration
+- [ ] Multi-user isolation
+
+### Data Privacy
+- [ ] No sensitive data leakage
+- [ ] Request logging safety
+- [ ] Cache data security
+- [ ] GDPR compliance validation
+
+## Monitoring & Observability
+
+### Telemetry
+- [ ] Usage tracking accuracy
+- [ ] Error reporting
+- [ ] Performance metrics
+- [ ] User experience analytics
+
+### Debugging Tools
+- [ ] Request/response logging
+- [ ] Cost calculation transparency
+- [ ] Error diagnostics
+- [ ] Performance profiling
+
+## Future Model Expansions
+
+### Additional xAI Models
+- [ ] grok-4 (full version)
+- [ ] grok-3 variants
+- [ ] Future xAI model releases
+- [ ] Model deprecation handling
+
+### Feature Updates
+- [ ] New xAI capabilities
+- [ ] Pricing changes
+- [ ] API updates
+- [ ] Feature flag testing
+
+## Implementation Notes
+
+### Test Infrastructure Needed
+- [ ] Real xAI API key management (secure)
+- [ ] Test account with spending limits
+- [ ] Automated cleanup of test resources
+- [ ] Mock API server for development
+
+### CI/CD Integration
+- [ ] Mock tests in every PR
+- [ ] Real API tests on release branches
+- [ ] Performance regression detection
+- [ ] Cost budget monitoring
+
+### Maintenance Tasks
+- [ ] Regular pricing validation
+- [ ] API compatibility monitoring
+- [ ] Performance benchmark updates
+- [ ] Security audit scheduling
+
+---
+
+## Priority Implementation Order
+
+1. **High Priority** (Next Sprint)
+   - Basic real API connectivity tests
+   - Authentication validation
+   - Model availability checks
+
+2. **Medium Priority** (Following Sprints)
+   - Streaming behavior tests
+   - UI integration validation
+   - Performance benchmarks
+
+3. **Low Priority** (Future Releases)
+   - Advanced error scenarios
+   - Cross-platform testing
+   - Security compliance
+   - Monitoring tools
+
+---
+
+*This list will be updated as new test scenarios are identified and implemented.*

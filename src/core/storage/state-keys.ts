@@ -99,7 +99,10 @@ export interface GlobalState {
 	planModeGroqModelInfo: ModelInfo | undefined
 	planModeOpenRouterModelId: string | undefined
 	planModeOpenRouterModelInfo: ModelInfo | undefined
-	// Act mode configurations
+	planModeAnthropicModelId: string | undefined
+	planModeAnthropicModelInfo: ModelInfo | undefined
+	actModeAnthropicModelId: string | undefined
+	actModeAnthropicModelInfo: ModelInfo | undefined // Act mode configurations
 	actModeApiProvider: ApiProvider
 	actModeApiModelId: string | undefined
 	actModeThinkingBudgetTokens: number | undefined

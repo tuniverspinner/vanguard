@@ -1,18 +1,10 @@
 import {
-	LiteLLMModelInfo,
-	OpenAiCompatibleModelInfo,
 	OpenRouterModelInfo,
 	ModelsApiConfiguration as ProtoApiConfiguration,
 	ApiProvider as ProtoApiProvider,
 	ThinkingConfig,
 } from "@shared/proto/cline/models"
-import {
-	ApiConfiguration,
-	ApiProvider,
-	LiteLLMModelInfo as AppLiteLLMModelInfo,
-	OpenAiCompatibleModelInfo as AppOpenAiCompatibleModelInfo,
-	ModelInfo,
-} from "../../api"
+import { ApiConfiguration, ApiProvider, ModelInfo } from "../../api"
 
 // Convert application ThinkingConfig to proto ThinkingConfig
 function convertThinkingConfigToProto(config: ModelInfo["thinkingConfig"]): ThinkingConfig | undefined {
@@ -81,104 +73,6 @@ function convertProtoToModelInfo(info: OpenRouterModelInfo | undefined): ModelIn
 		thinkingConfig: convertProtoToThinkingConfig(info.thinkingConfig),
 		supportsGlobalEndpoint: info.supportsGlobalEndpoint,
 		tiers: info.tiers.length > 0 ? info.tiers : undefined,
-	}
-}
-
-// Convert application LiteLLMModelInfo to proto LiteLLMModelInfo
-function convertLiteLLMModelInfoToProto(info: AppLiteLLMModelInfo | undefined): LiteLLMModelInfo | undefined {
-	if (!info) {
-		return undefined
-	}
-
-	return {
-		maxTokens: info.maxTokens,
-		contextWindow: info.contextWindow,
-		supportsImages: info.supportsImages,
-		supportsPromptCache: info.supportsPromptCache ?? false,
-		inputPrice: info.inputPrice,
-		outputPrice: info.outputPrice,
-		thinkingConfig: convertThinkingConfigToProto(info.thinkingConfig),
-		supportsGlobalEndpoint: info.supportsGlobalEndpoint,
-		cacheWritesPrice: info.cacheWritesPrice,
-		cacheReadsPrice: info.cacheReadsPrice,
-		description: info.description,
-		tiers: info.tiers || [],
-		temperature: info.temperature,
-	}
-}
-
-// Convert proto LiteLLMModelInfo to application LiteLLMModelInfo
-function convertProtoToLiteLLMModelInfo(info: LiteLLMModelInfo | undefined): AppLiteLLMModelInfo | undefined {
-	if (!info) {
-		return undefined
-	}
-
-	return {
-		maxTokens: info.maxTokens,
-		contextWindow: info.contextWindow,
-		supportsImages: info.supportsImages,
-		supportsPromptCache: info.supportsPromptCache,
-		inputPrice: info.inputPrice,
-		outputPrice: info.outputPrice,
-		thinkingConfig: convertProtoToThinkingConfig(info.thinkingConfig),
-		supportsGlobalEndpoint: info.supportsGlobalEndpoint,
-		cacheWritesPrice: info.cacheWritesPrice,
-		cacheReadsPrice: info.cacheReadsPrice,
-		description: info.description,
-		tiers: info.tiers.length > 0 ? info.tiers : undefined,
-		temperature: info.temperature,
-	}
-}
-
-// Convert application OpenAiCompatibleModelInfo to proto OpenAiCompatibleModelInfo
-function convertOpenAiCompatibleModelInfoToProto(
-	info: AppOpenAiCompatibleModelInfo | undefined,
-): OpenAiCompatibleModelInfo | undefined {
-	if (!info) {
-		return undefined
-	}
-
-	return {
-		maxTokens: info.maxTokens,
-		contextWindow: info.contextWindow,
-		supportsImages: info.supportsImages,
-		supportsPromptCache: info.supportsPromptCache ?? false,
-		inputPrice: info.inputPrice,
-		outputPrice: info.outputPrice,
-		thinkingConfig: convertThinkingConfigToProto(info.thinkingConfig),
-		supportsGlobalEndpoint: info.supportsGlobalEndpoint,
-		cacheWritesPrice: info.cacheWritesPrice,
-		cacheReadsPrice: info.cacheReadsPrice,
-		description: info.description,
-		tiers: info.tiers || [],
-		temperature: info.temperature,
-		isR1FormatRequired: info.isR1FormatRequired,
-	}
-}
-
-// Convert proto OpenAiCompatibleModelInfo to application OpenAiCompatibleModelInfo
-function convertProtoToOpenAiCompatibleModelInfo(
-	info: OpenAiCompatibleModelInfo | undefined,
-): AppOpenAiCompatibleModelInfo | undefined {
-	if (!info) {
-		return undefined
-	}
-
-	return {
-		maxTokens: info.maxTokens,
-		contextWindow: info.contextWindow,
-		supportsImages: info.supportsImages,
-		supportsPromptCache: info.supportsPromptCache,
-		inputPrice: info.inputPrice,
-		outputPrice: info.outputPrice,
-		thinkingConfig: convertProtoToThinkingConfig(info.thinkingConfig),
-		supportsGlobalEndpoint: info.supportsGlobalEndpoint,
-		cacheWritesPrice: info.cacheWritesPrice,
-		cacheReadsPrice: info.cacheReadsPrice,
-		description: info.description,
-		tiers: info.tiers.length > 0 ? info.tiers : undefined,
-		temperature: info.temperature,
-		isR1FormatRequired: info.isR1FormatRequired,
 	}
 }
 
