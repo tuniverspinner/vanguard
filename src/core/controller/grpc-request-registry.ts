@@ -58,6 +58,33 @@ export class GrpcRequestRegistry {
 	}
 
 	/**
+	 * Update the cleanup function for a request, chaining it with the original
+	 * @param requestId The ID of the request
+	 * @param newCleanup The new cleanup to chain before the original
+	 * @returns True if updated, false if request not found
+	 */
+	public updateCleanup(requestId: string, newCleanup: () => void): boolean {
+		const info = this.activeRequests.get(requestId)
+		if (!info) {
+			return false
+		}
+		const originalCleanup = info.cleanup
+		info.cleanup = () => {
+			try {
+				newCleanup()
+			} catch (error) {
+				console.error(`Error in custom cleanup for ${requestId}:`, error)
+			}
+			try {
+				originalCleanup()
+			} catch (error) {
+				console.error(`Error in original cleanup for ${requestId}:`, error)
+			}
+		}
+		return true
+	}
+
+	/**
 	 * Cancel a request and clean up its resources
 	 * @param requestId The ID of the request to cancel
 	 * @returns True if the request was found and cancelled, false otherwise

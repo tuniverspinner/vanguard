@@ -1,4 +1,5 @@
 import { VSCodeLink, VSCodeTextField } from "@vscode/webview-ui-toolkit/react"
+import { useEffect } from "react"
 import { useDebouncedInput } from "../utils/useDebouncedInput"
 
 /**
@@ -25,6 +26,10 @@ export const ApiKeyField = ({
 	helpText,
 }: ApiKeyFieldProps) => {
 	const [localValue, setLocalValue] = useDebouncedInput(initialValue, onChange)
+
+	useEffect(() => {
+		console.log(`[UI ApiKeyField] Initial value for ${providerName}:`, initialValue ? "[EXISTS]" : "empty")
+	}, [initialValue, providerName])
 
 	return (
 		<div>

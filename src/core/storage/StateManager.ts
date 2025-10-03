@@ -55,6 +55,16 @@ export class StateManager {
 
 			this.isInitialized = true
 
+			// Debug log for API key loading
+			console.log("[StateManager] Loaded secrets:", {
+				xaiApiKey: this.secretsCache.xaiApiKey ? "[EXISTS]" : "missing",
+				groqApiKey: this.secretsCache.groqApiKey ? "[EXISTS]" : "missing",
+				anthropicApiKey: this.secretsCache.apiKey ? "[EXISTS]" : "missing",
+				openRouterApiKey: this.secretsCache.openRouterApiKey ? "[EXISTS]" : "missing",
+				clineAccountId: this.secretsCache.clineAccountId ? "[EXISTS]" : "missing",
+				// Add more as needed
+			})
+
 			// Start watcher for taskHistory.json so external edits update cache (no persist loop)
 			await this.setupTaskHistoryWatcher()
 		} catch (error) {
@@ -226,6 +236,12 @@ export class StateManager {
 		if (!this.isInitialized) {
 			throw new Error(STATE_MANAGER_NOT_INITIALIZED)
 		}
+
+		// Debug log for API config
+		console.log(
+			"[StateManager] getApiConfiguration - xaiApiKey present:",
+			this.secretsCache["xaiApiKey"] ? "[EXISTS]" : "missing",
+		)
 
 		// Construct API configuration from cached component keys
 		return this.constructApiConfigurationFromCache()

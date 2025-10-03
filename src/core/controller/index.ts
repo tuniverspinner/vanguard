@@ -614,6 +614,7 @@ export class Controller {
 	}
 
 	async postStateToWebview() {
+		console.log("[Controller] postStateToWebview called for id:", this.id)
 		const state = await this.getStateToPostToWebview()
 		await sendStateUpdate(this.id, state)
 	}
@@ -621,6 +622,10 @@ export class Controller {
 	async getStateToPostToWebview(): Promise<ExtensionState> {
 		// Get API configuration from cache for immediate access
 		const apiConfiguration = this.stateManager.getApiConfiguration()
+
+		// Debug log for posting state
+		console.log("[Controller] Posting state - xaiApiKey in config:", apiConfiguration.xaiApiKey ? "[EXISTS]" : "missing")
+
 		const lastShownAnnouncementId = this.stateManager.getGlobalStateKey("lastShownAnnouncementId")
 		const taskHistory = this.stateManager.getGlobalStateKey("taskHistory")
 		const autoApprovalSettings = this.stateManager.getGlobalStateKey("autoApprovalSettings")
