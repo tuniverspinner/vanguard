@@ -41,12 +41,42 @@ export class AnthropicHandler implements ApiHandler {
 		const modelId = this.getModel().id
 		const modelInfo = this.getModel().info
 
+		// Enable prompt caching for supported models
+		let modifiedSystem: string | Anthropic.Messages.ContentBlock[] = systemPrompt
+		const modifiedMessages = [...messages]
+
+		if (modelInfo.supportsPromptCache) {
+			// Add cache_control to system prompt
+			modifiedSystem = [
+				{
+					type: "text",
+					text: systemPrompt,
+					...({ cache_control: { type: "ephemeral" } } as any),
+				},
+			]
+
+			// Add cache_control to the last two user messages
+			const userMessages = modifiedMessages.filter((msg) => msg.role === "user")
+			const lastTwoUserMessages = userMessages.slice(-2)
+			lastTwoUserMessages.forEach((msg) => {
+				if (typeof msg.content === "string") {
+					msg.content = [{ type: "text", text: msg.content }]
+				}
+				if (Array.isArray(msg.content)) {
+					const lastTextBlock = msg.content.filter((block) => block.type === "text").pop()
+					if (lastTextBlock && "text" in lastTextBlock) {
+						;(lastTextBlock as any).cache_control = { type: "ephemeral" }
+					}
+				}
+			})
+		}
+
 		const stream = await client.messages.stream({
 			model: modelId,
 			max_tokens: modelInfo.maxTokens || 8192,
 			temperature: 0,
-			system: systemPrompt,
-			messages: messages,
+			system: modifiedSystem as any,
+			messages: modifiedMessages,
 		})
 
 		for await (const chunk of stream) {
