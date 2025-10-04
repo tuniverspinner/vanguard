@@ -242,6 +242,10 @@ export class StateManager {
 			"[StateManager] getApiConfiguration - xaiApiKey present:",
 			this.secretsCache["xaiApiKey"] ? "[EXISTS]" : "missing",
 		)
+		console.log(
+			"[StateManager] getApiConfiguration - anthropicApiKey present:",
+			this.secretsCache["anthropicApiKey"] ? "[EXISTS]" : "missing",
+		)
 
 		// Construct API configuration from cached component keys
 		return this.constructApiConfigurationFromCache()

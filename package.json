@@ -2,8 +2,7 @@
 	"name": "vanguard",
 	"displayName": "Vanguard",
 	"description": "Resilient autonomous coding agent with automatic retry functionality for Grok models. Creates/edits files, runs commands, uses browser, and more with your permission every step of the way.",
-	"version": "0.5.1",
-	"icon": "assets/icons/icon.png",
+	"version": "0.5.111",
 	"engines": {
 		"vscode": "^1.84.0"
 	},
@@ -11,7 +10,7 @@
 		"name": "Vanguard Development"
 	},
 	"license": "Apache-2.0",
-	"publisher": "bryne-dev",
+	"publisher": "vanguard",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/tuniverspinner/vanguard"

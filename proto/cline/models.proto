@@ -276,6 +276,7 @@ message ModelsApiConfiguration {
   optional string qwen_code_oauth_path = 70;
   optional string dify_api_key = 71;
   optional string dify_base_url = 72;
+  optional string anthropic_api_key = 73;
 
   // Plan mode configurations
   optional ApiProvider plan_mode_api_provider = 100;
