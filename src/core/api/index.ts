@@ -66,6 +66,13 @@ function createHandlerForProvider(
 				apiModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
 			})
 		case "anthropic":
+			console.log("[ANTHROPIC-DEBUG] Creating AnthropicHandler with:", {
+				hasAnthropicApiKey: !!options.anthropicApiKey,
+				anthropicApiKeyLength: options.anthropicApiKey?.length || 0,
+				mode,
+				anthropicModelId: mode === "plan" ? options.planModeAnthropicModelId : options.actModeAnthropicModelId,
+				apiModelId: mode === "plan" ? options.planModeApiModelId : options.actModeApiModelId,
+			})
 			return new AnthropicHandler({
 				onRetryAttempt: options.onRetryAttempt,
 				anthropicApiKey: options.anthropicApiKey,

@@ -45,6 +45,7 @@ export async function saveApiKey(controller: Controller, request: KeyValuePair):
 function isValidSecretKey(key: string): key is SecretKey {
 	const validKeys: SecretKey[] = [
 		"apiKey",
+		"anthropicApiKey",
 		"clineAccountId",
 		"openRouterApiKey",
 		"awsAccessKey",

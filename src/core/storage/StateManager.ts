@@ -273,6 +273,8 @@ export class StateManager {
 			planModeGroqModelInfo,
 			planModeOpenRouterModelId,
 			planModeOpenRouterModelInfo,
+			planModeAnthropicModelId,
+			planModeAnthropicModelInfo,
 			// Act mode configurations
 			actModeApiProvider,
 			actModeApiModelId,
@@ -297,6 +299,8 @@ export class StateManager {
 			planModeGroqModelInfo,
 			planModeOpenRouterModelId,
 			planModeOpenRouterModelInfo,
+			planModeAnthropicModelId,
+			planModeAnthropicModelInfo,
 
 			// Act mode configuration updates
 			actModeApiProvider,
@@ -516,6 +520,8 @@ export class StateManager {
 			planModeGroqModelInfo: this.globalStateCache["planModeGroqModelInfo"],
 			planModeOpenRouterModelId: this.globalStateCache["planModeOpenRouterModelId"],
 			planModeOpenRouterModelInfo: this.globalStateCache["planModeOpenRouterModelInfo"],
+			planModeAnthropicModelId: this.globalStateCache["planModeAnthropicModelId"],
+			planModeAnthropicModelInfo: this.globalStateCache["planModeAnthropicModelInfo"],
 
 			// Act mode configurations
 			actModeApiProvider: this.globalStateCache["actModeApiProvider"],

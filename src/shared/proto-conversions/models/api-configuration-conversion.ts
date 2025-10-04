@@ -179,6 +179,7 @@ export function convertApiConfigurationToProto(config: ApiConfiguration): ProtoA
 		ulid: config.ulid,
 		xaiApiKey: config.xaiApiKey,
 		groqApiKey: config.groqApiKey,
+		apiKey: config.anthropicApiKey,
 		requestTimeoutMs: config.requestTimeoutMs,
 		// Required proto fields (provide defaults)
 		openAiHeaders: {},
@@ -214,6 +215,7 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		ulid: protoConfig.ulid,
 		xaiApiKey: protoConfig.xaiApiKey,
 		groqApiKey: protoConfig.groqApiKey,
+		anthropicApiKey: protoConfig.apiKey,
 		requestTimeoutMs: protoConfig.requestTimeoutMs,
 
 		// Plan mode configurations
@@ -227,6 +229,8 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		planModeVsCodeLmModelSelector: protoConfig.planModeVsCodeLmModelSelector,
 		planModeGroqModelId: protoConfig.planModeGroqModelId,
 		planModeGroqModelInfo: convertProtoToModelInfo(protoConfig.planModeGroqModelInfo),
+		planModeAnthropicModelId: protoConfig.planModeApiModelId,
+		planModeAnthropicModelInfo: convertProtoToModelInfo(protoConfig.planModeGroqModelInfo),
 
 		// Act mode configurations
 		actModeApiProvider:
@@ -237,6 +241,8 @@ export function convertProtoToApiConfiguration(protoConfig: ProtoApiConfiguratio
 		actModeVsCodeLmModelSelector: protoConfig.actModeVsCodeLmModelSelector,
 		actModeGroqModelId: protoConfig.actModeGroqModelId,
 		actModeGroqModelInfo: convertProtoToModelInfo(protoConfig.actModeGroqModelInfo),
+		actModeAnthropicModelId: protoConfig.actModeApiModelId,
+		actModeAnthropicModelInfo: convertProtoToModelInfo(protoConfig.actModeGroqModelInfo),
 
 		// Favorited model IDs
 		favoritedModelIds:
