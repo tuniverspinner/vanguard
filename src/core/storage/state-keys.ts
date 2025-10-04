@@ -115,6 +115,7 @@ export interface GlobalState {
 
 export interface Secrets {
 	apiKey: string | undefined
+	anthropicApiKey: string | undefined
 	clineAccountId: string | undefined
 	openRouterApiKey: string | undefined
 	awsAccessKey: string | undefined

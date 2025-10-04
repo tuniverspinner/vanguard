@@ -15,6 +15,7 @@ import { GlobalState, LocalState, SecretKey, Secrets } from "../state-keys"
 export async function readSecretsFromDisk(context: ExtensionContext): Promise<Secrets> {
 	const [
 		apiKey,
+		anthropicApiKey,
 		openRouterApiKey,
 		clineAccountId,
 		awsAccessKey,
@@ -52,6 +53,7 @@ export async function readSecretsFromDisk(context: ExtensionContext): Promise<Se
 		authNonce,
 	] = await Promise.all([
 		context.secrets.get("apiKey") as Promise<string | undefined>,
+		context.secrets.get("anthropicApiKey") as Promise<string | undefined>,
 		context.secrets.get("openRouterApiKey") as Promise<string | undefined>,
 		context.secrets.get("clineAccountId") as Promise<string | undefined>,
 		context.secrets.get("awsAccessKey") as Promise<string | undefined>,
@@ -92,6 +94,7 @@ export async function readSecretsFromDisk(context: ExtensionContext): Promise<Se
 	return {
 		authNonce,
 		apiKey,
+		anthropicApiKey,
 		openRouterApiKey,
 		clineAccountId,
 		huggingFaceApiKey,

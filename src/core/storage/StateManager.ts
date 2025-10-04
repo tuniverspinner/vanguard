@@ -59,7 +59,7 @@ export class StateManager {
 			console.log("[StateManager] Loaded secrets:", {
 				xaiApiKey: this.secretsCache.xaiApiKey ? "[EXISTS]" : "missing",
 				groqApiKey: this.secretsCache.groqApiKey ? "[EXISTS]" : "missing",
-				anthropicApiKey: this.secretsCache.apiKey ? "[EXISTS]" : "missing",
+				anthropicApiKey: this.secretsCache.anthropicApiKey ? "[EXISTS]" : "missing",
 				openRouterApiKey: this.secretsCache.openRouterApiKey ? "[EXISTS]" : "missing",
 				clineAccountId: this.secretsCache.clineAccountId ? "[EXISTS]" : "missing",
 				// Add more as needed
@@ -260,6 +260,7 @@ export class StateManager {
 			clineAccountId,
 			xaiApiKey,
 			groqApiKey,
+			anthropicApiKey,
 			openRouterProviderSorting,
 			requestTimeoutMs,
 			favoritedModelIds,
@@ -320,6 +321,7 @@ export class StateManager {
 			clineAccountId,
 			xaiApiKey,
 			groqApiKey,
+			anthropicApiKey,
 		})
 	}
 
@@ -500,7 +502,7 @@ export class StateManager {
 			clineAccountId: this.secretsCache["clineAccountId"],
 			xaiApiKey: this.secretsCache["xaiApiKey"],
 			groqApiKey: this.secretsCache["groqApiKey"],
-			anthropicApiKey: this.secretsCache["apiKey"],
+			anthropicApiKey: this.secretsCache["anthropicApiKey"],
 			openRouterProviderSorting: this.globalStateCache["openRouterProviderSorting"],
 			requestTimeoutMs: this.globalStateCache["requestTimeoutMs"],
 			favoritedModelIds: this.globalStateCache["favoritedModelIds"],
