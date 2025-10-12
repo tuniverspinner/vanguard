@@ -4,6 +4,7 @@
 		"showNavbar": false,
 		"postMessageHandler": "vscode",
 		"togglePlanActKeys": "Meta+Shift+a",
+		"toggleModelKeys": "Meta+Shift+s",
 		"supportsTerminalMentions": true
 	},
 	"standalone": {
@@ -11,6 +12,7 @@
 		"showNavbar": true,
 		"postMessageHandler": "standalone",
 		"togglePlanActKeys": "Meta+Shift+p",
+		"toggleModelKeys": "Meta+Shift+s",
 		"supportsTerminalMentions": false
 	}
 }

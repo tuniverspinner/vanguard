@@ -1075,6 +1075,26 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 
 		useShortcut(usePlatform().togglePlanActKeys, onModeToggle, { disableTextInputs: false }) // important that we don't disable the text input here
 
+		const onModelToggle = useCallback(() => {
+			const { selectedProvider, selectedModelId } = normalizeApiConfiguration(apiConfiguration, mode)
+			if (selectedProvider === "xai") {
+				const newModelId = selectedModelId === "grok-4-fast" ? "grok-code-fast-1" : "grok-4-fast"
+
+				// Update the apiConfiguration with the new model
+				if (apiConfiguration) {
+					const updatedApiConfig = {
+						...apiConfiguration,
+						selectedModelId: newModelId,
+					}
+
+					// Submit the updated configuration
+					submitApiConfig()
+				}
+			}
+		}, [apiConfiguration, mode, submitApiConfig])
+
+		useShortcut(usePlatform().toggleModelKeys, onModelToggle, { disableTextInputs: false })
+
 		const handleContextButtonClick = useCallback(() => {
 			// Focus the textarea first
 			textAreaRef.current?.focus()
@@ -1414,6 +1434,10 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 		// Replace Meta with the platform specific key and uppercase the command letter.
 		const togglePlanActKeys = usePlatform()
 			.togglePlanActKeys.replace("Meta", metaKeyChar)
+			.replace(/.$/, (match) => match.toUpperCase())
+
+		const toggleModelKeys = usePlatform()
+			.toggleModelKeys.replace("Meta", metaKeyChar)
 			.replace(/.$/, (match) => match.toUpperCase())
 
 		return (
@@ -1759,6 +1783,16 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 											showModelOptions={true}
 										/>
 									</ModelSelectorTooltip>
+								)}
+								{normalizeApiConfiguration(apiConfiguration, mode).selectedProvider === "xai" && (
+									<Tooltip
+										hintText={`Toggle Grok models w/ ${toggleModelKeys}`}
+										style={{ zIndex: 1000 }}
+										tipText="Toggle between grok-4-fast and grok-code-fast-1"
+										visible={true}
+									>
+										<div />
+									</Tooltip>
 								)}
 							</ModelContainer>
 						</ButtonGroup>

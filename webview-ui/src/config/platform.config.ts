@@ -7,6 +7,7 @@ export interface PlatformConfig {
 	encodeMessage: MessageEncoder
 	decodeMessage: MessageDecoder
 	togglePlanActKeys: string
+	toggleModelKeys: string
 	supportsTerminalMentions: boolean
 }
 
@@ -16,6 +17,7 @@ type PlatformConfigJson = {
 	showNavbar: boolean
 	postMessageHandler: "vscode" | "standalone"
 	togglePlanActKeys: string
+	toggleModelKeys: string
 	supportsTerminalMentions: boolean
 }
 
@@ -83,6 +85,7 @@ export const PLATFORM_CONFIG: PlatformConfig = {
 	encodeMessage: messageEncoders[selectedConfig.messageEncoding],
 	decodeMessage: messageDecoders[selectedConfig.messageEncoding],
 	togglePlanActKeys: selectedConfig.togglePlanActKeys,
+	toggleModelKeys: selectedConfig.toggleModelKeys,
 	supportsTerminalMentions: selectedConfig.supportsTerminalMentions,
 }
 
