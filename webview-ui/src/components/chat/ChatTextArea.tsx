@@ -1789,8 +1789,7 @@ const ChatTextArea = forwardRef<HTMLTextAreaElement, ChatTextAreaProps>(
 										hintText={`Toggle Grok models w/ ${toggleModelKeys}`}
 										style={{ zIndex: 1000 }}
 										tipText="Toggle between grok-4-fast and grok-code-fast-1"
-										visible={true}
-									>
+										visible={true}>
 										<div />
 									</Tooltip>
 								)}

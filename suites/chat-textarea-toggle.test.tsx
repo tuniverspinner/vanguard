@@ -1,6 +1,6 @@
-import { describe, expect, it, vi } from "vitest"
 import { render, screen } from "@testing-library/react"
 import userEvent from "@testing-library/user-event"
+import { describe, expect, it, vi } from "vitest"
 import ChatTextArea from "../webview-ui/src/components/chat/ChatTextArea"
 
 // Mock the necessary hooks and dependencies
@@ -27,8 +27,8 @@ vi.mock("../webview-ui/src/services/grpc-client", () => ({
 
 import { useExtensionState } from "../webview-ui/src/context/ExtensionStateContext"
 import { usePlatform } from "../webview-ui/src/context/PlatformContext"
-import { useShortcut } from "../webview-ui/src/utils/hooks"
 import { ModelsServiceClient } from "../webview-ui/src/services/grpc-client"
+import { useShortcut } from "../webview-ui/src/utils/hooks"
 
 describe("ChatTextArea - Model Toggle Keybinding", () => {
 	const mockUseExtensionState = vi.mocked(useExtensionState)
@@ -80,19 +80,19 @@ describe("ChatTextArea - Model Toggle Keybinding", () => {
 
 		render(
 			<ChatTextArea
-				inputValue=""
 				activeQuote={null}
-				setInputValue={vi.fn()}
-				sendingDisabled={false}
+				inputValue=""
+				onSelectFilesAndImages={vi.fn()}
+				onSend={vi.fn()}
 				placeholderText="Type a message..."
 				selectedFiles={[]}
 				selectedImages={[]}
-				setSelectedImages={vi.fn()}
+				sendingDisabled={false}
+				setInputValue={vi.fn()}
 				setSelectedFiles={vi.fn()}
-				onSend={vi.fn()}
-				onSelectFilesAndImages={vi.fn()}
+				setSelectedImages={vi.fn()}
 				shouldDisableFilesAndImages={false}
-			/>
+			/>,
 		)
 
 		// Simulate Cmd+Shift+S keypress
@@ -110,7 +110,7 @@ describe("ChatTextArea - Model Toggle Keybinding", () => {
 				apiConfiguration: expect.objectContaining({
 					selectedModelId: "grok-code-fast-1",
 				}),
-			})
+			}),
 		)
 	})
 
@@ -143,19 +143,19 @@ describe("ChatTextArea - Model Toggle Keybinding", () => {
 
 		render(
 			<ChatTextArea
-				inputValue=""
 				activeQuote={null}
-				setInputValue={vi.fn()}
-				sendingDisabled={false}
+				inputValue=""
+				onSelectFilesAndImages={vi.fn()}
+				onSend={vi.fn()}
 				placeholderText="Type a message..."
 				selectedFiles={[]}
 				selectedImages={[]}
-				setSelectedImages={vi.fn()}
+				sendingDisabled={false}
+				setInputValue={vi.fn()}
 				setSelectedFiles={vi.fn()}
-				onSend={vi.fn()}
-				onSelectFilesAndImages={vi.fn()}
+				setSelectedImages={vi.fn()}
 				shouldDisableFilesAndImages={false}
-			/>
+			/>,
 		)
 
 		await user.keyboard("{Meta>}{Shift>}S{/Shift}{/Meta}")
@@ -197,19 +197,19 @@ describe("ChatTextArea - Model Toggle Keybinding", () => {
 
 		render(
 			<ChatTextArea
-				inputValue=""
 				activeQuote={null}
-				setInputValue={vi.fn()}
-				sendingDisabled={false}
+				inputValue=""
+				onSelectFilesAndImages={vi.fn()}
+				onSend={vi.fn()}
 				placeholderText="Type a message..."
 				selectedFiles={[]}
 				selectedImages={[]}
-				setSelectedImages={vi.fn()}
+				sendingDisabled={false}
+				setInputValue={vi.fn()}
 				setSelectedFiles={vi.fn()}
-				onSend={vi.fn()}
-				onSelectFilesAndImages={vi.fn()}
+				setSelectedImages={vi.fn()}
 				shouldDisableFilesAndImages={false}
-			/>
+			/>,
 		)
 
 		await user.keyboard("{Meta>}{Shift>}S{/Shift}{/Meta}")
@@ -223,7 +223,7 @@ describe("ChatTextArea - Model Toggle Keybinding", () => {
 				apiConfiguration: expect.objectContaining({
 					selectedModelId: "grok-4-fast",
 				}),
-			})
+			}),
 		)
 	})
 
@@ -246,19 +246,19 @@ describe("ChatTextArea - Model Toggle Keybinding", () => {
 
 		render(
 			<ChatTextArea
-				inputValue=""
 				activeQuote={null}
-				setInputValue={vi.fn()}
-				sendingDisabled={false}
+				inputValue=""
+				onSelectFilesAndImages={vi.fn()}
+				onSend={vi.fn()}
 				placeholderText="Type a message..."
 				selectedFiles={[]}
 				selectedImages={[]}
-				setSelectedImages={vi.fn()}
+				sendingDisabled={false}
+				setInputValue={vi.fn()}
 				setSelectedFiles={vi.fn()}
-				onSend={vi.fn()}
-				onSelectFilesAndImages={vi.fn()}
+				setSelectedImages={vi.fn()}
 				shouldDisableFilesAndImages={false}
-			/>
+			/>,
 		)
 
 		// Check for hint text (this will fail until we implement the hint)
@@ -284,19 +284,19 @@ describe("ChatTextArea - Model Toggle Keybinding", () => {
 
 		render(
 			<ChatTextArea
-				inputValue=""
 				activeQuote={null}
-				setInputValue={vi.fn()}
-				sendingDisabled={false}
+				inputValue=""
+				onSelectFilesAndImages={vi.fn()}
+				onSend={vi.fn()}
 				placeholderText="Type a message..."
 				selectedFiles={[]}
 				selectedImages={[]}
-				setSelectedImages={vi.fn()}
+				sendingDisabled={false}
+				setInputValue={vi.fn()}
 				setSelectedFiles={vi.fn()}
-				onSend={vi.fn()}
-				onSelectFilesAndImages={vi.fn()}
+				setSelectedImages={vi.fn()}
 				shouldDisableFilesAndImages={false}
-			/>
+			/>,
 		)
 
 		// Hint should not be present
